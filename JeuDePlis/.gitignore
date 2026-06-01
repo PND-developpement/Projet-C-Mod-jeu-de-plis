@@ -41,7 +41,6 @@
 *.dwo
 
 #vs
-*.sln
 *.db
 .vs/
 x64/
