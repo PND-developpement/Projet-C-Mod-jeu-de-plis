@@ -45,5 +45,6 @@
 *.filters
 *.user
 *.sln
+*.db
 .vs/
 x64/
