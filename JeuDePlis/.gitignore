@@ -41,9 +41,6 @@
 *.dwo
 
 #vs
-*.vcxproj
-*.filters
-*.user
 *.sln
 *.db
 .vs/
