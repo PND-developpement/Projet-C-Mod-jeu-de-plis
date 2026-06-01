@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bess7\\OneDrive\\Documents\\COURS\\COO2\\C\u002B\u002B modern\\Projet\\Projet-C-Mod-jeu-de-plis\\JeuDePlis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{93390AC5-E627-4369-9C90-A7CFA60CAE46}|JeuDePlis.vcxproj|C:\\Users\\bess7\\OneDrive\\Documents\\COURS\\COO2\\C\u002B\u002B modern\\Projet\\Projet-C-Mod-jeu-de-plis\\JeuDePlis\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{93390AC5-E627-4369-9C90-A7CFA60CAE46}|JeuDePlis.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\bess7\\OneDrive\\Documents\\COURS\\COO2\\C\u002B\u002B modern\\Projet\\Projet-C-Mod-jeu-de-plis\\JeuDePlis\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "C:\\Users\\bess7\\OneDrive\\Documents\\COURS\\COO2\\C\u002B\u002B modern\\Projet\\Projet-C-Mod-jeu-de-plis\\JeuDePlis\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-01T09:30:07.688Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
