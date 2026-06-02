@@ -17,7 +17,7 @@ EnsembleDeCartes MainJoueur::lireCartesMain() const
 
 void MainJoueur::modifierCartesMain(EnsembleDeCartes nouvellesCartesMain)
 {
-	CartesMain = nouvellesCartesMain;
+	CartesMain = move(nouvellesCartesMain);
 }
 
 void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
