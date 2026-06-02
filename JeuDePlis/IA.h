@@ -1,7 +1,9 @@
 #ifndef _IA_H__
 #define _IA_H__
 
-class IA
+#include "Joueur.h"
+
+class IA : public Joueur
 {
 
 };
