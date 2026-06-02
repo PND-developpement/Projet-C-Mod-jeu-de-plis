@@ -6,6 +6,7 @@
 #include "Carte.h"
 #include <string>
 
+
 class EnsembleDeCartes{
 private:
 	// Atribut
