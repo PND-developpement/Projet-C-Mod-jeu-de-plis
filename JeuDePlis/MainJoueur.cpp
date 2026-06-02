@@ -29,3 +29,13 @@ void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)
 {
 	CartesMain.supprimer(carte);
 }
+
+void MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
+{
+
+}
+
+void MainJoueur::afficherMainJoueur()
+{
+
+}

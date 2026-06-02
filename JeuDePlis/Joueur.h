@@ -3,6 +3,7 @@
 
 #include <string>
 #include "MainJoueur.h"
+#include "Carte.h"
 
 class Joueur
 {
@@ -31,7 +32,9 @@ public :
 	void ModifierCartes(MainJoueur nouvellesCartes);
 
 	//Méthodes
+	Carte JouerUneCarte(int positionCarte);
 
+	void afficherMainJoueur();
 };
 
 #endif

@@ -5,6 +5,14 @@
 
 class IA : public Joueur
 {
+	IA();
+	IA(std::string pseudoIA);
+	IA(IA& parametre);
+	IA(IA&& parametre);
+	~IA();
+
+	
+
 
 };
 

@@ -5,29 +5,29 @@
 #ifndef _C_JEU_DE_CARTES_H__
 #define _C_JEU_DE_CARTES_H__
 
+#include "EnsembleDeCartes.h"
+#include "Carte.h"
+
 #include <vector>
 #include <string>
 #include <memory>
 
-#include "CEnsembleDeCartes.h"
-#include "CCarte.h"
 
-class CJeuDeCartes
+class JeuDeCarte
 {
 private:
-    std::unique_ptr<CEnsembleDeCartes> pEnsembleCartes;
-
-    CJeuDeCartes();
+    std::unique_ptr<EnsembleDeCartes> pEnsembleCartes;
 
 public:
-    ~CJeuDeCartes() = default;
+    JeuDeCarte();
+    ~JeuDeCarte() = default;
 
-    static std::unique_ptr<CJeuDeCartes> CreerJeuSurMesure(
+    static std::unique_ptr<JeuDeCarte> CreerJeuSurMesure(
         const std::vector<std::string>& vCouleurs,
         const std::vector<std::string>& vValeurs,
         unsigned int uiNbJokers = 0);
 
-    CEnsembleDeCartes* ObtenirEnsemble() const;
+    EnsembleDeCartes* ObtenirEnsemble() const;
 };
 
 #endif

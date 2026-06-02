@@ -23,6 +23,8 @@ public:
 
 	void AjouterCarteMain(std::shared_ptr<Carte> nouvelleCarte);
 	void SupprimerCarteMain(std::shared_ptr<Carte> carte);
+	void TrouverCarte(std::shared_ptr<Carte> carte);
+	void afficherMainJoueur() const;
 
 };
 
