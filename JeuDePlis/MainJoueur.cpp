@@ -2,6 +2,7 @@
 #include <utility>
 using namespace std;
 
+
 MainJoueur::MainJoueur() {}
 
 MainJoueur::MainJoueur(const EnsembleDeCartes& CopieCartesMain) : CartesMain(CopieCartesMain) {}
@@ -27,15 +28,24 @@ void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
 
 void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)
 {
-	CartesMain.supprimer(carte);
+	CartesMain.supprimerCarte(carte);
 }
 
-void MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
+bool MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
 {
+    const auto& ensemble = CartesMain.getensembleDeCarte();
 
+
+    for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
+    {
+		if (carte == *itCarte)
+			return true;
+    }
+
+	return false;
 }
 
-void MainJoueur::afficherMainJoueur()
+void MainJoueur::afficherMainJoueur() const
 {
 
 }

@@ -5,13 +5,15 @@
 
 class IA : public Joueur
 {
+	//Constrcuteurs et destructeurs 
 	IA();
 	IA(std::string pseudoIA);
 	IA(IA& parametre);
 	IA(IA&& parametre);
 	~IA();
 
-	
+	//Méthodes
+	Carte JouerUneCarte(int positionCarte);
 
 
 };

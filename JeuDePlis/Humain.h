@@ -6,6 +6,10 @@
 class Humain : public Joueur
 {
 
+
+
+
+	Carte JouerUneCarte(int positionCarte);
 };
 
 #endif

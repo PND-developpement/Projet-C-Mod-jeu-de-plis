@@ -17,14 +17,16 @@ public:
 	EnsembleDeCartes();
 	EnsembleDeCartes(size_t taille);
 	EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept;
-	EnsembleDeCartes(const EnsembleDeCartes&& ensemble2) noexcept;
+	EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept;
 	~EnsembleDeCartes();
+
+	EnsembleDeCartes& operator=(const EnsembleDeCartes& ensemble) = default; //redefini l'opérateur = car j'avais une erreur dans MainJoueur pour le setter. 
 	 
 	// Methodes
 	void ajouterCarte(std::shared_ptr<Carte> carte);
 	void ajouterCarte(Carte& carte);
-	
-	void supprimerCarte();
+	 
+	void supprimerCarte(const std::shared_ptr<Carte> carteASupprimer); //On devrait pas mettre la carte qu'on veut supprimer en paramètre ? Cela permettrait de parcourir le vecteur avec un itérateur et de comparé avec la carte placée en param, puis la supprimer si elle est trouvé da,=ns le vecteur.
 	void trieCarte(std::string typedetrie);
 	void melangeAleatoireCarte();
 	

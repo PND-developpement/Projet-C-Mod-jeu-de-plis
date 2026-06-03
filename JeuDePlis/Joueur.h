@@ -32,7 +32,7 @@ public :
 	void ModifierCartes(MainJoueur nouvellesCartes);
 
 	//Méthodes
-	Carte JouerUneCarte(int positionCarte);
+	virtual Carte JouerUneCarte(int positionCarte) = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
 
 	void afficherMainJoueur();
 };

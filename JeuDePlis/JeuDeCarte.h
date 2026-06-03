@@ -22,10 +22,7 @@ public:
     JeuDeCarte();
     ~JeuDeCarte() = default;
 
-    static std::unique_ptr<JeuDeCarte> CreerJeuSurMesure(
-        const std::vector<std::string>& vCouleurs,
-        const std::vector<std::string>& vValeurs,
-        unsigned int uiNbJokers = 0);
+    static std::unique_ptr<JeuDeCarte> CreerJeuSurMesure(const std::vector<std::string>& vCouleurs, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers = 0);
 
     EnsembleDeCartes* ObtenirEnsemble() const;
 };

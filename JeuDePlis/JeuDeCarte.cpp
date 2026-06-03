@@ -6,30 +6,31 @@ JeuDeCarte::JeuDeCarte()
     pEnsembleCartes = std::make_unique<EnsembleDeCartes>();
 }
 
-std::unique_ptr<JeuDeCarte> JeuDeCarte::CreerJeuSurMesure(
-    const std::vector<std::string>& vCouleurs,
-    const std::vector<std::string>& vValeurs,
-    unsigned int uiNbJokers)
+std::unique_ptr<JeuDeCarte> JeuDeCarte::CreerJeuSurMesure(const std::vector<std::string>& vCouleurs, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers)
 {
+    std::vector<std::string>::const_iterator itCouleur;
+    std::vector<std::string>::const_iterator itValeur;
+
+
     try
     {
         std::unique_ptr<JeuDeCarte> pNouveauJeu(new JeuDeCarte());
 
-        for (const auto& couleur : vCouleurs)
+        for (itCouleur = vCouleurs.begin(); itCouleur != vCouleurs.end(); itCouleur++)
         {
-            for (const auto& valeur : vValeurs)
+            for (itValeur = vValeurs.begin(); itValeur != vValeurs.end(); itValeur++)
             {
                 // Allocation partagée : la carte pourra exister simultanément 
-                // dans le paquet, dans la main d'un joueur, et sur un pli.
-                std::shared_ptr<Carte> pCarte = std::make_shared<Carte>(valeur, couleur);
-                pNouveauJeu->pEnsembleCartes->AjouterCarte(pCarte);
+                // dans le paquet, dans la main d'un joueur, et sur un pli. 
+                std::shared_ptr<Carte> pCarte = std::make_shared<Carte>(itValeur, itCouleur);
+                pNouveauJeu->pEnsembleCartes->ajouterCarte(pCarte);
             }
         }
 
         for (unsigned int i = 0; i < uiNbJokers; ++i)
         {
             std::shared_ptr<Carte> pJoker = std::make_shared<Carte>("Joker", "Aucune");
-            pNouveauJeu->pEnsembleCartes->AjouterCarte(pJoker);
+            pNouveauJeu->pEnsembleCartes->ajouterCarte(pJoker);
         }
 
         return pNouveauJeu;
