@@ -32,7 +32,7 @@ public :
 	void ModifierCartes(MainJoueur nouvellesCartes);
 
 	//Méthodes
-	virtual Carte JouerUneCarte(int positionCarte) = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
+	virtual std::shared_ptr<Carte> JouerUneCarte() = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
 
 	void AfficherMainJoueur();
 };

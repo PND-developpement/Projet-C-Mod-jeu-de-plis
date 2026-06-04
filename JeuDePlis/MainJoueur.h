@@ -8,7 +8,7 @@
 class MainJoueur
 {
 private:
-	EnsembleDeCartes CartesMain;
+	EnsembleDeCartes CartesMain; //L'ensemble de cartes qui composent la main du joueur
 
 public:
 	//constructeurs et destructeurs
@@ -24,10 +24,12 @@ public:
 	void AjouterCarteMain(std::shared_ptr<Carte> nouvelleCarte);
 	void SupprimerCarteMain(std::shared_ptr<Carte> carte);
 	bool TrouverCarte(std::shared_ptr<Carte> carte);
+	std::shared_ptr<Carte> ObtenirCarte(int positionCarte);
+	void afficherMainJoueur() const;
 	void AfficherMainJoueur() const;
 
 };
 
 
 
-#endif // !H_MJO_H
+#endif 

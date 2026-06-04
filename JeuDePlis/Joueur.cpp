@@ -35,12 +35,12 @@ Joueur::~Joueur(){}
 //accesseurs
 std::string Joueur::LirePseudo() const
 {
-	return pseudo;
+	return pseudo; //On renvoie le pseudo du joueur
 }
 
 void Joueur::ModifierPseudo(std::string NouveauPseudo)
 {
-	pseudo = move(NouveauPseudo);
+	pseudo = move(NouveauPseudo); //On modifie le pseudo
 }
 
 int Joueur::LireScore() const
@@ -60,5 +60,10 @@ MainJoueur Joueur::LireCartes() const
 
 void Joueur::ModifierCartes(MainJoueur nouvellesCartes)
 {
-	cartes = move(nouvellesCartes);
+	cartes = move(nouvellesCartes); //On modifie la main du joueur
+}
+
+void Joueur::afficherMainDuJoueur() const
+{
+	cartes.afficherMainJoueur();
 }
