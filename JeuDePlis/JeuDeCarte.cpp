@@ -51,3 +51,7 @@ EnsembleDeCartes* JeuDeCartes::ObtenirEnsemble() const
 {
     return pEnsembleCartes.get();
 }
+
+void JeuDeCartes::MelangeCarte() const{
+    pEnsembleCartes->MelangeAleatoireCarte();
+}

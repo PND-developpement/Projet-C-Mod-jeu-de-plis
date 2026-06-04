@@ -80,6 +80,7 @@ Carte& EnsembleDeCartes::GetCarte(unsigned int position) const{
 	return ncarte;
 }
 
+/*
 vector<const std::shared_ptr<Carte>> EnsembleDeCartes::GetensembleDeCarte() const{
 	vector<const std::shared_ptr<Carte>> constensembleDeCarte;
 	size_t boucleAjout;
@@ -90,7 +91,7 @@ vector<const std::shared_ptr<Carte>> EnsembleDeCartes::GetensembleDeCarte() cons
 
 	return constensembleDeCarte;
 }
-
+*/
 void EnsembleDeCartes::AfficherCarte() const{
 	// ajouter interface
 }

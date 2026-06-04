@@ -96,8 +96,9 @@ void PartieDameDePique::DistribuerCartes()
     }
 
     cout << "Melange des cartes en cours" << std::endl;
-
+    pLeJeu->MelangeCarte();
     cout << "Distribution de 13 cartes a chaque joueur..." << std::endl;
+
 }
 
 void PartieDameDePique::LancerPartie()

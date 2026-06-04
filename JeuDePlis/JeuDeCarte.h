@@ -25,6 +25,7 @@ public:
         unsigned int uiNbJokers = 0);
 
     EnsembleDeCartes* ObtenirEnsemble() const;
+    void MelangeCarte() const;
 };
 
 #endif
