@@ -1,19 +1,19 @@
-#include "CPartieDameDePique.h"
+#include "PartieDameDePique.h"
 #include <iostream>
 
-CPartieDameDePique::CPartieDameDePique() : CPartie()
+PartieDameDePique::PartieDameDePique() : CPartie()
 {
     pLeJeu = nullptr;
 }
 
-void CPartieDameDePique::InitialiserLaPartie()
+void PartieDameDePique::InitialiserLaPartie()
 {
     // regles specifiques de la Dame de Pique (52 cartes)
     std::vector<std::string> couleurs = { "Pique", "Coeur", "Carreau", "Trefle" };
     std::vector<std::string> valeurs = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi", "As" };
 
     //generation du paquet grace a CJeuDeCartes
-    pLeJeu = CJeuDeCartes::CreerJeuSurMesure(couleurs, valeurs, 0);
+    pLeJeu = JeuDeCarte::CreerJeuSurMesure(couleurs, valeurs, 0);
 
     if (pLeJeu != nullptr)
     {
