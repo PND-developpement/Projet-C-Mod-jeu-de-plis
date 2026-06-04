@@ -2,21 +2,8 @@
 #define _PARTIE_DAME_DE_PIQUE_H__
 
 #include "Partie.h"
-#include "JeuDeCarte.h"
-#include <memory>
-#include <vector>
-#include <string>
 
-
-class PartieDameDePique : public Partie
-{
-private:
-    std::unique_ptr<JeuDeCartes> pLeJeu;
-    std::vector<std::string> vNomsJoueurs;
-
-    //la partie possède et gère son propre paquet de cartes
-    std::unique_ptr<JeuDeCartes> pLeJeu;
-
+class PartieDameDePique : public Partie{
 public:
     PartieDameDePique();
     ~PartieDameDePique() = default;

@@ -3,12 +3,14 @@
 #include "Joueur.h"
 #include <vector>
 #include <memory>
+#include "JeuDeCarte.h"
 
 class Partie{
 protected:
 	// Atribut 
-	int nombreJoueur;
+	unsigned int nombreJoueur; 
 	std::vector <std::unique_ptr <Joueur>> listeJoueur;
+	std::unique_ptr<JeuDeCartes> pLeJeu;
 public:
 	// Constructeur et Destructeur
 
@@ -17,7 +19,7 @@ public:
 
 	// Methodes
 
-	virtual void AfficherRegles() = 0;
+	virtual void AfficherRegles() const = 0 ;
 	virtual void InitaliserPartie() = 0;
 	virtual void DistribuerCartes() = 0;
 	virtual void LancerPartie() = 0;
