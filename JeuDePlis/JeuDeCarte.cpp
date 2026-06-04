@@ -1,36 +1,41 @@
-#include "JeuDeCarte.h"
+#include "JeuDeCartes.h"
 #include <iostream>
 
-JeuDeCarte::JeuDeCarte()
+JeuDeCartes::JeuDeCartes()
 {
     pEnsembleCartes = std::make_unique<EnsembleDeCartes>();
 }
 
-std::unique_ptr<JeuDeCarte> JeuDeCarte::CreerJeuSurMesure(const std::vector<std::string>& vCouleurs, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers)
+std::unique_ptr<JeuDeCartes> JeuDeCartes::CreerJeuSurMesure(
+    const std::vector<std::string>& vFigures,
+    const std::vector<std::string>& vValeurs,
+    unsigned int uiNbJokers)
 {
-    std::vector<std::string>::const_iterator itCouleur;
-    std::vector<std::string>::const_iterator itValeur;
-
-
     try
     {
-        std::unique_ptr<JeuDeCarte> pNouveauJeu(new JeuDeCarte());
+        std::unique_ptr<JeuDeCartes> pNouveauJeu(new JeuDeCartes());
 
-        for (itCouleur = vCouleurs.begin(); itCouleur != vCouleurs.end(); itCouleur++)
+        for (const auto& figure : vFigures)
         {
-            for (itValeur = vValeurs.begin(); itValeur != vValeurs.end(); itValeur++)
+            //on déduit la couleur (rouge ou noir) grâce à la figure
+            std::string couleurPhysique = "Noir"; 
+            if (figure == "Coeur" || figure == "Carreau") {
+                couleurPhysique = "Rouge";
+            }
+
+            for (const auto& valeur : vValeurs)
             {
-                // Allocation partagée : la carte pourra exister simultanément 
-                // dans le paquet, dans la main d'un joueur, et sur un pli. 
-                std::shared_ptr<Carte> pCarte = std::make_shared<Carte>(itValeur, itCouleur);
-                pNouveauJeu->pEnsembleCartes->ajouterCarte(pCarte);
+                //on passe les 3 caractéristiques au constructeur de carte
+                std::shared_ptr<Carte> pCarte = std::make_shared<Carte>(valeur, figure, couleurPhysique);
+                pNouveauJeu->pEnsembleCartes->AjouterCarte(pCarte);
             }
         }
 
         for (unsigned int i = 0; i < uiNbJokers; ++i)
         {
-            std::shared_ptr<Carte> pJoker = std::make_shared<Carte>("Joker", "Aucune");
-            pNouveauJeu->pEnsembleCartes->ajouterCarte(pJoker);
+            //le joker a des caractéristiques spécifiques
+            std::shared_ptr<Carte> pJoker = std::make_shared<Carte>("Joker", "Aucune", "NoirEtBlanc");
+            pNouveauJeu->pEnsembleCartes->AjouterCarte(pJoker);
         }
 
         return pNouveauJeu;
@@ -42,7 +47,7 @@ std::unique_ptr<JeuDeCarte> JeuDeCarte::CreerJeuSurMesure(const std::vector<std:
     }
 }
 
-EnsembleDeCartes* JeuDeCarte::ObtenirEnsemble() const
+EnsembleDeCartes* JeuDeCartes::ObtenirEnsemble() const
 {
     return pEnsembleCartes.get();
 }
