@@ -14,7 +14,7 @@ protected :
 
 public :
 	//constructeurs et destructeurs
-
+	
 	Joueur();
 	Joueur(const Joueur& rJoueur);
 	Joueur(Joueur&& rJoueur);
@@ -34,7 +34,7 @@ public :
 	//Méthodes
 	virtual Carte JouerUneCarte(int positionCarte) = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
 
-	void afficherMainJoueur();
+	void AfficherMainJoueur();
 };
 
 #endif

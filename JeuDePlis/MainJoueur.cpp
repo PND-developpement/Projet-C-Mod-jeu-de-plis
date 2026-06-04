@@ -16,24 +16,24 @@ EnsembleDeCartes MainJoueur::lireCartesMain() const
 	return CartesMain;
 }
 
-void MainJoueur::modifierCartesMain(EnsembleDeCartes nouvellesCartesMain)
+void MainJoueur::ModifierCartesMain(EnsembleDeCartes nouvellesCartesMain)
 {
 	CartesMain = move(nouvellesCartesMain);
 }
 
 void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
 {
-	CartesMain.ajouterCarte(nouvelleCarte);
+	CartesMain.AjouterCarte(nouvelleCarte);
 }
 
 void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)
 {
-	CartesMain.supprimerCarte(carte);
+	CartesMain.SupprimerCarte(carte);
 }
 
 bool MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
 {
-    const auto& ensemble = CartesMain.getensembleDeCarte();
+    const auto& ensemble = CartesMain.GetensembleDeCarte();
 
 
     for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
@@ -45,7 +45,7 @@ bool MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
 	return false;
 }
 
-void MainJoueur::afficherMainJoueur() const
+void MainJoueur::AfficherMainJoueur() const
 {
 
 }

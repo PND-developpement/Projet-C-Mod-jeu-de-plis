@@ -14,29 +14,81 @@ private:
 	size_t taille;
 public:
 	// Constructeur et Destructeur
-	EnsembleDeCartes();
-	EnsembleDeCartes(size_t taille);
-	EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept;
-	EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept;
-	~EnsembleDeCartes();
 
+	/*
+	* Constructeur par defaut
+	* initalise la taille avec 0
+	*/
+	EnsembleDeCartes();
+
+	/*
+	* Constructeur qui initalise la taille
+	* @param taille size_t
+	*/
+	EnsembleDeCartes(size_t taille);
+
+	/*
+	* Constructeur de recopie
+	* @param ensemble2 const EnsembleDeCartes&
+	*/
+	EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept;
+
+	/*
+	* Constructeur de recopie avec move
+	* @param ensemble2 const EnsembleDeCartes&&
+	*/
+	EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept;
+
+	/*
+	* Destructeur vide le vecteur
+	*/
+	~EnsembleDeCartes();
+	
+	/*
+	* Surchage operator=
+	* @param ensemble const EnsembleDeCartes
+	*/
 	EnsembleDeCartes& operator=(const EnsembleDeCartes& ensemble) = default; //redefini l'opérateur = car j'avais une erreur dans MainJoueur pour le setter. 
 	 
 	// Methodes
-	void ajouterCarte(std::shared_ptr<Carte> carte);
-	void ajouterCarte(Carte& carte);
-	 
-	void supprimerCarte(const std::shared_ptr<Carte> carteASupprimer); //On devrait pas mettre la carte qu'on veut supprimer en paramètre ? Cela permettrait de parcourir le vecteur avec un itérateur et de comparé avec la carte placée en param, puis la supprimer si elle est trouvé da,=ns le vecteur.
-	void trieCarte(std::string typedetrie);
-	void melangeAleatoireCarte();
-	
-	Carte& getCarte(unsigned int position) const;
-	std::vector<const std::shared_ptr<Carte>> getensembleDeCarte() const;
 
-	void setTaille(size_t taille) { this->taille = taille; }
+	/*
+	* Ajoute une carte dans le vecteur
+	* @param carte shared_ptr<CArte>
+	*/
+	void AjouterCarte(std::shared_ptr<Carte> carte);
+
+	/*
+	* Ajoute une carte dans le vecteur
+	* @param carte Carte&
+	*/
+	void AjouterCarte(Carte& carte);
+	
+	/*
+	* Supprimer carte dans le vecteur avec la carte en parametre
+	* @param carteASupprimer shared_prt<Carte>
+	*/
+	void SupprimerCarte(std::shared_ptr<Carte> carteASupprimer);
+
+	
+	void TrieCarte(std::string typedetrie);
+
+	/*
+	* Melange les cartes aleatoirement
+	*/
+	void MelangeAleatoireCarte();
+	
+	/*
+	* Renvoie une carte du vecteur dans la postion en parametre
+	* @param position unsigned int
+	*/
+	Carte& GetCarte(unsigned int position) const;
+	std::vector<const std::shared_ptr<Carte>> GetensembleDeCarte() const;
+
+	void SetTaille(size_t taille) { this->taille = taille; }
 	size_t getTaille() const { return taille; }
 
-	void afficherCarte();
+	void AfficherCarte();
 
 };
 #endif // !H_EDC_H

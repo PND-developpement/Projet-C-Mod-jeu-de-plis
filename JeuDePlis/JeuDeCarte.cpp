@@ -1,4 +1,4 @@
-#include "JeuDeCartes.h"
+#include "JeuDeCarte.h"
 #include <iostream>
 
 JeuDeCartes::JeuDeCartes()

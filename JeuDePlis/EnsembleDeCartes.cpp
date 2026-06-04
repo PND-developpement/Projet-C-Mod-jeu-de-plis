@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <chrono>
 using namespace std;
+
 EnsembleDeCartes::EnsembleDeCartes(){
 	taille = 0;
 }
@@ -24,7 +25,7 @@ EnsembleDeCartes::EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept{
 	}
 }
 
-EnsembleDeCartes::EnsembleDeCartes(const EnsembleDeCartes&& ensemble2) noexcept{
+EnsembleDeCartes::EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept{
 	taille = ensemble2.taille;
 	size_t boucleAjout;
 	for (boucleAjout = 0; boucleAjout < taille; boucleAjout++) {
@@ -39,7 +40,7 @@ EnsembleDeCartes::~EnsembleDeCartes(){
 	ensembleDeCarte.clear();
 }
 
-void EnsembleDeCartes::ajouterCarte(std::shared_ptr<Carte> carte){
+void EnsembleDeCartes::AjouterCarte(std::shared_ptr<Carte> carte){
 	if (ensembleDeCarte.size() < taille) {
 		ensembleDeCarte.push_back(carte);
 	}
@@ -48,7 +49,7 @@ void EnsembleDeCartes::ajouterCarte(std::shared_ptr<Carte> carte){
 	}
 }
 
-void EnsembleDeCartes::ajouterCarte(Carte& carte){
+void EnsembleDeCartes::AjouterCarte(Carte& carte){
 	if (ensembleDeCarte.size() < taille) {
 		shared_ptr<Carte> ncarte = make_unique<Carte>(carte);
 		ensembleDeCarte.push_back(ncarte);
@@ -58,25 +59,28 @@ void EnsembleDeCartes::ajouterCarte(Carte& carte){
 	}
 }
 
-void EnsembleDeCartes::supprimerCarte(){
-	ensembleDeCarte.pop_back();
+void EnsembleDeCartes::SupprimerCarte(std::shared_ptr<Carte> carteASupprimer){
+	auto it = std::find(ensembleDeCarte.begin(), ensembleDeCarte.end(), carteASupprimer);
+	if (it != ensembleDeCarte.end()) {
+		ensembleDeCarte.erase(it);
+	}
 }
 
-void EnsembleDeCartes::trieCarte(std::string typedetrie){
+void EnsembleDeCartes::TrieCarte(std::string typedetrie){
 	
 }
 
-void EnsembleDeCartes::melangeAleatoireCarte(){
+void EnsembleDeCartes::MelangeAleatoireCarte(){
 	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
 	shuffle(ensembleDeCarte.begin(), ensembleDeCarte.end(), default_random_engine(seed));
 }
 
-Carte& EnsembleDeCartes::getCarte(unsigned int position) const{
+Carte& EnsembleDeCartes::GetCarte(unsigned int position) const{
 	Carte ncarte(ensembleDeCarte[position]);
 	return ncarte;
 }
 
-vector<const std::shared_ptr<Carte>> EnsembleDeCartes::getensembleDeCarte() const{
+vector<const std::shared_ptr<Carte>> EnsembleDeCartes::GetensembleDeCarte() const{
 	vector<const std::shared_ptr<Carte>> constensembleDeCarte;
 	size_t boucleAjout;
 	for ( boucleAjout = 0; boucleAjout < ensembleDeCarte.size(); boucleAjout++){
@@ -87,6 +91,6 @@ vector<const std::shared_ptr<Carte>> EnsembleDeCartes::getensembleDeCarte() cons
 	return constensembleDeCarte;
 }
 
-void EnsembleDeCartes::afficherCarte(){
+void EnsembleDeCartes::AfficherCarte(){
 	// ajouter interface
 }

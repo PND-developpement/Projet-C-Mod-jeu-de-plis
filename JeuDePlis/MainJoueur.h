@@ -19,12 +19,12 @@ public:
 
 	//accesseurs
 	EnsembleDeCartes lireCartesMain() const;
-	void modifierCartesMain(EnsembleDeCartes nouvellesCartesMain);
+	void ModifierCartesMain(EnsembleDeCartes nouvellesCartesMain);
 
 	void AjouterCarteMain(std::shared_ptr<Carte> nouvelleCarte);
 	void SupprimerCarteMain(std::shared_ptr<Carte> carte);
 	bool TrouverCarte(std::shared_ptr<Carte> carte);
-	void afficherMainJoueur() const;
+	void AfficherMainJoueur() const;
 
 };
 

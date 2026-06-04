@@ -22,7 +22,7 @@ void PartieDameDePique::AfficherRegles() const
     std::cin.get();
 }
 
-void PartieDameDePique::InitialiserLaPartie()
+void PartieDameDePique::InitaliserPartie()
 {
     //inscription des joueurs à la table
     vNomsJoueurs = { "Terminator", "Sososlazdeg", "Evaninha", "Coco" };
@@ -54,20 +54,20 @@ void PartieDameDePique::DistribuerCartes()
 
 void PartieDameDePique::LancerPartie()
 {
-    AfficherRegles();
-    InitialiserLaPartie();
-    DistribuerCartes();
+    afficherRegles();
+    initaliserPartie();
+    distribuerCartes();
 
     std::cout << "\nLa partie commence " << std::endl;
 }
-void PartieDameDePique::InitialiserLaPartie()
+void PartieDameDePique::InitaliserPartie()
 {
     // regles specifiques de la Dame de Pique (52 cartes)
     std::vector<std::string> couleurs = { "Pique", "Coeur", "Carreau", "Trefle" };
     std::vector<std::string> valeurs = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi", "As" };
 
     //generation du paquet grace a CJeuDeCartes
-    pLeJeu = JeuDeCarte::CreerJeuSurMesure(couleurs, valeurs, 0);
+    pLeJeu = JeuDeCartes::CreerJeuSurMesure(couleurs, valeurs, 0);
 
     if (pLeJeu != nullptr)
     {

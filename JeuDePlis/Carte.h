@@ -21,14 +21,41 @@ public:
 
 	// Methodes
 
-	void setValeur(std::string& valeur) { this->valeur = valeur; }
-	std::string getValeur() const { return valeur; }
+	/*
+	* Ajoute la valeur par celle mis en parametre
+	* @param valeur std::string
+	*/
+	void SetValeur(std::string& valeur) { this->valeur = valeur; }
 
-	void setFigure(std::string& figure) { this->figure = figure; }
-	std::string getFigure() const { return figure; }
+	/*
+	* Renvoie la valeur 
+	* @return valeur std::string
+	*/
+	std::string GetValeur() const { return valeur; }
 
-	void setCouleur(std::string& couleur) { this->couleur = couleur; }
-	std::string getCouleur() const { return couleur; }
+	/*
+	* Ajoute la figure par celle mis en parametre
+	* @param figure std::string
+	*/
+	void SetFigure(std::string& figure) { this->figure = figure; }
+
+	/*
+	* Renvoie la figure
+	* @return figure std::string
+	*/
+	std::string GetFigure() const { return figure; }
+
+	/*
+	* Ajoute la couleur par celle mis en parametre
+	* @param couleur std::string
+	*/
+	void SetCouleur(std::string& couleur) { this->couleur = couleur; }
+
+	/*
+	* Renvoie la couleur
+	* @return couleur std::string
+	*/
+	std::string GetCouleur() const { return couleur; }
 
 
 };
