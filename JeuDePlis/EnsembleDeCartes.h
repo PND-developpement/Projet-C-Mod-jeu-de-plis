@@ -36,7 +36,7 @@ public:
 	void setTaille(size_t taille) { this->taille = taille; }
 	size_t getTaille() const { return taille; }
 
-	void afficherCarte();
+	void afficherCarte() const;
 
 };
 #endif // !H_EDC_H

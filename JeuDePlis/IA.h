@@ -5,6 +5,7 @@
 
 class IA : public Joueur
 {
+public :
 	//Constrcuteurs et destructeurs 
 	IA();
 	IA(std::string pseudoIA);
@@ -13,9 +14,7 @@ class IA : public Joueur
 	~IA();
 
 	//Méthodes
-	Carte JouerUneCarte(int positionCarte);
-
-
+	virtual std::shared_ptr<Carte> JouerUneCarte();
 };
 
 #endif
