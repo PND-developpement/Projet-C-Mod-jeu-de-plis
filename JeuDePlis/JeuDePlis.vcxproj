@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Carte.cpp" />
+    <ClCompile Include="CPartieDameDePique.cpp" />
     <ClCompile Include="EnsembleDeCartes.cpp" />
     <ClCompile Include="IA.cpp" />
     <ClCompile Include="JeuDeCarte.cpp" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Carte.h" />
+    <ClInclude Include="CPartieDameDePique.h" />
     <ClInclude Include="EnsembleDeCartes.h" />
     <ClInclude Include="Humain.h" />
     <ClInclude Include="IA.h" />
