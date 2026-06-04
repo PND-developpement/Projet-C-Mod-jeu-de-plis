@@ -25,7 +25,6 @@ public:
 	void SupprimerCarteMain(std::shared_ptr<Carte> carte);
 	bool TrouverCarte(std::shared_ptr<Carte> carte);
 	std::shared_ptr<Carte> ObtenirCarte(int positionCarte);
-	void afficherMainJoueur() const;
 	void AfficherMainJoueur() const;
 
 };

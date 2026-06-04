@@ -63,7 +63,7 @@ void Joueur::ModifierCartes(MainJoueur nouvellesCartes)
 	cartes = move(nouvellesCartes); //On modifie la main du joueur
 }
 
-void Joueur::afficherMainDuJoueur() const
+void Joueur::AfficherMainDuJoueur() const
 {
-	cartes.afficherMainJoueur();
+	cartes.AfficherMainJoueur();
 }

@@ -34,7 +34,7 @@ public :
 	//Méthodes
 	virtual std::shared_ptr<Carte> JouerUneCarte() = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
 
-	void AfficherMainJoueur();
+	void AfficherMainDuJoueur() const;
 };
 
 #endif

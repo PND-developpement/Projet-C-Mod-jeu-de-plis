@@ -32,9 +32,7 @@ void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
 	//On vérifie qu'elle ne soit pas déjà présente dans la main du joueur
 	if (TrouverCarte)
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
-
-	CartesMain.ajouterCarte(nouvelleCarte); //On l'ajoute à la main
-	CartesMain.AjouterCarte(nouvelleCarte);
+	CartesMain.AjouterCarte(nouvelleCarte); //On l'ajoute à la main
 }
 
 void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)

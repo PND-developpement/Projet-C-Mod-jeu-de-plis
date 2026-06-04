@@ -86,9 +86,9 @@ public:
 	std::vector<const std::shared_ptr<Carte>> GetensembleDeCarte() const;
 
 	void SetTaille(size_t taille) { this->taille = taille; }
-	size_t getTaille() const { return taille; }
+	size_t GetTaille() const { return taille; }
 
-	void AfficherCarte();
+	void AfficherCarte() const;
 
 };
 #endif // !H_EDC_H

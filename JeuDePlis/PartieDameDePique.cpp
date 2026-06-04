@@ -54,9 +54,9 @@ void PartieDameDePique::DistribuerCartes()
 
 void PartieDameDePique::LancerPartie()
 {
-    afficherRegles();
-    initaliserPartie();
-    distribuerCartes();
+    AfficherRegles();
+    InitaliserPartie();
+    DistribuerCartes();
 
     std::cout << "\nLa partie commence " << std::endl;
 }

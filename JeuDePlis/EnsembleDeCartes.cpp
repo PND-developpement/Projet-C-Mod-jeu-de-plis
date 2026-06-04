@@ -20,7 +20,7 @@ EnsembleDeCartes::EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept{
 	taille = ensemble2.taille;
 	size_t boucleAjout;
 	for ( boucleAjout = 0; boucleAjout < taille; boucleAjout++){
-		shared_ptr<Carte> carte = make_unique<Carte>(ensembleDeCarte[boucleAjout]);
+		shared_ptr<Carte> carte = make_shared<Carte>(ensembleDeCarte[boucleAjout]);
 		ensembleDeCarte.push_back(carte);
 	}
 }
@@ -29,7 +29,7 @@ EnsembleDeCartes::EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept{
 	taille = ensemble2.taille;
 	size_t boucleAjout;
 	for (boucleAjout = 0; boucleAjout < taille; boucleAjout++) {
-		shared_ptr<Carte> carte = make_unique<Carte>(ensembleDeCarte[boucleAjout]);
+		shared_ptr<Carte> carte = make_shared<Carte>(ensembleDeCarte[boucleAjout]);
 		ensembleDeCarte.push_back(carte);
 	}
 	ensemble2.~EnsembleDeCartes();
@@ -51,7 +51,7 @@ void EnsembleDeCartes::AjouterCarte(std::shared_ptr<Carte> carte){
 
 void EnsembleDeCartes::AjouterCarte(Carte& carte){
 	if (ensembleDeCarte.size() < taille) {
-		shared_ptr<Carte> ncarte = make_unique<Carte>(carte);
+		shared_ptr<Carte> ncarte = make_shared<Carte>(carte);
 		ensembleDeCarte.push_back(ncarte);
 	}
 	else {
@@ -84,13 +84,13 @@ vector<const std::shared_ptr<Carte>> EnsembleDeCartes::GetensembleDeCarte() cons
 	vector<const std::shared_ptr<Carte>> constensembleDeCarte;
 	size_t boucleAjout;
 	for ( boucleAjout = 0; boucleAjout < ensembleDeCarte.size(); boucleAjout++){
-		shared_ptr<Carte> const carte = make_unique<Carte>(ensembleDeCarte[boucleAjout]);
+		shared_ptr<Carte> const carte = make_shared<Carte>(ensembleDeCarte[boucleAjout]);
 		constensembleDeCarte.push_back(carte);
 	}
 
 	return constensembleDeCarte;
 }
 
-void EnsembleDeCartes::AfficherCarte(){
+void EnsembleDeCartes::AfficherCarte() const{
 	// ajouter interface
 }

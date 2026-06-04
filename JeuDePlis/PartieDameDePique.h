@@ -21,10 +21,10 @@ public:
     PartieDameDePique();
     ~PartieDameDePique() = default;
 
-    void afficherRegles() const;
-    void initaliserPartie();
-    void distribuerCartes();
-    void lancerPartie();
+    void AfficherRegles() const;
+    void InitaliserPartie();
+    void DistribuerCartes();
+    void LancerPartie();
 };
 
 #endif
