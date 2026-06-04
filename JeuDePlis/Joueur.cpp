@@ -9,7 +9,7 @@ Joueur::Joueur()
 	score = 0;
 }
 
-Joueur::Joueur(const Joueur& rJoueur)
+Joueur::Joueur(const Joueur& rJoueur) noexcept
 {
 	pseudo = rJoueur.pseudo;
 	score = rJoueur.score;

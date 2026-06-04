@@ -11,10 +11,10 @@ public :
 	IA(std::string pseudoIA);
 	IA(IA& parametre);
 	IA(IA&& parametre);
-	~IA();
+	~IA() = default;
 
 	//Méthodes
-	virtual std::shared_ptr<Carte> JouerUneCarte();
+	virtual std::shared_ptr<Carte> JouerUneCarte() override;
 };
 
 #endif

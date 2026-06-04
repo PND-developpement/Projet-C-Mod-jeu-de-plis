@@ -16,8 +16,8 @@ public :
 	//constructeurs et destructeurs
 	
 	Joueur();
-	Joueur(const Joueur& rJoueur);
-	Joueur(Joueur&& rJoueur);
+	Joueur(const Joueur& rJoueur) noexcept;
+	Joueur(Joueur&& rJoueur) noexcept;
 	Joueur(std::string pseudo, int score, MainJoueur cartes);
 	~Joueur();
 

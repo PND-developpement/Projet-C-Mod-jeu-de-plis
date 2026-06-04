@@ -5,11 +5,16 @@
 
 class Humain : public Joueur
 {
+public:
+	//Constrcuteurs et destructeurs 
+	Humain();
+	Humain(std::string pseudoJoueur);
+	Humain(Humain& parametre);
+	Humain(Humain&& parametre) noexcept;
+	~Humain() = default;
 
-
-
-
-	Carte JouerUneCarte(int positionCarte);
+	//méthodes
+	virtual std::shared_ptr<Carte> JouerUneCarte() override;
 };
 
 #endif

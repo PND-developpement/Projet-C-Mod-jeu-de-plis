@@ -1,17 +1,22 @@
 #include "IA.h"
 
+using namespace std;
+
 //Constrcuteurs et destructeurs 
 IA::IA(){}
 
-IA::IA(std::string pseudoIA) { pseudo = move(pseudoIA); }
+IA::IA(std::string pseudoIA) 
+{ 
+	this->pseudo = move(pseudoIA); 
+}
+
 IA::IA(IA& parametre) : Joueur(parametre) {}
-IA::IA(IA&& parametre) : Joueur(parametre) {}
-IA::~IA() {}
+IA::IA(IA&& parametre) : Joueur(move(parametre)) {}
 
 //Méthodes
 std::shared_ptr<Carte> IA::JouerUneCarte()
 {
-	size_t nbCarteMainJoueur = cartes.lireCartesMain().getTaille(); //On récupère la taille de l'ensemble de carte
+	size_t nbCarteMainJoueur = cartes.lireCartesMain().GetTaille(); //On récupère la taille de l'ensemble de carte
 
 	int positionCarte = rand() % nbCarteMainJoueur + 1; //On choisit une position de carte aléatoirement
 

@@ -81,6 +81,21 @@ Carte& EnsembleDeCartes::GetCarte(unsigned int position) const{
 }
 
 /*
+* ********** autre méthode pour get carte
+* méthode 1
+std::shared_ptr<Carte> EnsembleDeCartes::GetCarte(unsigned int position) const {
+
+	return ensembleDeCarte.at(position);
+}
+* méthode 2 :
+Carte& EnsembleDeCartes::getCarte(unsigned int position) const
+{
+	return *(ensembleDeCarte.at(position));
+}
+*/
+
+
+/*
 vector<const std::shared_ptr<Carte>> EnsembleDeCartes::GetensembleDeCarte() const{
 	vector<const std::shared_ptr<Carte>> constensembleDeCarte;
 	size_t boucleAjout;

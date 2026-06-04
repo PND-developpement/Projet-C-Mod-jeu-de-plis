@@ -8,7 +8,7 @@
 class MainJoueur
 {
 private:
-	EnsembleDeCartes CartesMain; //L'ensemble de cartes qui composent la main du joueur
+	EnsembleDeCartes CartesMain; //L'ensemble de cartes qui composent la main du joueur 
 
 public:
 	//constructeurs et destructeurs

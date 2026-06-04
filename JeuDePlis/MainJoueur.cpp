@@ -30,7 +30,7 @@ void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
 		throw std::invalid_argument("Erreur : pointeur est nul");
 
 	//On vérifie qu'elle ne soit pas déjà présente dans la main du joueur
-	if (TrouverCarte)
+	if (TrouverCarte(nouvelleCarte))
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
 	CartesMain.AjouterCarte(nouvelleCarte); //On l'ajoute à la main
 }
@@ -42,7 +42,7 @@ void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)
 		throw std::invalid_argument("Erreur : pointeur est nul");
 
 	//On vérifie qu'elle soit présente dans la main du joueur
-	if (!TrouverCarte)
+	if (!TrouverCarte(carte))
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
 
 	CartesMain.SupprimerCarte(carte); //On la supprime de la main
@@ -65,7 +65,7 @@ bool MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
 std::shared_ptr<Carte> MainJoueur::ObtenirCarte(int positionCarte)
 {
 	return CartesMain.GetensembleDeCarte().at(positionCarte); //On renvoie la carte à la position donnée en paramètre de la fonction dans la main du joueur
-}
+} //utilisé la méthode "GetCarte(unsigned int position)" de la classe ENsembleDeCartes ! 
 
 void MainJoueur::AfficherMainJoueur() const
 {
