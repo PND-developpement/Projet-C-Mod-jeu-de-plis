@@ -3,8 +3,9 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include "CarteInterface.h"
 
-class Carte{
+class Carte : public CarteInterface{
 protected:
 	// Atributs
 	std::string valeur;
@@ -57,7 +58,19 @@ public:
 	*/
 	std::string GetCouleur() const { return couleur; }
 
+	/*
+	* Renvoie le score de la carte
+	* @return int
+	*/
+	int GetScoreCarte() override;
 
+	/*
+	* affiche la carte
+	* @return couleur std::string
+	* @return valeur std::string
+	* @return figure std::string
+	*/
+	void AfficherCarte() const override;
 };
 
 #endif

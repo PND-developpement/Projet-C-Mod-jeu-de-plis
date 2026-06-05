@@ -20,8 +20,6 @@ std::shared_ptr<Carte> Humain::JouerUneCarte()
 {
 	//L'idée ici est de demander une carte et de récupérer sa position 
 
-	//afficher main du joueur (si besoin)
-
 	//int positionCarte = demanderUneCarte()
 
 	//obtenir la carte : 
