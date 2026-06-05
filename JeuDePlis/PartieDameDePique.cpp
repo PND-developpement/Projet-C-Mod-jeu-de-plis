@@ -46,9 +46,9 @@ void PartieDameDePique::InitaliserPartie()
         cout << "Entree pseudo joueur :" << endl;
         string pseudo;
         cin >> pseudo;
-        //unique_ptr <Humain> nJoueur = make_unique<Humain>();
-        //nJoueur->ModifierPseudo(pseudo);
-        //listeJoueur.push_back(move(nJoueur));
+        unique_ptr <Humain> nJoueur = make_unique<Humain>();
+        nJoueur->ModifierPseudo(pseudo);
+        listeJoueur.push_back(move(nJoueur));
     }
 
     if (nombreJoueurHumain > nombreJoueur) { // Si jamais le joueur renvoie une valeur supérieure à la limite autorisée

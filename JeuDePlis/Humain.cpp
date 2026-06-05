@@ -3,7 +3,7 @@
 using namespace std;
 
 //Constrcuteurs et destructeurs 
-Humain::Humain(){}
+Humain::Humain() : Joueur(){}
 
 Humain::Humain(std::string pseudoJoueur)
 {
