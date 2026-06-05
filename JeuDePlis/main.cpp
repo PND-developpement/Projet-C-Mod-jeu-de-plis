@@ -6,6 +6,7 @@ int main()
 {
     //std::cout << "Hello World !!!!!!!!!!!!!!!!!!!!!!!!!\n";
 
+    /*
     //exemple initalisation d'un jeux
     PartieFactory jeux;
     auto partie = jeux.create(1);
@@ -16,5 +17,5 @@ int main()
     else{
         cout << "Aucune partie trouvee";
     }
-
+    */
 }

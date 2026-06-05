@@ -75,17 +75,18 @@ void EnsembleDeCartes::MelangeAleatoireCarte(){
 	shuffle(ensembleDeCarte.begin(), ensembleDeCarte.end(), default_random_engine(seed));
 }
 
-Carte& EnsembleDeCartes::GetCarte(unsigned int position) const{
-	Carte ncarte(ensembleDeCarte[position]);
-	return ncarte;
+std::shared_ptr<Carte> EnsembleDeCartes::GetCarte(unsigned int position) const 
+{
+
+	return ensembleDeCarte.at(position);
 }
 
 /*
 * ********** autre méthode pour get carte
 * méthode 1
-std::shared_ptr<Carte> EnsembleDeCartes::GetCarte(unsigned int position) const {
-
-	return ensembleDeCarte.at(position);
+Carte& EnsembleDeCartes::GetCarte(unsigned int position) const{
+	Carte ncarte(ensembleDeCarte[position]);
+	return ncarte;
 }
 * méthode 2 :
 Carte& EnsembleDeCartes::getCarte(unsigned int position) const

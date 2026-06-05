@@ -82,7 +82,7 @@ public:
 	* Renvoie une carte du vecteur dans la postion en parametre
 	* @param position unsigned int
 	*/
-	Carte& GetCarte(unsigned int position) const;
+	std::shared_ptr<Carte> GetCarte(unsigned int position) const;
 	std::vector<std::shared_ptr<Carte>> GetensembleDeCarte() const { return ensembleDeCarte; }
 
 	void SetTaille(size_t taille) { this->taille = taille; }
