@@ -6,16 +6,17 @@ int main()
 {
     //std::cout << "Hello World !!!!!!!!!!!!!!!!!!!!!!!!!\n";
 
-    /*
+    
     //exemple initalisation d'un jeux
     PartieFactory jeux;
     auto partie = jeux.create(1);
 
     if (partie) {
-
+        cout << "partie ok";
+        partie->AfficherRegles();
     }
     else{
         cout << "Aucune partie trouvee";
     }
-    */
+    
 }

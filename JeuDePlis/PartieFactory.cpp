@@ -1,6 +1,7 @@
 #include "PartieFactory.h"
 #include "PartieDameDePique.h"
 #include <memory>
+#include "Partie.h"
 using namespace std;
 
 
@@ -14,6 +15,6 @@ unique_ptr<Partie> PartieFactory::create(int choix)
     if (it != jeux.end()) {
         return it->second();
     }
-        
+       
     return nullptr;
 }

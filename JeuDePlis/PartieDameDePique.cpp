@@ -7,6 +7,7 @@
 #include "Humain.h"
 #include <utility>
 #include <stdexcept>
+#include <memory>
 
 using namespace std;
 PartieDameDePique::PartieDameDePique() : Partie()
@@ -45,9 +46,9 @@ void PartieDameDePique::InitaliserPartie()
         cout << "Entree pseudo joueur :" << endl;
         string pseudo;
         cin >> pseudo;
-        std::unique_ptr <Humain> nJoueur = make_unique<Humain>();
-        nJoueur->ModifierPseudo(pseudo);
-        listeJoueur.push_back(move(nJoueur));
+        //unique_ptr <Humain> nJoueur = make_unique<Humain>();
+        //nJoueur->ModifierPseudo(pseudo);
+        //listeJoueur.push_back(move(nJoueur));
     }
 
     if (nombreJoueurHumain > nombreJoueur) { // Si jamais le joueur renvoie une valeur supérieure à la limite autorisée
@@ -60,7 +61,7 @@ void PartieDameDePique::InitaliserPartie()
     for (boucleAjoutJoueurIA = 0; boucleAjoutJoueurIA < nombreJoueurIA; boucleAjoutJoueurIA++) {
         string pseudo = "IA";
         
-        std::unique_ptr <IA> nJoueur = make_unique<IA>();
+        unique_ptr <IA> nJoueur = make_unique<IA>();
         nJoueur->ModifierPseudo(pseudo+to_string(boucleAjoutJoueurIA));
         listeJoueur.push_back(move(nJoueur));
     }

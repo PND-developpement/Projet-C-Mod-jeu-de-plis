@@ -14,7 +14,7 @@ public:
 	~Humain() = default;
 
 	//méthodes
-	virtual std::shared_ptr<Carte> JouerUneCarte() override;
+	std::shared_ptr<Carte> JouerUneCarte() override;
 };
 
 #endif

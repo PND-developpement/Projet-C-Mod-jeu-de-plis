@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Carte.cpp" />
     <ClCompile Include="EnsembleDeCartes.cpp" />
+    <ClCompile Include="Humain.cpp" />
     <ClCompile Include="IA.cpp" />
     <ClCompile Include="JeuDeCarte.cpp" />
     <ClCompile Include="Joueur.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="MainJoueur.cpp" />
     <ClCompile Include="Partie.cpp" />
     <ClCompile Include="PartieDameDePique.cpp" />
+    <ClCompile Include="PartieFactory.cpp" />
     <ClCompile Include="Plis.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +150,7 @@
     <ClInclude Include="MainJoueur.h" />
     <ClInclude Include="Partie.h" />
     <ClInclude Include="PartieDameDePique.h" />
+    <ClInclude Include="PartieFactory.h" />
     <ClInclude Include="Plis.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
