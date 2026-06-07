@@ -14,8 +14,8 @@ protected:
 public:
 	// Constructeur et Destructeur
 
-	Partie() = default;
-	~Partie() = default;
+	Partie();
+	virtual ~Partie() = default;
 
 	// Methodes
 

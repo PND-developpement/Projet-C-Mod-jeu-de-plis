@@ -1,29 +1,39 @@
 #include "MainJoueur.h"
 #include <utility>
 #include <stdexcept>
+#include <memory>
+#include "EnsembleDeCartes.h"
+#include "CarteInterface.h"
 using namespace std;
 
 //COnstructeurs et destructeurs
-MainJoueur::MainJoueur() {}
+MainJoueur::MainJoueur() {
+	taille = 0;
+	CartesMain = make_unique<EnsembleDeCartes>();
+}
 
-MainJoueur::MainJoueur(const EnsembleDeCartes& CopieCartesMain) : CartesMain(CopieCartesMain) {}
+MainJoueur::MainJoueur(const MainJoueur& CopieCartesMain) : taille(CopieCartesMain.taille){
+	CartesMain = make_unique<EnsembleDeCartes>(*CopieCartesMain.CartesMain);
+}
 
-MainJoueur::MainJoueur(EnsembleDeCartes&& CopieCartesMain) : CartesMain(move(CopieCartesMain)) {}
+MainJoueur::MainJoueur(MainJoueur&& CopieCartesMain) : taille(CopieCartesMain.taille),CartesMain(move(CopieCartesMain.CartesMain)) {
+	CopieCartesMain.taille = 0;
+}
 
 MainJoueur::~MainJoueur() {}
 
 //accesseurs
-EnsembleDeCartes MainJoueur::lireCartesMain() const
+EnsembleDeCartes* MainJoueur::lireCartesMain() const
 {
-	return CartesMain; //On renvoie la main du joueur
+	return CartesMain.get(); //On renvoie la main du joueur
 }
 
 void MainJoueur::ModifierCartesMain(EnsembleDeCartes nouvellesCartesMain)
 {
-	CartesMain = move(nouvellesCartesMain); //On modifie la valeur
+	CartesMain = make_unique<EnsembleDeCartes>(move(nouvellesCartesMain)); //On modifie la valeur
 }
 
-void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
+void MainJoueur::AjouterCarteMain(shared_ptr<CarteInterface> nouvelleCarte)
 {
 	//On vérifie que la carte en paramètre ne soit pas null
 	if (nouvelleCarte == nullptr)
@@ -32,10 +42,10 @@ void MainJoueur::AjouterCarteMain(shared_ptr<Carte> nouvelleCarte)
 	//On vérifie qu'elle ne soit pas déjà présente dans la main du joueur
 	if (TrouverCarte(nouvelleCarte))
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
-	CartesMain.AjouterCarte(nouvelleCarte); //On l'ajoute à la main
+	CartesMain->AjouterCarte(nouvelleCarte); //On l'ajoute à la main
 }
 
-void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)
+void MainJoueur::SupprimerCarteMain(shared_ptr<CarteInterface> carte)
 {
 	//On vérifie que la carte en paramètre ne soit pas null
 	if (carte == nullptr)
@@ -45,12 +55,12 @@ void MainJoueur::SupprimerCarteMain(shared_ptr<Carte> carte)
 	if (!TrouverCarte(carte))
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
 
-	CartesMain.SupprimerCarte(carte); //On la supprime de la main
+	CartesMain->SupprimerCarte(carte); //On la supprime de la main
 }
 
-bool MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
+bool MainJoueur::TrouverCarte(std::shared_ptr<CarteInterface> carte)
 {
-    const auto& ensemble = CartesMain.GetensembleDeCarte();
+    const auto& ensemble = CartesMain->GetensembleDeCarte();
 
 	//Boucle permettant de rechercher la carte dans la main du joueur avec un itérateur
     for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
@@ -62,12 +72,12 @@ bool MainJoueur::TrouverCarte(std::shared_ptr<Carte> carte)
 	return false; //On renvoie "false" si la carte n'est as présente dans la main.
 }
 
-std::shared_ptr<Carte> MainJoueur::ObtenirCarte(int positionCarte)
+std::shared_ptr<CarteInterface> MainJoueur::ObtenirCarte(int positionCarte)
 {
-	return CartesMain.GetensembleDeCarte().at(positionCarte); //On renvoie la carte à la position donnée en paramètre de la fonction dans la main du joueur
+	return CartesMain->GetensembleDeCarte().at(positionCarte); //On renvoie la carte à la position donnée en paramètre de la fonction dans la main du joueur
 } //utilisé la méthode "GetCarte(unsigned int position)" de la classe ENsembleDeCartes ! 
 
 void MainJoueur::AfficherMainJoueur() const
 {
-	CartesMain.AfficherCarte();
+	CartesMain->AfficherCarte();
 }

@@ -1,22 +1,25 @@
 #include "Partie.h"
 #include "PartieFactory.h"
 #include <iostream>
+#include <exception>
 using namespace std;
 int main()
 {
-    //std::cout << "Hello World !!!!!!!!!!!!!!!!!!!!!!!!!\n";
+    try {
+        //exemple initalisation d'un jeux
+        PartieFactory jeux;
+        auto partie = jeux.create(1);
 
-    
-    //exemple initalisation d'un jeux
-    PartieFactory jeux;
-    auto partie = jeux.create(1);
-
-    if (partie) {
-        cout << "partie ok";
-        partie->AfficherRegles();
+        if (partie) {
+            cout << "partie ok";
+            partie->LancerPartie();
+        }
+        else {
+            cout << "Aucune partie trouvee";
+        }
     }
-    else{
-        cout << "Aucune partie trouvee";
+    catch(exception erreur){
+        cout << "Erreur : " << erreur.what() << endl;
     }
     
 }

@@ -1,6 +1,6 @@
 #include "Interface.h"
 #include <iostream>
-
+/*
 int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
     int choix = 0;
     int nbCartes = mainDuJoueur.lireCartesMain().GetTaille();
@@ -72,3 +72,4 @@ void Interface::AfficherScores(const std::vector<std::string>& nomsJoueurs, cons
     }
     std::cout << "==========================================\n" << std::endl;
 }
+*/

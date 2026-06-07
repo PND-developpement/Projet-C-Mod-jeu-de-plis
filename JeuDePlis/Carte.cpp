@@ -34,3 +34,12 @@ Carte::Carte(string valeur, string figure, string couleur) : valeur(valeur),figu
 
 Carte::~Carte(){
 }
+
+int Carte::GetScoreCarte()
+{
+	return 0;
+}
+
+void Carte::AfficherCarte() const
+{
+}

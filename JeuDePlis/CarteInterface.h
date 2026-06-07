@@ -7,7 +7,7 @@ class CarteInterface
 {
 public :
 	//Destructeur
-	~CarteInterface() = default;;
+	~CarteInterface() = default;
 
 	//méthodes
 	/*

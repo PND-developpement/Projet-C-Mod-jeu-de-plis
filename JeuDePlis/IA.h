@@ -2,6 +2,8 @@
 #define _IA_H__
 
 #include "Joueur.h"
+#include "CarteInterface.h"
+#include <memory>
 
 class IA : public Joueur
 {
@@ -14,7 +16,7 @@ public :
 	~IA() = default;
 
 	//Méthodes
-	std::shared_ptr<Carte> JouerUneCarte() override;
+	std::shared_ptr<CarteInterface> JouerUneCarte() override;
 };
 
 #endif

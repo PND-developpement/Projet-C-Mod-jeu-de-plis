@@ -1,24 +1,26 @@
 #include "PartieDameDePique.h"
+#include "JeuDeCarte.h"
+#include "JeuDeCartesDameDePique.h"
+#include "IA.h"
+#include "Humain.h"
+#include "MainJoueur.h"
 #include <iostream>
 #include <vector>
 #include <string>
-#include "JeuDeCarte.h"
-#include "IA.h"
-#include "Humain.h"
 #include <utility>
 #include <stdexcept>
 #include <memory>
+#include "Partie.h"
 
 using namespace std;
 PartieDameDePique::PartieDameDePique() : Partie()
 {
-    pLeJeu = nullptr;
+    pLeJeu = make_unique<JeuDeCartesDameDePique>();
     nombreJoueur = 4;
 }
 
 
-void PartieDameDePique::AfficherRegles() const
-{
+void PartieDameDePique::AfficherRegles() const{
     cout << "\n=================================================" << endl;
     cout << "           JEU DE LA DAME DE PIQUE          " << endl;
     cout << "=================================================\n" << endl;
@@ -35,8 +37,7 @@ void PartieDameDePique::AfficherRegles() const
 void PartieDameDePique::InitaliserPartie()
 {
     //inscription des joueurs à la table
-    //{ "Terminator", "Sososlazdeg", "Evaninha", "Coco" }
-
+    
     cout << "Entree le nombre de joueur Humain : " << endl;
     unsigned int nombreJoueurHumain=0;
     cin >> nombreJoueurHumain;
@@ -52,21 +53,19 @@ void PartieDameDePique::InitaliserPartie()
     }
 
     if (nombreJoueurHumain > nombreJoueur) { // Si jamais le joueur renvoie une valeur supérieure à la limite autorisée
-        throw invalid_argument("Nombre de joueur trop grand pour le jeux");
+        throw invalid_argument("Nombre de joueur trop grand pour le jeux : InitaliserPartie PartieDameDePique");
     }
 
     unsigned int nombreJoueurIA = nombreJoueur-nombreJoueurHumain;
 
+    vector<string> nomIA = { "Terminator", "Sososlazdeg", "Evaninha", "Coco" };
     size_t boucleAjoutJoueurIA;
     for (boucleAjoutJoueurIA = 0; boucleAjoutJoueurIA < nombreJoueurIA; boucleAjoutJoueurIA++) {
-        string pseudo = "IA";
-        
         unique_ptr <IA> nJoueur = make_unique<IA>();
-        nJoueur->ModifierPseudo(pseudo+to_string(boucleAjoutJoueurIA));
+        nJoueur->ModifierPseudo(nomIA[boucleAjoutJoueurIA]);
         listeJoueur.push_back(move(nJoueur));
     }
 
-    
     cout << "Joueurs inscrits : ";
     for (const auto& nom : listeJoueur) {
         cout << nom->LirePseudo() << " ";
@@ -77,28 +76,41 @@ void PartieDameDePique::InitaliserPartie()
     vector<string> valeurs = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi", "As" };
 
     //deduction de la couleur
-    pLeJeu = JeuDeCartes::CreerJeuSurMesure(figures, valeurs, 0);
+    pLeJeu->SetTaille(52);
+    pLeJeu->CreerJeux(figures,valeurs,0);
 
-    if (pLeJeu != nullptr)
+    if (pLeJeu == nullptr)
     {
-        cout << "La partie de Dame de Pique est initialisee (52 cartes prêtes)." << std::endl;
+        throw invalid_argument("Echec de l'initialisation du jeu : InitaliserPartie PartieDameDePique");
     }
-    else
-    {
-        cerr << "Echec de l'initialisation du jeu." << std::endl;
-    }
+  
+    cout << "La partie de Dame de Pique est initialisee (52 cartes pretes)." << std::endl;
 }
 
 void PartieDameDePique::DistribuerCartes()
 {
     if (pLeJeu == nullptr) {
-        cerr << "Erreur : Impossible de distribuer, le jeu n'est pas initialise." << std::endl;
-        return;
+        throw invalid_argument("Impossible de distribuer, le jeu n'est pas initialise : DistribuerCartes PartieDameDePique");
     }
 
     cout << "Melange des cartes en cours" << std::endl;
     pLeJeu->MelangeCarte();
     cout << "Distribution de 13 cartes a chaque joueur..." << std::endl;
+    for (const auto& joueur : listeJoueur) {
+        unique_ptr<MainJoueur> nmainjoueur = make_unique<MainJoueur>();
+        nmainjoueur->SetTaille(13);
+        size_t boucleAjouterCarte;
+        unsigned int ajoutCarte=0;
+        for (boucleAjouterCarte = 0; boucleAjouterCarte < 13; boucleAjouterCarte++) {
+            ajoutCarte++;
+            
+            if (ajoutCarte<52){
+                nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->GetensembleDeCarte()[ajoutCarte]);
+            }
+        }
+        
+        joueur->ModifierCartes(move(nmainjoueur));
+    }
 
 }
 
@@ -107,6 +119,6 @@ void PartieDameDePique::LancerPartie()
     AfficherRegles();
     InitaliserPartie();
     DistribuerCartes();
-
     cout << "\nLa partie commence " << std::endl;
+
 }

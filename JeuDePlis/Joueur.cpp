@@ -1,5 +1,9 @@
 #include "Joueur.h"
 #include <utility>
+#include <memory>
+#include "EnsembleDeCartes.h"
+#include "MainJoueur.h"
+#include <string>
 using namespace std;
 
 //constructeurs et destructeurs
@@ -13,7 +17,7 @@ Joueur::Joueur(const Joueur& rJoueur) noexcept
 {
 	pseudo = rJoueur.pseudo;
 	score = rJoueur.score;
-	cartes = rJoueur.cartes;
+	cartes = make_unique<MainJoueur>(*rJoueur.cartes);
 }
 
 Joueur::Joueur(Joueur&& rJoueur) noexcept
@@ -23,10 +27,10 @@ Joueur::Joueur(Joueur&& rJoueur) noexcept
 	cartes = move(rJoueur.cartes);
 }
 
-Joueur::Joueur(std::string pseudo, int score, MainJoueur cartes)
+Joueur::Joueur(string pseudo, int score, unique_ptr<MainJoueur> cartes)
 {
 	pseudo = move(pseudo);
-	score = score;
+	this->score = score;
 	cartes = move(cartes);
 }
 
@@ -53,17 +57,18 @@ void Joueur::ModifierScore(int NouveauScore)
 	score = NouveauScore;
 }
 
-MainJoueur Joueur::LireCartes() const
+MainJoueur* Joueur::LireCartes() const
 {
-	return cartes;
+	return cartes.get();
 }
 
-void Joueur::ModifierCartes(MainJoueur nouvellesCartes)
-{
+void Joueur::ModifierCartes(std::unique_ptr<MainJoueur> nouvellesCartes){
 	cartes = move(nouvellesCartes); //On modifie la main du joueur
 }
 
+
+
 void Joueur::AfficherMainDuJoueur() const
 {
-	cartes.AfficherMainJoueur();
+	cartes->AfficherMainJoueur();
 }

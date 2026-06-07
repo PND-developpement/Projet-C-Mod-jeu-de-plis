@@ -1,5 +1,5 @@
 #include "EnsembleDeCartes.h"
-#include <iostream>
+#include "CarteInterface.h"
 #include <vector>
 #include <memory>
 #include <stdexcept>
@@ -7,6 +7,8 @@
 #include <random>
 #include <algorithm>
 #include <chrono>
+#include <utility>
+
 using namespace std;
 
 EnsembleDeCartes::EnsembleDeCartes(){
@@ -20,27 +22,14 @@ EnsembleDeCartes::EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept{
 	taille = ensemble2.taille;
 	size_t boucleAjout;
 	for ( boucleAjout = 0; boucleAjout < taille; boucleAjout++){
-		shared_ptr<Carte> carte = make_shared<Carte>(ensembleDeCarte[boucleAjout]);
-		ensembleDeCarte.push_back(carte);
+		ensembleDeCarte.push_back(ensemble2.ensembleDeCarte[boucleAjout]);
 	}
 }
 
-EnsembleDeCartes::EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept{
-	taille = ensemble2.taille;
-	size_t boucleAjout;
-	for (boucleAjout = 0; boucleAjout < taille; boucleAjout++) {
-		shared_ptr<Carte> carte = make_shared<Carte>(ensembleDeCarte[boucleAjout]);
-		ensembleDeCarte.push_back(carte);
-	}
-	ensemble2.~EnsembleDeCartes();
+EnsembleDeCartes::EnsembleDeCartes(EnsembleDeCartes&& ensemble2) noexcept : taille(ensemble2.taille),ensembleDeCarte(move(ensemble2.ensembleDeCarte)){
 }
 
-EnsembleDeCartes::~EnsembleDeCartes(){
-	taille = 0;
-	ensembleDeCarte.clear();
-}
-
-void EnsembleDeCartes::AjouterCarte(std::shared_ptr<Carte> carte){
+void EnsembleDeCartes::AjouterCarte(std::shared_ptr<CarteInterface> carte){
 	if (ensembleDeCarte.size() < taille) {
 		ensembleDeCarte.push_back(carte);
 	}
@@ -49,17 +38,19 @@ void EnsembleDeCartes::AjouterCarte(std::shared_ptr<Carte> carte){
 	}
 }
 
-void EnsembleDeCartes::AjouterCarte(Carte& carte){
+/*
+void EnsembleDeCartes::AjouterCarte(CarteInterface& carte){
 	if (ensembleDeCarte.size() < taille) {
-		shared_ptr<Carte> ncarte = make_shared<Carte>(carte);
+		shared_ptr<CarteInterface> ncarte = make_shared<CarteInterface>(carte);
 		ensembleDeCarte.push_back(ncarte);
 	}
 	else {
 		throw invalid_argument("Ensemble plein");
 	}
 }
+*/
 
-void EnsembleDeCartes::SupprimerCarte(std::shared_ptr<Carte> carteASupprimer){
+void EnsembleDeCartes::SupprimerCarte(std::shared_ptr<CarteInterface> carteASupprimer){
 	auto it = std::find(ensembleDeCarte.begin(), ensembleDeCarte.end(), carteASupprimer);
 	if (it != ensembleDeCarte.end()) {
 		ensembleDeCarte.erase(it);
@@ -70,14 +61,14 @@ void EnsembleDeCartes::TrieCarte(std::string typedetrie){
 	
 }
 
-void EnsembleDeCartes::MelangeAleatoireCarte(){
-	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-	shuffle(ensembleDeCarte.begin(), ensembleDeCarte.end(), default_random_engine(seed));
+void EnsembleDeCartes::MelangeAleatoireCarte() {
+	auto seed = chrono::system_clock::now().time_since_epoch().count();
+	mt19937 rng(seed); // Permet le melange des cartes aleatoirement
+	shuffle(ensembleDeCarte.begin(), ensembleDeCarte.end(), rng);
 }
 
-std::shared_ptr<Carte> EnsembleDeCartes::GetCarte(unsigned int position) const 
+std::shared_ptr<CarteInterface> EnsembleDeCartes::GetCarte(unsigned int position) const
 {
-
 	return ensembleDeCarte.at(position);
 }
 

@@ -10,22 +10,19 @@
 
 class JeuDeCartes
 {
-private:
+protected:
     std::unique_ptr<EnsembleDeCartes> pEnsembleCartes;
-
-    JeuDeCartes();
-
+    size_t taille;
 public:
     ~JeuDeCartes() = default;
 
-    // On utilise vFigures (Pique, Coeur, Carreau et Trefle) et vValeurs (As, 10, etc)
-    static std::unique_ptr<JeuDeCartes> CreerJeuSurMesure(
-        const std::vector<std::string>& vFigures,
-        const std::vector<std::string>& vValeurs,
-        unsigned int uiNbJokers = 0);
+    virtual void SetTaille(size_t taille) = 0;
+    virtual size_t GetTaille() const = 0;
 
-    EnsembleDeCartes* ObtenirEnsemble() const;
-    void MelangeCarte() const;
+    // On utilise vFigures (Pique, Coeur, Carreau et Trefle) et vValeurs (As, 10, etc)
+    virtual void CreerJeux(const std::vector<std::string>& vFigures,const std::vector<std::string>& vValeurs,unsigned int uiNbJokers = 0) = 0;
+    virtual EnsembleDeCartes* ObtenirEnsemble() const = 0;
+    virtual void MelangeCarte() const =0;
 };
 
 #endif

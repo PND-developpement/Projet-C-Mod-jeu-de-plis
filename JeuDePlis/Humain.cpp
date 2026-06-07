@@ -1,4 +1,5 @@
 #include "Humain.h"
+#include "CarteInterface.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ Humain::Humain(Humain&& parametre) noexcept : Joueur(move(parametre)) {}
 
 
 //méthodes rédéfinies
-std::shared_ptr<Carte> Humain::JouerUneCarte()
+std::shared_ptr<CarteInterface> Humain::JouerUneCarte()
 {
 	//L'idée ici est de demander une carte et de récupérer sa position 
 
