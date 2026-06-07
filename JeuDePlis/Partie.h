@@ -14,16 +14,32 @@ protected:
 public:
 	// Constructeur et Destructeur
 
-	Partie();
+	/*
+	* Destructeur par défaut
+	*/
 	virtual ~Partie() = default;
 
 	// Methodes
 
+	/*
+	* Afficher dans la console les règles du jeu
+	*/
 	virtual void AfficherRegles() const = 0 ;
-	virtual void InitaliserPartie() = 0;
-	virtual void DistribuerCartes() = 0;
-	virtual void LancerPartie() = 0;
 
+	/*
+	* Crée le paquet de cartes et les joueurs
+	*/
+	virtual void InitaliserPartie() = 0;
+
+	/*
+	* Mélange le paquet de cartes et distribue aux joueurs leurs cartes
+	*/
+	virtual void DistribuerCartes() = 0;
+
+	/*
+	* Lance la partie
+	*/
+	virtual void LancerPartie() = 0;
 
 };
 #endif

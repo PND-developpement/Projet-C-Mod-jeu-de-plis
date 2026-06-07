@@ -13,7 +13,7 @@
 #include "Partie.h"
 
 using namespace std;
-PartieDameDePique::PartieDameDePique() : Partie()
+PartieDameDePique::PartieDameDePique()
 {
     pLeJeu = make_unique<JeuDeCartesDameDePique>();
     nombreJoueur = 4;

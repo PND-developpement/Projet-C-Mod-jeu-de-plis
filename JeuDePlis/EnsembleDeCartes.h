@@ -68,7 +68,10 @@ public:
 	*/
 	void SupprimerCarte(std::shared_ptr<CarteInterface> carteASupprimer);
 
-	
+	/*
+	* Trie les cartes selon un ordre donner en parametre
+	* @param valeur std::string
+	*/
 	void TrieCarte(std::string typedetrie);
 
 	/*
@@ -81,12 +84,29 @@ public:
 	* @param position unsigned int
 	*/
 	std::shared_ptr<CarteInterface> GetCarte(unsigned int position) const;
+
+	/*
+	* Renvoie le vecteur de carte
+	* @return ensembleDeCarte
+	*/
 	std::vector<std::shared_ptr<CarteInterface>> GetensembleDeCarte() const { return ensembleDeCarte; }
 
+	/*
+	* Modifie la taille avec la valeur passer en prametre
+	* @param taille size_t
+	*/
 	void SetTaille(size_t taille) { this->taille = taille; }
+
+	/*
+	* Renvoie la taille de l'ensemble
+	* @return taille
+	*/
 	size_t GetTaille() const { return taille; }
 
+	/*
+	* Afficher l’ensemble des cartes avec la méthode de l’interface
+	*/
 	void AfficherCarte() const;
 
 };
-#endif // !H_EDC_H
+#endif
