@@ -1,9 +1,9 @@
 #include "Interface.h"
 #include <iostream>
-/*
+
 int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
     int choix = 0;
-    int nbCartes = mainDuJoueur.lireCartesMain().GetTaille();
+    size_t nbCartes = mainDuJoueur.lireCartesMain()->GetTaille();
 
     std::cout << "\n--- A VOTRE TOUR DE JOUER ---" << std::endl;
     AfficherMain(mainDuJoueur);
@@ -30,10 +30,10 @@ int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
 
 void Interface::AfficherMain(const MainJoueur& mainDuJoueur) const {
     std::cout << "Votre main : \n";
-    int taille = mainDuJoueur.lireCartesMain().GetTaille();
+    size_t taille = mainDuJoueur.lireCartesMain()->GetTaille();
 
     for (int i = 0; i < taille; ++i) {
-        std::shared_ptr<Carte> c = mainDuJoueur.lireCartesMain().GetCarte(i);
+        std::shared_ptr<CarteInterface> c = mainDuJoueur.lireCartesMain()->GetCarte(i);
         std::cout << i + 1 << ") [" << c->GetValeur() << " de " << c->GetFigure() << "]\n";
     }
     std::cout << std::endl;
@@ -72,4 +72,3 @@ void Interface::AfficherScores(const std::vector<std::string>& nomsJoueurs, cons
     }
     std::cout << "==========================================\n" << std::endl;
 }
-*/
