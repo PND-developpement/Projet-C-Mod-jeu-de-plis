@@ -4,6 +4,7 @@
 #include <memory>
 #include "EnsembleDeCartes.h"
 #include "CarteInterface.h"
+#include <string>
 using namespace std;
 
 //COnstructeurs et destructeurs
@@ -70,6 +71,20 @@ bool MainJoueur::TrouverCarte(std::shared_ptr<CarteInterface> carte)
     }
 
 	return false; //On renvoie "false" si la carte n'est as présente dans la main.
+}
+
+bool MainJoueur::TrouverCarte(string valeur, string figure)
+{
+	bool trouver = false;
+	const auto& ensemble = CartesMain->GetensembleDeCarte();
+
+	//Boucle permettant de rechercher la carte dans la main du joueur avec un itérateur
+	for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
+	{
+		if (valeur == itCarte->get()->GetValeur() && figure == itCarte->get()->GetFigure())
+			trouver = true;
+	}
+	return trouver;
 }
 
 std::shared_ptr<CarteInterface> MainJoueur::ObtenirCarte(int positionCarte)

@@ -6,11 +6,15 @@
 #include "MainJoueur.h"
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <string>
 #include <utility>
 #include <stdexcept>
 #include <memory>
 #include "Partie.h"
+#include "CarteInterface.h"
+#include <algorithm>
+#include "Joueur.h"
 
 using namespace std;
 PartieDameDePique::PartieDameDePique()
@@ -118,8 +122,76 @@ void PartieDameDePique::LancerPartie()
 {
     AfficherRegles();
     InitaliserPartie();
-    DistribuerCartes();
-    cout << "\nLa partie commence " << std::endl;
-
-
+    
 }
+
+void PartieDameDePique::JouerPartie(){
+    LancerPartie();
+    unsigned int manche = 0;
+    while (!VerifScore()) {
+        DistribuerCartes();
+        cout << "\nLa partie commence " << endl;
+        cout << "Manche : " << manche << endl;
+        manche++;
+
+        unsigned int selectionJoueur = 0; // Choisit le joueur qui doit jouer
+        bool trouverJoueur = false; // Recherche le joueur avec la carte 2 de Trefle
+        while (selectionJoueur < 4 && !trouverJoueur) {
+            if (listeJoueur[selectionJoueur]->LireCartes()->TrouverCarte("2", "Trefle")) {
+                trouverJoueur = true;
+            }
+            selectionJoueur++;
+        }
+
+        unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
+        while (nombreDeTour < 13) {
+            unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
+            unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlie; 
+            while (nombreJoueurJouer < 4) {
+                if (selectionJoueur == 4) {
+                    selectionJoueur = 0;
+                }
+                cout << "Autour du joueur " << listeJoueur[selectionJoueur]->LirePseudo() << " de jouer" << endl;
+                cin.get(); // attendre la validation du joueur
+                // interface afficher le bloque noire
+                listeJoueur[selectionJoueur]->AfficherMainDuJoueur();
+                auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte();
+                carteDuPlie[selectionJoueur] = cartejouer;
+                selectionJoueur++;
+                nombreJoueurJouer++;
+                
+            }
+            // Plie verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
+        }
+        AfficherScore();
+    }
+    cout << "Fin Partie Classement finale :" << endl;
+    AfficherScore();
+}
+
+bool PartieDameDePique::VerifScore()
+{
+    bool scoreFinale = false;
+    auto parcourirJoueur = listeJoueur.begin();
+    while (parcourirJoueur != listeJoueur.end() && !scoreFinale) {
+        if (parcourirJoueur->get()->LireScore() == 100) {
+            scoreFinale = true;
+        }
+        parcourirJoueur++;
+    }
+    return scoreFinale;
+}
+
+void PartieDameDePique::AfficherScore(){
+    sort(listeJoueur.begin(), listeJoueur.end(), [](const unique_ptr<Joueur>& j1, const unique_ptr<Joueur>& j2) {
+        return j1->LireScore() < j2->LireScore();
+    });
+    cout << "1er : " << listeJoueur[0] << " score : " << listeJoueur[0]->LireScore() << endl;
+    cout << "2eme : " << listeJoueur[1] << " score : " << listeJoueur[1]->LireScore() << endl;
+    cout << "3eme : " << listeJoueur[2] << " score : " << listeJoueur[2]->LireScore() << endl;
+    cout << "4eme : " << listeJoueur[3] << " score : " << listeJoueur[3]->LireScore() << endl;
+}
+
+
+
+

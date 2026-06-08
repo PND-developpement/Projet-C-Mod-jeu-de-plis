@@ -2,6 +2,8 @@
 #define _PARTIE_DAME_DE_PIQUE_H__
 
 #include "Partie.h"
+#include "Joueur.h"
+#include <memory>
 
 class PartieDameDePique : public Partie{
 public:
@@ -38,6 +40,22 @@ public:
 	* Lance la partie
 	*/
 	void LancerPartie() override;
+
+	/*
+	* Jouer la partie
+	*/
+	void JouerPartie() override;
+
+	/*
+	* Verifier score des joueurs
+	*/
+	bool VerifScore() override;
+
+	/*
+	* Affiche le vainceur de la partie
+	*/
+	void AfficherScore() override;
+
 };
 
 #endif

@@ -40,5 +40,19 @@ public:
 	*/
 	virtual void LancerPartie() = 0;
 
+	/*
+	* Jouer la partie
+	*/
+	virtual void JouerPartie() = 0;
+
+	/*
+	* Verifier score des joueurs
+	*/
+	virtual bool VerifScore() = 0;
+
+	/*
+	* Affiche le vainceur de la partie
+	*/
+	virtual void AfficherScore() = 0;
 };
 #endif
