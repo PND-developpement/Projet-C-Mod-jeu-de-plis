@@ -42,4 +42,5 @@ int Carte::GetScoreCarte()
 
 void Carte::AfficherCarte() const
 {
+	cout  << "Carte : " << GetValeur() << " de " << GetFigure() << endl;
 }

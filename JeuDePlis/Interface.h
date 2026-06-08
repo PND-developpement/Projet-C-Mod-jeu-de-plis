@@ -12,16 +12,15 @@ public:
     Interface() = default;
     ~Interface() = default;
 
+    // Affiche les cartes que le joueur a en main
+    //void AfficherMainJoueur(const MainJoueur& mainDuJoueur) const;
+    void AfficherCarte(std::vector<std::shared_ptr<CarteInterface>> ensembleCarte);
 
     // Demande à l'humain de jouer et renvoie l'index
     int DemanderCarte(const MainJoueur& mainDuJoueur) const;
 
-
-    // Affiche les cartes que le joueur a en main
-    void AfficherMain(const MainJoueur& mainDuJoueur) const;
-
     // Affiche les cartes actuellement posées au centre de la table
-    void AfficherTable(const std::vector<std::shared_ptr<Carte>>& cartesAuMilieu) const;
+    void AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>& cartes) const;
 
     // Affiche un message générique par ex "Début du tour 3"
     void AfficherMessage(const std::string& message) const;

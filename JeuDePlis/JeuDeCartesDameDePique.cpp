@@ -61,4 +61,47 @@ void JeuDeCartesDameDePique::MelangeCarte() const {
     pEnsembleCartes->MelangeAleatoireCarte();
 }
 
+int JeuDeCartesDameDePique::ScoreCarte(const std::shared_ptr<CarteInterface>& carte) const
+{
+    switch(carte->GetValeur())
+    {
+        case 'as':
+            return 1;
+        
+        case 'deux':
+            return 2;
 
+        case 'trois':
+            return 3;
+
+        case 'quatre':
+            return 4;
+
+        case 'cinq':
+            return 5;
+
+        case 'six':
+            return 6;
+
+        case 'sept':
+            return 7;
+
+        case 'huit':
+            return 8;
+
+        case 'neuf':
+            return 9;
+
+        case 'dix':
+            return 10;
+
+        case 'vallet':
+            return 11;
+
+        case 'dame':
+            return 12;
+
+        case 'roi':
+            return 13;
+    }
+}

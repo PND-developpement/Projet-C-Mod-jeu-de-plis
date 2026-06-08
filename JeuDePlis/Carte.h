@@ -66,9 +66,6 @@ public:
 
 	/*
 	* affiche la carte
-	* @return couleur std::string
-	* @return valeur std::string
-	* @return figure std::string
 	*/
 	void AfficherCarte() const override;
 };

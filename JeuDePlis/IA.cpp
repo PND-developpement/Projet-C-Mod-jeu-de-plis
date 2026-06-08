@@ -28,13 +28,13 @@ std::shared_ptr<CarteInterface> IA::JouerUneCarte()
 
 	int positionCarte = rand() % nbCarteMainJoueur + 1; //On choisit une position de carte aléatoirement
 
-	std::shared_ptr<CarteInterface> carte = cartes->ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
+	std::shared_ptr<CarteInterface> carteJouee = cartes->ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
 
 	//On vérifie que la carte ne soit pas null
-	if (carte == nullptr)
+	if (carteJouee == nullptr)
 		throw std::invalid_argument("Erreur : pointeur est nul : JouerUneCarte IA");
 
-	cartes->SupprimerCarteMain(carte); //On la supprime du deck
+	cartes->SupprimerCarteMain(carteJouee); //On la supprime du deck
 
-	return carte; //on la renvoie
+	return carteJouee; //on la renvoie
 }

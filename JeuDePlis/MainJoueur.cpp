@@ -1,9 +1,7 @@
 #include "MainJoueur.h"
 #include <utility>
 #include <stdexcept>
-#include <memory>
-#include "EnsembleDeCartes.h"
-#include "CarteInterface.h"
+
 using namespace std;
 
 //COnstructeurs et destructeurs
@@ -79,5 +77,5 @@ std::shared_ptr<CarteInterface> MainJoueur::ObtenirCarte(int positionCarte)
 
 void MainJoueur::AfficherMainJoueur() const
 {
-	CartesMain->AfficherCarte();
+	CartesMain->AfficherEnsembleDeCarte();
 }
