@@ -121,4 +121,5 @@ void PartieDameDePique::LancerPartie()
     DistribuerCartes();
     cout << "\nLa partie commence " << std::endl;
 
+
 }

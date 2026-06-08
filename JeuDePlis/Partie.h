@@ -13,11 +13,10 @@ protected:
 	std::unique_ptr<JeuDeCartes> pLeJeu;
 public:
 	// Constructeur et Destructeur
-
 	/*
 	* Destructeur par défaut
 	*/
-	virtual ~Partie() = default;
+	~Partie() = default;
 
 	// Methodes
 

@@ -22,22 +22,22 @@ public:
 	/*
 	* Afficher dans la console les règles du jeu
 	*/
-	void AfficherRegles() const = 0;
+	void AfficherRegles() const override;
 
 	/*
 	* Crée le paquet de cartes et les joueurs
 	*/
-	void InitaliserPartie() = 0;
+	void InitaliserPartie() override;
 
 	/*
 	* Mélange le paquet de cartes et distribue aux joueurs leurs cartes
 	*/
-	void DistribuerCartes() = 0;
+	void DistribuerCartes() override;
 
 	/*
 	* Lance la partie
 	*/
-	void LancerPartie() = 0;
+	void LancerPartie() override;
 };
 
 #endif
