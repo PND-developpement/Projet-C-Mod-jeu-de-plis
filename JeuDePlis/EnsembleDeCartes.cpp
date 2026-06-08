@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <chrono>
 #include <utility>
+#include <iostream>
 
 using namespace std;
 
@@ -99,6 +100,14 @@ vector<const std::shared_ptr<Carte>> EnsembleDeCartes::GetensembleDeCarte() cons
 	return constensembleDeCarte;
 }
 */
-void EnsembleDeCartes::AfficherCarte() const{
-	// ajouter interface
+void EnsembleDeCartes::AfficherEnsembleDeCarte() const
+{
+	for (int positionCarte = 0; positionCarte < ensembleDeCarte.size(); ++positionCarte)
+	{
+		std::shared_ptr<CarteInterface> carteJoueur = GetCarte(positionCarte);
+		cout << "(" << positionCarte << ")";
+		carteJoueur->AfficherCarte();
+		cout << endl;
+	}
+	cout << endl;
 }

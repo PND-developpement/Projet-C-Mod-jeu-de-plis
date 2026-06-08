@@ -1,9 +1,9 @@
 #include "MainJoueur.h"
 #include <utility>
 #include <stdexcept>
-#include <memory>
 #include "EnsembleDeCartes.h"
 #include "CarteInterface.h"
+#include <memory>
 #include <string>
 using namespace std;
 
@@ -94,5 +94,5 @@ std::shared_ptr<CarteInterface> MainJoueur::ObtenirCarte(int positionCarte)
 
 void MainJoueur::AfficherMainJoueur() const
 {
-	CartesMain->AfficherCarte();
+	CartesMain->AfficherEnsembleDeCarte();
 }

@@ -19,21 +19,21 @@ Humain::Humain(Humain&& parametre) noexcept : Joueur(move(parametre)) {}
 //méthodes rédéfinies
 std::shared_ptr<CarteInterface> Humain::JouerUneCarte()
 {
-	//L'idée ici est de demander une carte et de récupérer sa position 
-
-	//int positionCarte = demanderUneCarte()
+	int positionCarte = demanderUneCarte();
 
 	//obtenir la carte : 
-	//std::shared_ptr<Carte> carte = cartes.ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
+	std::shared_ptr<Carte> carteJouee = cartes.ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
 
 	//On vérifie que la carte ne soit pas null
-	//if (carte == nullptr)
-	//	throw std::invalid_argument("Erreur : pointeur est nul");
+	if (carteJouee == nullptr)
+		throw std::invalid_argument("Erreur : pointeur est nul");
 
-	//cartes.SupprimerCarteMain(carte); //On la supprime du deck
+	cartes.SupprimerCarteMain(carteJouee); //On la supprime du deck
 
-	//return carte; //on la renvoie
+	return carteJouee; //on la renvoie
+}
 
-
-	return nullptr;
-} //J'ai mis cette fonction en commentaire en attendant de développer la méthode de demande de carte dans un deck
+void Humain::AfficherMainDuJoueur() const
+{
+	cartes->AfficherMainJoueur();
+}

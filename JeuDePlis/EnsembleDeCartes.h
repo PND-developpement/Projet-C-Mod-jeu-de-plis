@@ -106,7 +106,7 @@ public:
 	/*
 	* Afficher l’ensemble des cartes avec la méthode de l’interface
 	*/
-	void AfficherCarte() const;
+	void AfficherEnsembleDeCarte() const;
 
 };
 #endif

@@ -15,6 +15,7 @@ public:
     void CreerJeux(const std::vector<std::string>& vFigures, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers = 0);
     EnsembleDeCartes* ObtenirEnsemble() const;
     void MelangeCarte() const;
+    int ScoreCarte(const std::shared_ptr<CarteInterface>& carte) const override;
 };
 
 #endif 
