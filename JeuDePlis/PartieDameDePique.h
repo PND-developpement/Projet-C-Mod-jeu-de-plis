@@ -44,7 +44,7 @@ public:
 	/*
 	* Jouer la partie
 	*/
-	void JouerPartie() override;
+	void JouerPartie(const Interface& interface) override;
 
 	/*
 	* Verifier score des joueurs

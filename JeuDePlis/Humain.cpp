@@ -1,5 +1,4 @@
 #include "Humain.h"
-#include "CarteInterface.h"
 
 using namespace std;
 
@@ -17,23 +16,18 @@ Humain::Humain(Humain&& parametre) noexcept : Joueur(move(parametre)) {}
 
 
 //méthodes rédéfinies
-std::shared_ptr<CarteInterface> Humain::JouerUneCarte()
+std::shared_ptr<CarteInterface> Humain::JouerUneCarte(const Interface& interface)
 {
-	int positionCarte = demanderUneCarte();
+	int positionCarte = interface.DemanderCarte(*cartes);
 
 	//obtenir la carte : 
-	std::shared_ptr<Carte> carteJouee = cartes.ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
+	std::shared_ptr<CarteInterface> carteJouee = cartes->ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
 
 	//On vérifie que la carte ne soit pas null
 	if (carteJouee == nullptr)
 		throw std::invalid_argument("Erreur : pointeur est nul");
 
-	cartes.SupprimerCarteMain(carteJouee); //On la supprime du deck
+	cartes->SupprimerCarteMain(carteJouee); //On la supprime du deck
 
 	return carteJouee; //on la renvoie
-}
-
-void Humain::AfficherMainDuJoueur() const
-{
-	cartes->AfficherMainJoueur();
 }

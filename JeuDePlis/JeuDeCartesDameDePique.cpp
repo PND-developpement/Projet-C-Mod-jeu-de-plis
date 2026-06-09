@@ -8,6 +8,7 @@
 #include "Carte.h"
 #include <string>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 JeuDeCartesDameDePique::JeuDeCartesDameDePique()
@@ -30,15 +31,12 @@ void JeuDeCartesDameDePique::CreerJeux(const std::vector<std::string>& vFigures,
         {
             //on passe les 3 caractéristiques au constructeur de carte  
             shared_ptr<CarteInterface> pCarte;
-            if (figure == "Coeur") {
+            if (figure == "Coeur")
                 pCarte = make_shared<CarteAtout>(make_shared<Carte>(valeur, figure, couleurPhysique),1);
-            }
-            else{
-                if (figure == "Pique" && valeur == "Dame") {
-                    pCarte = make_shared<CarteAtout>(make_shared<Carte>(valeur, figure, couleurPhysique),13);
-                }
+            else if(figure == "Pique" && valeur == "Dame") 
+                pCarte = make_shared<CarteAtout>(make_shared<Carte>(valeur, figure, couleurPhysique), 13);
+            else
                 pCarte = std::make_shared<Carte>(valeur, figure, couleurPhysique);
-            }
             
             pEnsembleCartes->AjouterCarte(pCarte);
         }
@@ -61,47 +59,22 @@ void JeuDeCartesDameDePique::MelangeCarte() const {
     pEnsembleCartes->MelangeAleatoireCarte();
 }
 
+
 int JeuDeCartesDameDePique::ScoreCarte(const std::shared_ptr<CarteInterface>& carte) const
 {
-    switch(carte->GetValeur())
-    {
-        case 'as':
-            return 1;
-        
-        case 'deux':
-            return 2;
+    //On créeait notre table de correspondance pour chaque carte. 
+    //Variable statique pour éviter de la reconstruire à chaque appelle étant donné que le score des cartes seront toujours les mêmes
+    static const std::unordered_map<string, int> valeurCarte = {
+        {"as", 1}, {"deux", 2}, {"trois", 3}, {"quatre", 4}, {"cinq", 5}, {"six", 6}, {"sept", 7}, {"huit", 8}, {"neuf", 9}, {"dix", 10}, {"vallet", 11}, {"dame", 12}, {"roi", 13}
+    };
 
-        case 'trois':
-            return 3;
+    //On cherche la valeur de la carte dans notre map
+    auto valeurDeLaCarte = valeurCarte.find(carte->GetValeur());
 
-        case 'quatre':
-            return 4;
+    //Si on la trouve on renvoie so, score associé 
+    if (valeurDeLaCarte != valeurCarte.end())
+        return valeurDeLaCarte->second;
 
-        case 'cinq':
-            return 5;
-
-        case 'six':
-            return 6;
-
-        case 'sept':
-            return 7;
-
-        case 'huit':
-            return 8;
-
-        case 'neuf':
-            return 9;
-
-        case 'dix':
-            return 10;
-
-        case 'vallet':
-            return 11;
-
-        case 'dame':
-            return 12;
-
-        case 'roi':
-            return 13;
-    }
+    //sinon on renvoie 0
+    return 0;
 }

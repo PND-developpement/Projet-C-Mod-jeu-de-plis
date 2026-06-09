@@ -2,10 +2,10 @@
 #define _JOUEUR_H__
 
 #include <string>
-#include "MainJoueur.h"
-#include "Carte.h"
 #include <memory>
+#include "MainJoueur.h"
 #include "CarteInterface.h"
+#include "interface.h"
 
 class Joueur
 {
@@ -34,7 +34,7 @@ public :
 	void ModifierCartes(std::unique_ptr<MainJoueur> nouvellesCartes);
 
 	//Méthodes
-	virtual std::shared_ptr<CarteInterface> JouerUneCarte() = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
+	virtual std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface) = 0; //virtual pure car une IA ne jouera pas de la même façon qu'un humain ? 
 
 	void AfficherMainDuJoueur() const;
 };

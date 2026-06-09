@@ -2,7 +2,6 @@
 #define _HUMAIN_H__
 
 #include "Joueur.h"
-#include "CarteInterface.h"
 
 class Humain : public Joueur
 {
@@ -15,7 +14,7 @@ public:
 	~Humain() = default;
 
 	//méthodes
-	std::shared_ptr<CarteInterface> JouerUneCarte() override;
+	std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface) override;
 };
 
 #endif
