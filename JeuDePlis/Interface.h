@@ -8,6 +8,11 @@
 #include "MainJoueur.h"
 
 class Interface {
+private:
+    //Codes pour les couleurs dansla console
+    const std::string COULEUR_ROUGE = "\033[31m";
+    const std::string COULEUR_BLANCHE = "\033[97m";
+    const std::string RESET_COULEUR = "\033[0m";
 public:
     Interface() = default;
     ~Interface() = default;
