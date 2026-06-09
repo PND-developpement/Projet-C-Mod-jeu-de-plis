@@ -1,60 +1,86 @@
 #include "Interface.h"
 #include <iostream>
 
+void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
+    std::cout << "Votre main : \n";
 
-void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const
-{
-    mainJoueur.AfficherMainJoueur();
+    //on recupere la taille de la main
+    size_t taille = mainJoueur.lireCartesMain()->GetTaille();
+
+    // boucle pour afficher chaque carte avec la bonne couleur
+    for (size_t i = 0; i < taille; ++i) {
+        auto c = mainJoueur.lireCartesMain()->GetCarte(i);
+
+        // On determine la couleur active
+        std::string couleurActive = (c->GetCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+
+        // Affichage colore
+        std::cout << i + 1 << ") ["
+            << couleurActive << c->GetValeur() << " de " << c->GetFigure() << RESET_COULEUR
+            << "]\n";
+    }
+    std::cout << std::endl;
 }
 
-int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const
-{
+int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.lireCartesMain()->GetTaille();
 
     std::cout << "\n- - - A VOTRE TOUR DE JOUER - - -" << std::endl;
     AfficherMainDuJoueur(mainDuJoueur);
 
-    while (true) 
+    while (true)
     {
         std::cout << "Quelle carte voulez-vous jouer ? (1 a " << nbCartes << ") : ";
         std::cin >> positionCarte;
 
+        //on a mis une vérification pour vider le buffer en cas de faute de frappe
         if (std::cin.fail()) {
-            //std::cin.clear();
-            //std::cin.ignore(10000, '\n');
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
             std::cout << "Erreur : Entrez un chiffre." << std::endl;
         }
         else if (positionCarte < 1 || positionCarte > nbCartes) {
             std::cout << "Erreur : Numero invalide." << std::endl;
         }
         else {
-            break;
+            break; // saisie correcte
         }
     }
 
+    //renvoie l'index memoire
     return positionCarte - 1;
 }
 
-void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>& cartes) const 
-{
+void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>& cartes) const {
     std::cout << "\n- - - CARTES SUR LA TABLE - - -" << std::endl;
 
-    if (cartes.empty())
+    if (cartes.empty()) {
         std::cout << "La table est vide." << std::endl;
-    else 
+    }
+    else
     {
         for (auto carteEnCours = cartes.begin(); carteEnCours != cartes.end(); carteEnCours++)
-            std::cout << "[" << (*carteEnCours)->GetValeur() << " de " << (*carteEnCours)->GetFigure() << "] ";
+        {
+            //on applique la couleur sur la table
+            std::string couleurActive = ((*carteEnCours)->GetCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+
+            std::cout << "["
+                << couleurActive
+                << (*carteEnCours)->GetValeur() << " de " << (*carteEnCours)->GetFigure()
+                << RESET_COULEUR
+                << "] ";
+        }
         std::cout << std::endl;
     }
 }
 
-void Interface::AfficherMessage(const std::string& message) const { std::cout << message << std::endl;}
+void Interface::AfficherMessage(const std::string& message) const {
+    std::cout << message << std::endl;
+}
 
-void Interface::AfficherGagnantPli(const std::string& nomGagnant) const 
-{
-    std::cout << "\n>> " << nomGagnant << " remporte ce pli ! <<" << std::endl;
+void Interface::AfficherGagnantPli(const std::string& nomGagnant) const {
+    std::cout << "\n>> " << nomGagnant << " remporte ce pli !! <<" << std::endl;
     std::cout << "------------------------------------------\n" << std::endl;
 }
 
@@ -65,7 +91,6 @@ void Interface::AfficherScores(const std::vector<std::string>& nomsJoueurs, cons
 
     for (size_t boucleNomJoueur = 0; boucleNomJoueur < nomsJoueurs.size(); ++boucleNomJoueur)
     {
-        //  le \t insère une tabulation classique pour espacer un peu
         std::cout << nomsJoueurs[boucleNomJoueur] << " \t: " << scores[boucleNomJoueur] << " points" << std::endl;
     }
     std::cout << "==========================================\n" << std::endl;
