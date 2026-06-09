@@ -14,7 +14,7 @@ public:
 
     // Affiche les cartes que le joueur a en main
     //void AfficherMainJoueur(const MainJoueur& mainDuJoueur) const;
-    void AfficherCarte(std::vector<std::shared_ptr<CarteInterface>> ensembleCarte);
+    void AfficherMainDuJoueur(const MainJoueur& mainJoueur) const;
 
     // Demande à l'humain de jouer et renvoie l'index
     int DemanderCarte(const MainJoueur& mainDuJoueur) const;

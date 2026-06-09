@@ -1,10 +1,9 @@
 #include "MainJoueur.h"
 #include <utility>
 #include <stdexcept>
-#include "EnsembleDeCartes.h"
-#include "CarteInterface.h"
 #include <memory>
 #include <string>
+
 using namespace std;
 
 //COnstructeurs et destructeurs

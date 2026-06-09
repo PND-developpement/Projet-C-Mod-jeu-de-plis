@@ -125,7 +125,8 @@ void PartieDameDePique::LancerPartie()
     
 }
 
-void PartieDameDePique::JouerPartie(){
+void PartieDameDePique::JouerPartie(const Interface& interface)
+{
     LancerPartie();
     unsigned int manche = 0;
     while (!VerifScore()) {
@@ -155,7 +156,7 @@ void PartieDameDePique::JouerPartie(){
                 cin.get(); // attendre la validation du joueur
                 // interface afficher le bloque noire
                 listeJoueur[selectionJoueur]->AfficherMainDuJoueur();
-                auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte();
+                auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
                 carteDuPlie[selectionJoueur] = cartejouer;
                 selectionJoueur++;
                 nombreJoueurJouer++;

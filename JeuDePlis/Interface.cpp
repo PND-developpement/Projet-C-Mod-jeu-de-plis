@@ -1,40 +1,19 @@
 #include "Interface.h"
 #include <iostream>
 
-/*void Interface::AfficherMainJoueur(const MainJoueur& mainDuJoueur) const
+
+void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const
 {
-    size_t nbCartesMainJoueur = mainDuJoueur.lireCartesMain()->GetTaille();
-
-    std::cout << "Votre main : \n";
-
-    for (int positionCarte = 0; positionCarte < nbCartesMainJoueur; ++positionCarte)
-    {
-        std::shared_ptr<CarteInterface> carteJoueur = mainDuJoueur.lireCartesMain()->GetCarte(positionCarte);
-        std::cout << "(" << positionCarte + 1 << ") [" << carteJoueur->GetValeur() << " de " << carteJoueur->GetFigure() << "]\n";
-    }
-    std::cout << std::endl;
-}
-*/
-void Interface::AfficherCarte(std::vector<std::shared_ptr<CarteInterface>> ensembleCarte)
-{
-    size_t nbCartesMainJoueur = ensembleCarte->GetTaille();
-
-    std::cout << "Votre main : \n";
-
-    for (int positionCarte = 0; positionCarte < nbCartesMainJoueur; ++positionCarte)
-    {
-        std::shared_ptr<CarteInterface> carteJoueur = mainDuJoueur.lireCartesMain()->GetCarte(positionCarte);
-        std::cout << "(" << positionCarte + 1 << ") [" << carteJoueur->GetValeur() << " de " << carteJoueur->GetFigure() << "]\n";
-    }
-    std::cout << std::endl;
+    mainJoueur.AfficherMainJoueur();
 }
 
-int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
+int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const
+{
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.lireCartesMain()->GetTaille();
 
     std::cout << "\n- - - A VOTRE TOUR DE JOUER - - -" << std::endl;
-    AfficherMainJoueur(mainDuJoueur);
+    AfficherMainDuJoueur(mainDuJoueur);
 
     while (true) 
     {

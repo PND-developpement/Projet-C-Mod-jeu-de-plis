@@ -43,7 +43,7 @@ public:
 	/*
 	* Jouer la partie
 	*/
-	virtual void JouerPartie() = 0;
+	virtual void JouerPartie(const Interface& interface) = 0;
 
 	/*
 	* Verifier score des joueurs

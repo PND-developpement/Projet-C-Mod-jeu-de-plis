@@ -3,8 +3,6 @@
 #include "Carte.h"
 #include <cstdlib>
 #include <stdexcept>
-#include "CarteInterface.h"
-#include "Joueur.h"
 #include <utility>
 #include <string>
 
@@ -22,7 +20,7 @@ IA::IA(IA& parametre) : Joueur(parametre) {}
 IA::IA(IA&& parametre) : Joueur(move(parametre)) {}
 
 //Méthodes
-std::shared_ptr<CarteInterface> IA::JouerUneCarte()
+std::shared_ptr<CarteInterface> IA::JouerUneCarte(const Interface& interface)
 {
 	size_t nbCarteMainJoueur = cartes->lireCartesMain()->GetTaille(); //On récupère la taille de l'ensemble de carte
 

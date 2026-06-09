@@ -1,9 +1,8 @@
 #include "Joueur.h"
 #include <utility>
 #include <memory>
-#include "EnsembleDeCartes.h"
-#include "MainJoueur.h"
 #include <string>
+
 using namespace std;
 
 //constructeurs et destructeurs
