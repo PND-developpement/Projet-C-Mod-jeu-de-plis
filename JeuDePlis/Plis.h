@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "CarteInterface.h"
 #include <memory>
+#include <vector>
 class Plis{
 public :
 	//Destructeur
@@ -17,9 +18,9 @@ public :
 	/*
 	* Verfie pour qu'elle joueur le plis et gagnant et renvoie la postion de ceux joueur
 	* @param carteDuPlis std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>>
-	* @return positionJoueur unsigned int
+	* @return resultatPlis premiere valeur joueur gagnant et deuxieme score du joueur
 	*/
-	virtual unsigned int verifePlis(std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>> carteDuPlis) = 0;
+	virtual vector<int> verifePlis(std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>> carteDuPlis, unsigned int positionPremierJoueur) = 0;
 
 };
 #endif 

@@ -148,6 +148,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
         while (nombreDeTour < 13) {
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
+            unsigned int positionPremierJoueur = selectionJoueur;
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;
