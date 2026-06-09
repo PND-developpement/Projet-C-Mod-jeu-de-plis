@@ -14,25 +14,25 @@ public :
 	* Renvoie la valeur
 	* @return valeur std::string
 	*/
-	virtual std::string GetValeur() const = 0;
+	virtual std::string ObtenirValeur() const = 0;
 
 	/*
 	* Renvoie la figure
 	* @return figure std::string
 	*/
 
-	virtual std::string GetFigure() const = 0;
+	virtual std::string ObtenirFigure() const = 0;
 
 	/*
 	* Renvoie la couleur
 	* @return couleur std::string
 	*/
-	virtual std::string GetCouleur() const = 0;
+	virtual std::string ObtenirCouleur() const = 0;
 
 	/*
 	* renvoie le score de la carte
 	*/
-	virtual int GetScoreCarte() = 0;
+	virtual int ObtenirScoreCarte() = 0;
 
 	/*
 	* Affiche la carte

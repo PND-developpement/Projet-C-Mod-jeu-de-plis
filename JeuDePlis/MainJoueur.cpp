@@ -80,7 +80,7 @@ bool MainJoueur::TrouverCarte(string valeur, string figure)
 	//Boucle permettant de rechercher la carte dans la main du joueur avec un itérateur
 	for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
 	{
-		if (valeur == itCarte->get()->GetValeur() && figure == itCarte->get()->GetFigure())
+		if (valeur == itCarte->get()->ObtenirValeur() && figure == itCarte->get()->ObtenirFigure())
 			trouver = true;
 	}
 	return trouver;

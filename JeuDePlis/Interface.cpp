@@ -12,11 +12,11 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
         auto c = mainJoueur.lireCartesMain()->GetCarte(i);
 
         // On determine la couleur active
-        std::string couleurActive = (c->GetCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+        std::string couleurActive = (c->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
 
         // Affichage colore
         std::cout << i + 1 << ") ["
-            << couleurActive << c->GetValeur() << " de " << c->GetFigure() << RESET_COULEUR
+            << couleurActive << c->ObtenirValeur() << " de " << c->ObtenirFigure() << RESET_COULEUR
             << "]\n";
     }
     std::cout << std::endl;
@@ -63,11 +63,11 @@ void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>
         for (auto carteEnCours = cartes.begin(); carteEnCours != cartes.end(); carteEnCours++)
         {
             //on applique la couleur sur la table
-            std::string couleurActive = ((*carteEnCours)->GetCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+            std::string couleurActive = ((*carteEnCours)->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
 
             std::cout << "["
                 << couleurActive
-                << (*carteEnCours)->GetValeur() << " de " << (*carteEnCours)->GetFigure()
+                << (*carteEnCours)->ObtenirValeur() << " de " << (*carteEnCours)->ObtenirFigure()
                 << RESET_COULEUR
                 << "] ";
         }

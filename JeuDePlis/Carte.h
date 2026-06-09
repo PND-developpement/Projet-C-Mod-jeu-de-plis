@@ -26,43 +26,43 @@ public:
 	* Ajoute la valeur par celle mis en parametre
 	* @param valeur std::string
 	*/
-	void SetValeur(std::string& valeur) { this->valeur = valeur; }
+	void DefinirValeur(std::string& valeur) { this->valeur = valeur; }
 
 	/*
 	* Renvoie la valeur 
 	* @return valeur std::string
 	*/
-	std::string GetValeur() const { return valeur; }
+	std::string ObtenirValeur() const { return valeur; }
 
 	/*
 	* Ajoute la figure par celle mis en parametre
 	* @param figure std::string
 	*/
-	void SetFigure(std::string& figure) { this->figure = figure; }
+	void DefinirFigure(std::string& figure) { this->figure = figure; }
 
 	/*
 	* Renvoie la figure
 	* @return figure std::string
 	*/
-	std::string GetFigure() const { return figure; }
+	std::string ObtenirFigure() const { return figure; }
 
 	/*
 	* Ajoute la couleur par celle mis en parametre
 	* @param couleur std::string
 	*/
-	void SetCouleur(std::string& couleur) { this->couleur = couleur; }
+	void DefinirCouleur(std::string& couleur) { this->couleur = couleur; }
 
 	/*
 	* Renvoie la couleur
 	* @return couleur std::string
 	*/
-	std::string GetCouleur() const { return couleur; }
+	std::string ObtenirCouleur() const { return couleur; }
 
 	/*
 	* Renvoie le score de la carte
 	* @return int
 	*/
-	int GetScoreCarte() override;
+	int ObtenirScoreCarte() override;
 
 	/*
 	* affiche la carte

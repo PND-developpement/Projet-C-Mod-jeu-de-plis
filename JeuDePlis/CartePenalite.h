@@ -20,26 +20,26 @@ public:
 	* Renvoie la valeur
 	* @return valeur std::string
 	*/
-	std::string GetValeur() const override { return carteInter->GetValeur(); }
+	std::string ObtenirValeur() const override { return carteInter->ObtenirValeur(); }
 
 	/*
 	* Renvoie la figure
 	* @return figure std::string
 	*/
-	std::string GetFigure() const override { return carteInter->GetFigure(); }
+	std::string ObtenirFigure() const override { return carteInter->ObtenirFigure(); }
 
 	/*
 	* Renvoie la couleur
 	* @return couleur std::string
 	*/
-	std::string GetCouleur() const override { return carteInter->GetCouleur(); }
+	std::string ObtenirCouleur() const override { return carteInter->ObtenirCouleur(); }
 
 	//Méthodes
 	/*
 	* Renvoie le score de la parte - la penalite
 	* @return int
 	*/
-	int GetScoreCarte() override { return carteInter->GetScoreCarte() - valeurPenalite; }
+	int ObtenirScoreCarte() override { return carteInter->ObtenirScoreCarte() - valeurPenalite; }
 
 	/*
 	Affiche la carte

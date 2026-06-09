@@ -35,12 +35,12 @@ Carte::Carte(string valeur, string figure, string couleur) : valeur(valeur),figu
 Carte::~Carte(){
 }
 
-int Carte::GetScoreCarte()
+int Carte::ObtenirScoreCarte()
 {
 	return 0;
 }
 
 void Carte::AfficherCarte() const
 {
-	cout  << "Carte : " << GetValeur() << " de " << GetFigure() << endl;
+	cout  << "Carte : " << ObtenirValeur() << " de " << ObtenirFigure() << endl;
 }
