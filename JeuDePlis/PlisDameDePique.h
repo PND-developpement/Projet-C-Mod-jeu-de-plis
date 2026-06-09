@@ -7,12 +7,13 @@
 
 class PlisDameDePique : public Plis{
 public:
+
 	/*
 	* Verfie pour qu'elle joueur le plis et gagnant et renvoie la postion de ceux joueur
-	* @param carteDuPlie std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>>
+	* @param carteDuPlis std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>>
 	* @return positionJoueur unsigned int
 	*/
-	unsigned int verifePlis(std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>> carteDuPlie) override;
+	unsigned int verifePlis(std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>> carteDuPlis) override;
 
 };
 

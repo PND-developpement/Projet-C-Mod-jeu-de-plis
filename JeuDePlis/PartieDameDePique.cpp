@@ -146,7 +146,7 @@ void PartieDameDePique::JouerPartie(){
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
         while (nombreDeTour < 13) {
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
-            unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlie; 
+            unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;
@@ -156,12 +156,12 @@ void PartieDameDePique::JouerPartie(){
                 // interface afficher le bloque noire
                 listeJoueur[selectionJoueur]->AfficherMainDuJoueur();
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte();
-                carteDuPlie[selectionJoueur] = cartejouer;
+                carteDuPlis[selectionJoueur] = cartejouer;
                 selectionJoueur++;
                 nombreJoueurJouer++;
                 
             }
-            // Plie verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
+            // Plis verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
         }
         AfficherScore();
     }
