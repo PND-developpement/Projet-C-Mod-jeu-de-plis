@@ -36,5 +36,5 @@ Carte::~Carte() {}
 
 void Carte::AfficherCarte() const
 {
-	cout  << "Carte : " << GetValeur() << " de " << GetFigure() << endl;
+	cout  << "Carte : " << ObtenirValeur() << " de " << ObtenirFigure() << endl;
 }

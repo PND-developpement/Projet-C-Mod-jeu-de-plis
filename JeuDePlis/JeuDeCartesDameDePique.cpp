@@ -69,7 +69,7 @@ int JeuDeCartesDameDePique::ScoreCarte(const std::shared_ptr<CarteInterface>& ca
     };
 
     //On cherche la valeur de la carte dans notre map
-    auto valeurDeLaCarte = valeurCarte.find(carte->GetValeur());
+    auto valeurDeLaCarte = valeurCarte.find(carte->ObtenirValeur());
 
     //Si on la trouve on renvoie so, score associé 
     if (valeurDeLaCarte != valeurCarte.end())

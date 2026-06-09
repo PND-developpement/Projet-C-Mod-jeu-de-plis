@@ -80,7 +80,7 @@ void PartieDameDePique::InitaliserPartie()
     vector<string> valeurs = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi", "As" };
 
     //deduction de la couleur
-    pLeJeu->SetTaille(52);
+    pLeJeu->DefinirTaille(52);
     pLeJeu->CreerJeux(figures,valeurs,0);
 
     if (pLeJeu == nullptr)
@@ -102,14 +102,14 @@ void PartieDameDePique::DistribuerCartes()
     cout << "Distribution de 13 cartes a chaque joueur..." << std::endl;
     for (const auto& joueur : listeJoueur) {
         unique_ptr<MainJoueur> nmainjoueur = make_unique<MainJoueur>();
-        nmainjoueur->SetTaille(13);
+        nmainjoueur->DefinirTaille(13);
         size_t boucleAjouterCarte;
         unsigned int ajoutCarte=0;
         for (boucleAjouterCarte = 0; boucleAjouterCarte < 13; boucleAjouterCarte++) {
             ajoutCarte++;
             
             if (ajoutCarte<52){
-                nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->GetensembleDeCarte()[ajoutCarte]);
+                nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->ObtenirEnsembleDeCarte()[ajoutCarte]);
             }
         }
         
@@ -148,6 +148,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
         while (nombreDeTour < 13) {
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
+            unsigned int positionPremierJoueur = selectionJoueur;
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;

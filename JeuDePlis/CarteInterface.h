@@ -15,32 +15,32 @@ public :
 	* Renvoie la valeur
 	* @return valeur std::string
 	*/
-	virtual std::string GetValeur() const = 0;
+	virtual std::string ObtenirValeur() const = 0;
 
 	/*
 	* Renvoie la figure
 	* @return figure std::string
 	*/
 
-	virtual std::string GetFigure() const = 0;
+	virtual std::string ObtenirFigure() const = 0;
 
 	/*
 	* Renvoie la couleur
 	* @return couleur std::string
 	*/
-	virtual std::string GetCouleur() const = 0;
+	virtual std::string ObtenirCouleur() const = 0;
 
 	/*
 	* renvoie la valeur de l'atout
 	* @return int
 	*/
-	virtual std::optional<int> GetAtout() const { return std::nullopt; }
+	virtual std::optional<int> ObtenirAtout() const { return std::nullopt; }
 
 	/*
 	* renvoie la valeur de la penalité
 	* @return int
 	*/
-	virtual std::optional<int> GetPenalite() const { return std::nullopt; }
+	virtual std::optional<int> ObtenirPenalite() const { return std::nullopt; }
 
 	/*
 	* Affiche la carte

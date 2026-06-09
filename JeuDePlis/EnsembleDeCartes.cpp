@@ -68,7 +68,7 @@ void EnsembleDeCartes::MelangeAleatoireCarte() {
 	shuffle(ensembleDeCarte.begin(), ensembleDeCarte.end(), rng);
 }
 
-std::shared_ptr<CarteInterface> EnsembleDeCartes::GetCarte(unsigned int position) const
+std::shared_ptr<CarteInterface> EnsembleDeCartes::ObtenirCarte(unsigned int position) const
 {
 	return ensembleDeCarte.at(position);
 }
@@ -104,7 +104,7 @@ void EnsembleDeCartes::AfficherEnsembleDeCarte() const
 {
 	for (int positionCarte = 0; positionCarte < ensembleDeCarte.size(); ++positionCarte)
 	{
-		std::shared_ptr<CarteInterface> carteJoueur = GetCarte(positionCarte);
+		std::shared_ptr<CarteInterface> carteJoueur = ObtenirCarte(positionCarte);
 		cout << "(" << positionCarte << ")";
 		carteJoueur->AfficherCarte();
 		cout << endl;

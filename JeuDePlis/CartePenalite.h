@@ -16,7 +16,8 @@ public:
 	* Renvoie la valeur de la Penalite
 	* @return valeurPenalite int
 	*/
-	std::optional<int> GetPenalite() const override { return valeurPenalite; }
+	std::optional<int> ObtenirPenalite() const override { return valeurPenalite; }
+
 };
 
 #endif

@@ -5,18 +5,18 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
     std::cout << "Votre main : \n";
 
     //on recupere la taille de la main
-    size_t taille = mainJoueur.lireCartesMain()->GetTaille();
+    size_t taille = mainJoueur.LireCartesMain()->ObtenirTaille();
 
     // boucle pour afficher chaque carte avec la bonne couleur
     for (size_t i = 0; i < taille; ++i) {
-        auto c = mainJoueur.lireCartesMain()->GetCarte(i);
+        auto c = mainJoueur.LireCartesMain()->ObtenirCarte(i);
 
         // On determine la couleur active
-        std::string couleurActive = (c->GetCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+        std::string couleurActive = (c->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
 
         // Affichage colore
         std::cout << i + 1 << ") ["
-            << couleurActive << c->GetValeur() << " de " << c->GetFigure() << RESET_COULEUR
+            << couleurActive << c->ObtenirValeur() << " de " << c->ObtenirFigure() << RESET_COULEUR
             << "]\n";
     }
     std::cout << std::endl;
@@ -24,7 +24,7 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
 
 int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
     int positionCarte = 0;
-    size_t nbCartes = mainDuJoueur.lireCartesMain()->GetTaille();
+    size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
     std::cout << "\n- - - A VOTRE TOUR DE JOUER - - -" << std::endl;
     AfficherMainDuJoueur(mainDuJoueur);
@@ -63,11 +63,11 @@ void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>
         for (auto carteEnCours = cartes.begin(); carteEnCours != cartes.end(); carteEnCours++)
         {
             //on applique la couleur sur la table
-            std::string couleurActive = ((*carteEnCours)->GetCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+            std::string couleurActive = ((*carteEnCours)->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
 
             std::cout << "["
                 << couleurActive
-                << (*carteEnCours)->GetValeur() << " de " << (*carteEnCours)->GetFigure()
+                << (*carteEnCours)->ObtenirValeur() << " de " << (*carteEnCours)->ObtenirFigure()
                 << RESET_COULEUR
                 << "] ";
         }

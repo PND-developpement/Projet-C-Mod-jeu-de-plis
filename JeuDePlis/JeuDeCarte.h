@@ -16,8 +16,8 @@ protected:
 public:
     ~JeuDeCartes() = default;
 
-    virtual void SetTaille(size_t taille) = 0;
-    virtual size_t GetTaille() const = 0;
+    virtual void DefinirTaille(size_t taille) = 0;
+    virtual size_t ObtenirTaille() const = 0;
 
     // On utilise vFigures (Pique, Coeur, Carreau et Trefle) et vValeurs (As, 10, etc)
     virtual void CreerJeux(const std::vector<std::string>& vFigures, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers = 0) = 0;
