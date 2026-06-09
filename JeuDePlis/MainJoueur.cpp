@@ -23,7 +23,7 @@ MainJoueur::MainJoueur(MainJoueur&& CopieCartesMain) : taille(CopieCartesMain.ta
 MainJoueur::~MainJoueur() {}
 
 //accesseurs
-EnsembleDeCartes* MainJoueur::lireCartesMain() const
+EnsembleDeCartes* MainJoueur::LireCartesMain() const
 {
 	return CartesMain.get(); //On renvoie la main du joueur
 }

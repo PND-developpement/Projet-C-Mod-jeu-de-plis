@@ -5,11 +5,11 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
     std::cout << "Votre main : \n";
 
     //on recupere la taille de la main
-    size_t taille = mainJoueur.lireCartesMain()->ObtenirTaille();
+    size_t taille = mainJoueur.LireCartesMain()->ObtenirTaille();
 
     // boucle pour afficher chaque carte avec la bonne couleur
     for (size_t i = 0; i < taille; ++i) {
-        auto c = mainJoueur.lireCartesMain()->ObtenirCarte(i);
+        auto c = mainJoueur.LireCartesMain()->ObtenirCarte(i);
 
         // On determine la couleur active
         std::string couleurActive = (c->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
@@ -24,7 +24,7 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
 
 int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
     int positionCarte = 0;
-    size_t nbCartes = mainDuJoueur.lireCartesMain()->ObtenirTaille();
+    size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
     std::cout << "\n- - - A VOTRE TOUR DE JOUER - - -" << std::endl;
     AfficherMainDuJoueur(mainDuJoueur);

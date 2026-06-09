@@ -18,11 +18,11 @@ public:
 	MainJoueur(MainJoueur&& CopieCartesMain);
 	~MainJoueur();
 
-	void SetTaille(size_t taille) { this->taille = taille; CartesMain->DefinirTaille(taille); }
-	size_t GetTaille() const { return taille; }
+	void DefinirTaille(size_t taille) { this->taille = taille; CartesMain->DefinirTaille(taille); }
+	size_t ObtenirTaille() const { return taille; }
 
 	//accesseurs
-	EnsembleDeCartes* lireCartesMain() const;
+	EnsembleDeCartes* LireCartesMain() const;
 	void ModifierCartesMain(EnsembleDeCartes nouvellesCartesMain);
 
 	void AjouterCarteMain(std::shared_ptr<CarteInterface> nouvelleCarte);

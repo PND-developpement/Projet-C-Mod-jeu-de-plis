@@ -22,7 +22,7 @@ IA::IA(IA&& parametre) : Joueur(move(parametre)) {}
 //Méthodes
 std::shared_ptr<CarteInterface> IA::JouerUneCarte(const Interface& interface)
 {
-	size_t nbCarteMainJoueur = cartes->lireCartesMain()->ObtenirTaille(); //On récupère la taille de l'ensemble de carte
+	size_t nbCarteMainJoueur = cartes->LireCartesMain()->ObtenirTaille(); //On récupère la taille de l'ensemble de carte
 
 	int positionCarte = rand() % nbCarteMainJoueur + 1; //On choisit une position de carte aléatoirement
 
