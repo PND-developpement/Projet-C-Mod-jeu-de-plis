@@ -32,9 +32,9 @@ void JeuDeCartesDameDePique::CreerJeux(const std::vector<std::string>& vFigures,
             //on passe les 3 caractéristiques au constructeur de carte  
             shared_ptr<CarteInterface> pCarte;
             if (figure == "Coeur")
-                pCarte = make_shared<CarteAtout>(make_shared<Carte>(valeur, figure, couleurPhysique),1);
+                pCarte = make_shared<CartePenalite>(make_shared<Carte>(valeur, figure, couleurPhysique),1);
             else if(figure == "Pique" && valeur == "Dame") 
-                pCarte = make_shared<CarteAtout>(make_shared<Carte>(valeur, figure, couleurPhysique), 13);
+                pCarte = make_shared<CartePenalite>(make_shared<Carte>(valeur, figure, couleurPhysique), 13);
             else
                 pCarte = std::make_shared<Carte>(valeur, figure, couleurPhysique);
             

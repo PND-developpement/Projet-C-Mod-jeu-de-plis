@@ -32,7 +32,7 @@ public:
 	* Renvoie la valeur 
 	* @return valeur std::string
 	*/
-	std::string GetValeur() const { return valeur; }
+	std::string GetValeur() const override { return valeur; };
 
 	/*
 	* Ajoute la figure par celle mis en parametre
@@ -44,7 +44,7 @@ public:
 	* Renvoie la figure
 	* @return figure std::string
 	*/
-	std::string GetFigure() const { return figure; }
+	std::string GetFigure() const override { return figure; }
 
 	/*
 	* Ajoute la couleur par celle mis en parametre
@@ -56,13 +56,7 @@ public:
 	* Renvoie la couleur
 	* @return couleur std::string
 	*/
-	std::string GetCouleur() const { return couleur; }
-
-	/*
-	* Renvoie le score de la carte
-	* @return int
-	*/
-	int GetScoreCarte() override;
+	std::string GetCouleur() const override { return couleur; }
 
 	/*
 	* affiche la carte

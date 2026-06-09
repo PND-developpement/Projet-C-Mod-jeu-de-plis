@@ -30,12 +30,6 @@ public :
 	std::string GetCouleur() const override { return carteInter->GetCouleur(); }
 
 	/*
-	* renvoie le score de la carte
-	* @return int
-	*/
-	int GetScoreCarte() override { return carteInter->GetScoreCarte(); }
-
-	/*
 	* Affiche la carte
 	*/
 	void AfficherCarte() const override { return carteInter->AfficherCarte(); }

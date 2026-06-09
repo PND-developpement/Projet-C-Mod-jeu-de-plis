@@ -13,7 +13,6 @@ public :
 	~Plis() = default;
 	
 	//Méthodes
-
 	/*
 	* Verfie pour qu'elle joueur le plis et gagnant et renvoie la postion de ceux joueur
 	* @param carteDuPlis std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>>

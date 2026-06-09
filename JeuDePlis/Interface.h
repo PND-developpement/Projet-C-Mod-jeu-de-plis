@@ -35,6 +35,9 @@ public:
 
     // Affiche le tableau des scores à la fin d'une manche
     void AfficherScores(const std::vector<std::string>& nomsJoueurs, const std::vector<int>& scores) const;
+
+    // - - - - - - -  - -
+    // Faire méthode écran noir
 };
 
 #endif

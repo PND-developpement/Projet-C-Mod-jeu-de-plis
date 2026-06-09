@@ -8,43 +8,15 @@ class CartePenalite : public CarteDecorator
 private:
 	int valeurPenalite;
 public:
+	//- - - Constructeur - - -
 	CartePenalite(std::shared_ptr<CarteInterface> carteInter, int valeurPenalite) : CarteDecorator(std::move(carteInter)), valeurPenalite(valeurPenalite) {}
-	//Accesseurs
+
+	//- - - Accesseur - - -
 	/*
 	* Renvoie la valeur de la Penalite
 	* @return valeurPenalite int
 	*/
-	int GetValeurPenalite() const { return valeurPenalite; }
-
-	/*
-	* Renvoie la valeur
-	* @return valeur std::string
-	*/
-	std::string GetValeur() const override { return carteInter->GetValeur(); }
-
-	/*
-	* Renvoie la figure
-	* @return figure std::string
-	*/
-	std::string GetFigure() const override { return carteInter->GetFigure(); }
-
-	/*
-	* Renvoie la couleur
-	* @return couleur std::string
-	*/
-	std::string GetCouleur() const override { return carteInter->GetCouleur(); }
-
-	//Méthodes
-	/*
-	* Renvoie le score de la parte - la penalite
-	* @return int
-	*/
-	int GetScoreCarte() override { return carteInter->GetScoreCarte() - valeurPenalite; }
-
-	/*
-	Affiche la carte
-	*/
-	void AfficherCarte() const override { return carteInter->AfficherCarte(); }
+	std::optional<int> GetPenalite() const override { return valeurPenalite; }
 };
 
 #endif

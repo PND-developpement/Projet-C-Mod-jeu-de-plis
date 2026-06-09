@@ -2,12 +2,13 @@
 #define _CARTE_INTERFACE_H__
 
 #include <string>
+#include <optional>
 
 class CarteInterface
 {
 public :
 	//Destructeur
-	~CarteInterface() = default;
+	virtual ~CarteInterface() = default;
 
 	//méthodes
 	/*
@@ -30,9 +31,16 @@ public :
 	virtual std::string GetCouleur() const = 0;
 
 	/*
-	* renvoie le score de la carte
+	* renvoie la valeur de l'atout
+	* @return int
 	*/
-	virtual int GetScoreCarte() = 0;
+	virtual std::optional<int> GetAtout() const { return std::nullopt; }
+
+	/*
+	* renvoie la valeur de la penalité
+	* @return int
+	*/
+	virtual std::optional<int> GetPenalite() const { return std::nullopt; }
 
 	/*
 	* Affiche la carte

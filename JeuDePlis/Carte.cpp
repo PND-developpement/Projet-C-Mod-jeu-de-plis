@@ -32,13 +32,7 @@ Carte::Carte(shared_ptr<Carte> carte2) noexcept{
 Carte::Carte(string valeur, string figure, string couleur) : valeur(valeur),figure(figure),couleur(couleur){
 }
 
-Carte::~Carte(){
-}
-
-int Carte::GetScoreCarte()
-{
-	return 0;
-}
+Carte::~Carte() {}
 
 void Carte::AfficherCarte() const
 {
