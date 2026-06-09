@@ -109,7 +109,7 @@ void PartieDameDePique::DistribuerCartes()
             ajoutCarte++;
             
             if (ajoutCarte<52){
-                nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->GetensembleDeCarte()[ajoutCarte]);
+                nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->ObtenirEnsembleDeCarte()[ajoutCarte]);
             }
         }
         

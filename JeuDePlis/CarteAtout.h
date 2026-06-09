@@ -32,7 +32,7 @@ public :
 	* Renvoie la valeur de l'atout
 	* @return valeurAtout int
 	*/
-	int GetValeurAtout() const { return valeurAtout; }
+	int ObtenirValeurAtout() const { return valeurAtout; }
 
 	//Méthodes
 	/*

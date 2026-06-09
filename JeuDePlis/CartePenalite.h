@@ -14,7 +14,7 @@ public:
 	* Renvoie la valeur de la Penalite
 	* @return valeurPenalite int
 	*/
-	int GetValeurPenalite() const { return valeurPenalite; }
+	int ObtenirValeurPenalite() const { return valeurPenalite; }
 
 	/*
 	* Renvoie la valeur

@@ -18,7 +18,7 @@ public:
 	MainJoueur(MainJoueur&& CopieCartesMain);
 	~MainJoueur();
 
-	void SetTaille(size_t taille) { this->taille = taille; CartesMain->SetTaille(taille); }
+	void SetTaille(size_t taille) { this->taille = taille; CartesMain->DefinirTaille(taille); }
 	size_t GetTaille() const { return taille; }
 
 	//accesseurs

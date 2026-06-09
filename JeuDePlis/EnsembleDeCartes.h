@@ -83,25 +83,25 @@ public:
 	* Renvoie une carte du vecteur dans la postion en parametre
 	* @param position unsigned int
 	*/
-	std::shared_ptr<CarteInterface> GetCarte(unsigned int position) const;
+	std::shared_ptr<CarteInterface> ObtenirCarte(unsigned int position) const;
 
 	/*
 	* Renvoie le vecteur de carte
 	* @return ensembleDeCarte
 	*/
-	std::vector<std::shared_ptr<CarteInterface>> GetensembleDeCarte() const { return ensembleDeCarte; }
+	std::vector<std::shared_ptr<CarteInterface>> ObtenirEnsembleDeCarte() const { return ensembleDeCarte; }
 
 	/*
 	* Modifie la taille avec la valeur passer en prametre
 	* @param taille size_t
 	*/
-	void SetTaille(size_t taille) { this->taille = taille; }
+	void DefinirTaille(size_t taille) { this->taille = taille; }
 
 	/*
 	* Renvoie la taille de l'ensemble
 	* @return taille
 	*/
-	size_t GetTaille() const { return taille; }
+	size_t ObtenirTaille() const { return taille; }
 
 	/*
 	* Afficher l’ensemble des cartes avec la méthode de l’interface

@@ -60,7 +60,7 @@ void MainJoueur::SupprimerCarteMain(shared_ptr<CarteInterface> carte)
 
 bool MainJoueur::TrouverCarte(std::shared_ptr<CarteInterface> carte)
 {
-    const auto& ensemble = CartesMain->GetensembleDeCarte();
+    const auto& ensemble = CartesMain->ObtenirEnsembleDeCarte();
 
 	//Boucle permettant de rechercher la carte dans la main du joueur avec un itérateur
     for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
@@ -75,7 +75,7 @@ bool MainJoueur::TrouverCarte(std::shared_ptr<CarteInterface> carte)
 bool MainJoueur::TrouverCarte(string valeur, string figure)
 {
 	bool trouver = false;
-	const auto& ensemble = CartesMain->GetensembleDeCarte();
+	const auto& ensemble = CartesMain->ObtenirEnsembleDeCarte();
 
 	//Boucle permettant de rechercher la carte dans la main du joueur avec un itérateur
 	for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
@@ -88,7 +88,7 @@ bool MainJoueur::TrouverCarte(string valeur, string figure)
 
 std::shared_ptr<CarteInterface> MainJoueur::ObtenirCarte(int positionCarte)
 {
-	return CartesMain->GetensembleDeCarte().at(positionCarte); //On renvoie la carte à la position donnée en paramètre de la fonction dans la main du joueur
+	return CartesMain->ObtenirEnsembleDeCarte().at(positionCarte); //On renvoie la carte à la position donnée en paramètre de la fonction dans la main du joueur
 } //utilisé la méthode "GetCarte(unsigned int position)" de la classe ENsembleDeCartes ! 
 
 void MainJoueur::AfficherMainJoueur() const

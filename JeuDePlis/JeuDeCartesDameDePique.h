@@ -16,7 +16,7 @@ public:
     * place la nouvelle valeur de taille et change la taille de l'ensemble de carte
     * @param taille : size_t
     */
-    void SetTaille(size_t taille) { this->taille = taille; pEnsembleCartes->SetTaille(taille); }
+    void SetTaille(size_t taille) { this->taille = taille; pEnsembleCartes->DefinirTaille(taille); }
 
     /*
     * renvoie l'attribut taille
