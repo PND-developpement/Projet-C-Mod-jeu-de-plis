@@ -18,6 +18,7 @@
 #include "PlisDameDePique.h"
 
 using namespace std;
+
 PartieDameDePique::PartieDameDePique()
 {
     pLeJeu = make_unique<JeuDeCartesDameDePique>();
@@ -143,8 +144,9 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 trouverJoueur = true;
             }
             else
+            {
                 selectionJoueur++;
-        }
+            }
 
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
         PlisDameDePique plis;
@@ -153,7 +155,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
             unsigned int positionPremierJoueur = selectionJoueur;
 
-            vector<shared_ptr<CarteInterface>> cartesTable;
+            vector <shared_ptr<CarteInterface>> carteTable;
 
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
@@ -166,20 +168,21 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
                 carteDuPlis[selectionJoueur] = cartejouer;
 
-                cartesTable.push_back(cartejouer);
-                interface.AfficherTable(cartesTable);
-
                 selectionJoueur++;
                 nombreJoueurJouer++;
+
+                carteTable.push_back(cartejouer);
             }
             // Plis verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
+            cout << "verif plis" << endl;
+            interface.AfficherTable(carteTable);
             vector<int> resultatPlis = plis.verifPlis(carteDuPlis, positionPremierJoueur);
             selectionJoueur = resultatPlis[0];
             listeJoueur[selectionJoueur]->ModifierScore(resultatPlis[1]);
 
-            nombreDeTour++;
+            cout << "fin verif plis" << endl;
         }
-        AfficherScore();
+        
     }
     cout << "Fin Partie Classement finale :" << endl;
     AfficherScore();

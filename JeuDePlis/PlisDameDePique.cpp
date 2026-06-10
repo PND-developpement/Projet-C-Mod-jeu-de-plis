@@ -20,8 +20,8 @@ vector<int> PlisDameDePique::verifPlis(unordered_map<unsigned int, shared_ptr<Ca
         if (deplacementCartesJ->second->ObtenirFigure() != carteJoueur1->ObtenirFigure()) {
             memeCartes = true;
         }
-        scoretotal = (*deplacementCartesJ->second->ObtenirPenalite()) + scoretotal;
-        if (memeCartes) {
+        scoretotal = (*deplacementCartesJ->second->ObtenirPenalite()) + scoretotal; // remplacer GETSCoreCarte par Getpenalite;
+        if (!memeCartes) {
             if (jeuxDameScore.ScoreCarte(deplacementCartesJ->second) > scoreBase) {
                 joueurGagnant = deplacementCartesJ->first;
             }
