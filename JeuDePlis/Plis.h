@@ -19,7 +19,7 @@ public :
 	* @param carteDuPlis std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>>
 	* @return resultatPlis premiere valeur joueur gagnant et deuxieme score du joueur
 	*/
-	virtual vector<int> verifPlis(std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>> carteDuPlis, unsigned int positionPremierJoueur) = 0;
+	virtual std::vector<int> verifPlis(std::unordered_map<unsigned int, std::shared_ptr<CarteInterface>> carteDuPlis, unsigned int positionPremierJoueur) = 0;
 
 };
 #endif 
