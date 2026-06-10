@@ -17,24 +17,45 @@ public:
     Interface() = default;
     ~Interface() = default;
 
-    // Affiche les cartes que le joueur a en main
-    //void AfficherMainJoueur(const MainJoueur& mainDuJoueur) const;
+    /*
+    * Affiche les cartes que le joueur a en main
+    * @param mainJoeur : MainJoueur&
+    */
     void AfficherMainDuJoueur(const MainJoueur& mainJoueur) const;
 
-    // Demande à l'humain de jouer et renvoie l'index
+    /*
+    * Demande à l'humain de jouer et renvoie l'index
+    * @param mainJoeur : MainJoueur&
+    */
     int DemanderCarte(const MainJoueur& mainDuJoueur) const;
 
-    // Affiche les cartes actuellement posées au centre de la table
+    /*
+    * Affiche les cartes actuellement posées au centre de la table
+    * @param cartes : const std::vector<std::shared_ptr<CarteInterface>>&
+    */
     void AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>& cartes) const;
 
-    // Affiche un message générique par ex "Début du tour 3"
+    /*
+    * Affiche un message générique par ex "Début du tour 3"
+    * @param message : const std::string&
+    */
     void AfficherMessage(const std::string& message) const;
 
-    // Annonce qui a remporté le pli
+    /*
+    * Annonce qui a remporté le pli
+    * @param nomGagnant : const std::string&
+    */
     void AfficherGagnantPli(const std::string& nomGagnant) const;
 
-    // Affiche le tableau des scores à la fin d'une manche
+    /*
+    * Affiche le tableau des scores à la fin d'une manche
+    * @param nomsJoueurs : const std::vector<std::string>&
+    * @param scores : const std::vector<int>&
+    */
     void AfficherScores(const std::vector<std::string>& nomsJoueurs, const std::vector<int>& scores) const;
+
+    // - - - - - - -  - -
+    // Faire méthode écran noir
 };
 
 #endif

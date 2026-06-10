@@ -59,12 +59,6 @@ public:
 	std::string ObtenirCouleur() const { return couleur; }
 
 	/*
-	* Renvoie le score de la carte
-	* @return int
-	*/
-	int ObtenirScoreCarte() override;
-
-	/*
 	* affiche la carte
 	*/
 	void AfficherCarte() const override;
