@@ -27,7 +27,6 @@ public:
 
 	void AjouterCarteMain(std::shared_ptr<CarteInterface> nouvelleCarte);
 	void SupprimerCarteMain(std::shared_ptr<CarteInterface> carte);
-	bool TrouverCarte(std::shared_ptr<CarteInterface> carte);
 	bool TrouverCarte(std::string valeur, std::string figure);
 	std::shared_ptr<CarteInterface> ObtenirCarte(int positionCarte);
 	void AfficherMainJoueur() const;

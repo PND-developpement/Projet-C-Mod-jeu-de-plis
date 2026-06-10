@@ -1,5 +1,5 @@
-#ifndef _JEU_DE_CARTES_H__
-#define _JEU_DE_CARTES_H__
+#ifndef _JEU_DE_CARTE_H__
+#define _JEU_DE_CARTE_H__
 
 #include <vector>
 #include <string>

@@ -147,7 +147,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             {
                 selectionJoueur++;
             }
-
+        }
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
         PlisDameDePique plis;
         while (nombreDeTour < 13) {

@@ -18,7 +18,7 @@ Humain::Humain(Humain&& parametre) noexcept : Joueur(move(parametre)) {}
 //méthodes rédéfinies
 std::shared_ptr<CarteInterface> Humain::JouerUneCarte(const Interface& interface)
 {
-	int positionCarte = interface.DemanderCarte(*cartes);
+	int positionCarte = interface.DemanderCarte(*cartes, pseudo);
 
 	//obtenir la carte : 
 	std::shared_ptr<CarteInterface> carteJouee = cartes->ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
