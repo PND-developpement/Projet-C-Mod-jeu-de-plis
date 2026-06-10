@@ -1,5 +1,6 @@
 #include "Partie.h"
 #include "PartieFactory.h"
+#include "Interface.h"
 #include <iostream>
 #include <exception>
 using namespace std;
@@ -12,7 +13,8 @@ int main()
 
         if (partie) {
             cout << "partie ok";
-            partie->LancerPartie();
+            Interface interface;
+            partie->JouerPartie(interface);
         }
         else {
             cout << "Aucune partie trouvee";

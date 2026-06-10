@@ -144,6 +144,7 @@
     <ClCompile Include="PartieDameDePique.cpp" />
     <ClCompile Include="PartieFactory.cpp" />
     <ClCompile Include="Plis.cpp" />
+    <ClCompile Include="PlisDameDePique.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Carte.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="PartieDameDePique.h" />
     <ClInclude Include="PartieFactory.h" />
     <ClInclude Include="Plis.h" />
+    <ClInclude Include="PlisDameDePique.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
