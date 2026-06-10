@@ -56,6 +56,7 @@ void EnsembleDeCartes::SupprimerCarte(std::shared_ptr<CarteInterface> carteASupp
 	if (it != ensembleDeCarte.end()) {
 		ensembleDeCarte.erase(it);
 	}
+	taille--;
 }
 
 void EnsembleDeCartes::TrieCarte(std::string typedetrie){

@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include "Carte.h"
-#include "MainJoueur.h"
+#include "joueur.h"
 
 class Interface {
 private:

@@ -26,7 +26,7 @@ int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
-    std::cout << "\n- - - A VOTRE TOUR DE JOUER - - -" << std::endl;
+    std::cout << "\n- - - AUTOUR DE  - - -" << std::endl;
     AfficherMainDuJoueur(mainDuJoueur);
 
     while (true)

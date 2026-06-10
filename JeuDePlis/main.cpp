@@ -23,5 +23,6 @@ int main()
     catch(exception erreur){
         cout << "Erreur : " << erreur.what() << endl;
     }
+    //Erreur : invalid vector subscript
     
 }
