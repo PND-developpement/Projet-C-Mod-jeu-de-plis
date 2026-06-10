@@ -120,6 +120,60 @@ void PartieDameDePique::DistribuerCartes()
 
 }
 
+void PartieDameDePique::DonnerCarte(const Interface& interface)
+{
+    vector <shared_ptr<CarteInterface>> carteAdonneeAuJoueur;
+    unsigned int selectionJoueur; // Choisit le joueur qui doit donner ses cartes
+    for (selectionJoueur = 0; selectionJoueur < 4; selectionJoueur++)
+    {
+        std::cout << "Autour du joueur " << listeJoueur[selectionJoueur]->LirePseudo() << " de donner 3 cartes" << endl;
+
+        unsigned int nbCartesDonnees = 0;
+        vector <shared_ptr<CarteInterface>> carteTable;
+        while (nbCartesDonnees < 3)
+        {
+            cin.get(); // attendre la validation du joueur
+
+            auto carteADonnee = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
+
+            carteAdonneeAuJoueur.push_back(carteADonnee);
+
+            carteTable.push_back(carteADonnee);
+
+            interface.AfficherTable(carteTable);
+
+            nbCartesDonnees++;
+        }
+    }
+
+    int boucleAjoutCarteJoueur;
+    int positionCarteVecteur = 0;
+
+    for (selectionJoueur = 0; selectionJoueur < 4; selectionJoueur++)
+    {
+        
+        if (selectionJoueur < 3)
+        {
+            size_t nouvelleTailleMainJoueur = listeJoueur[selectionJoueur + 1]->LireCartes()->ObtenirTaille() + 3;
+            listeJoueur[selectionJoueur + 1]->LireCartes()->DefinirTaille(nouvelleTailleMainJoueur);
+        }
+        else {
+            size_t nouvelleTailleMainJoueur = listeJoueur[0]->LireCartes()->ObtenirTaille() + 3;
+            listeJoueur[0]->LireCartes()->DefinirTaille(nouvelleTailleMainJoueur);
+        }
+        
+        for (boucleAjoutCarteJoueur = positionCarteVecteur; boucleAjoutCarteJoueur < positionCarteVecteur + 3; boucleAjoutCarteJoueur++)
+        {
+            if (selectionJoueur < 3)
+                listeJoueur[selectionJoueur + 1]->LireCartes()->AjouterCarteMain(carteAdonneeAuJoueur[boucleAjoutCarteJoueur]);
+            else
+                listeJoueur[0]->LireCartes()->AjouterCarteMain(carteAdonneeAuJoueur[boucleAjoutCarteJoueur]);
+        }
+        positionCarteVecteur += 3;
+    }
+}
+
+
 void PartieDameDePique::LancerPartie()
 {
     AfficherRegles();
@@ -136,6 +190,8 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
         cout << "\nLa partie commence " << endl;
         cout << "Manche : " << manche << endl;
         manche++;
+
+        DonnerCarte(interface);
 
         unsigned int selectionJoueur = 0; // Choisit le joueur qui doit jouer
         bool trouverJoueur = false; // Recherche le joueur avec la carte 2 de Trefle
@@ -161,11 +217,13 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;
                 }
+
                 cout << "Autour du joueur " << listeJoueur[selectionJoueur]->LirePseudo() << " de jouer" << endl;
                 cin.get(); // attendre la validation du joueur
                 // interface afficher le bloque noire
-               
+
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
+
                 carteDuPlis[selectionJoueur] = cartejouer;
 
                 selectionJoueur++;

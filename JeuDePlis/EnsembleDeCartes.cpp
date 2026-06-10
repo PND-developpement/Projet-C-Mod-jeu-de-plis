@@ -13,16 +13,15 @@
 using namespace std;
 
 EnsembleDeCartes::EnsembleDeCartes(){
-	taille = 0;
+	//taille = 0;
 }
 
-EnsembleDeCartes::EnsembleDeCartes(size_t taille) : taille(taille){
-}
+//EnsembleDeCartes::EnsembleDeCartes(size_t taille) : taille(taille){}
 
 EnsembleDeCartes::EnsembleDeCartes(const EnsembleDeCartes& ensemble2) noexcept{
-	taille = ensemble2.taille;
+	//taille = ensemble2.taille;
 	size_t boucleAjout;
-	for ( boucleAjout = 0; boucleAjout < taille; boucleAjout++){
+	for ( boucleAjout = 0; boucleAjout < ensemble2.ensembleDeCarte.size(); boucleAjout++){
 		ensembleDeCarte.push_back(ensemble2.ensembleDeCarte[boucleAjout]);
 	}
 }

@@ -37,6 +37,14 @@ public:
 	void DistribuerCartes() override;
 
 	/*
+	* dans cette classe, nous allons utliser cette méthode pour appliquer la règle selon laquelle chaque joueur
+	* donne 3 cartes au joueur à sa gauche (ici, se sera le joueur suivant dans la liste des joueurs de la partie)
+	* Ainsi, chaque joueur choisit trois cartes, elles sont retitrées de sa main puis ajoutées à la main d'un autre autre joueur de la partie.
+	* @param interface : Interface, référence const
+	*/
+	void DonnerCarte(const Interface& interface) override;
+
+	/*
 	* Lance la partie
 	*/
 	void LancerPartie() override;

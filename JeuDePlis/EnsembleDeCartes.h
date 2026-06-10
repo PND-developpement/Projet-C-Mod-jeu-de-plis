@@ -55,12 +55,6 @@ public:
 	* @param carte shared_ptr<CArte>
 	*/
 	void AjouterCarte(std::shared_ptr<CarteInterface> carte);
-
-	/*
-	* Ajoute une carte dans le vecteur
-	* @param carte Carte&
-	*/
-	//void AjouterCarte(CarteInterface& carte); //Surement innutile
 	
 	/*
 	* Supprimer carte dans le vecteur avec la carte en parametre
@@ -101,7 +95,9 @@ public:
 	* Renvoie la taille de l'ensemble
 	* @return taille
 	*/
-	size_t ObtenirTaille() const { return taille; }
+	//size_t ObtenirTaille() const { return taille; }
+	size_t ObtenirTaille() const { return ensembleDeCarte.size(); }
+
 
 	/*
 	* Afficher l’ensemble des cartes avec la méthode de l’interface

@@ -56,6 +56,7 @@ void MainJoueur::SupprimerCarteMain(shared_ptr<CarteInterface> carte)
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
 
 	CartesMain->SupprimerCarte(carte); //On la supprime de la main
+	taille--;
 }
 
 bool MainJoueur::TrouverCarte(string valeur, string figure)
@@ -76,7 +77,7 @@ bool MainJoueur::TrouverCarte(string valeur, string figure)
 std::shared_ptr<CarteInterface> MainJoueur::ObtenirCarte(int positionCarte)
 {
 	return CartesMain->ObtenirEnsembleDeCarte().at(positionCarte); //On renvoie la carte à la position donnée en paramètre de la fonction dans la main du joueur
-} //utilisé la méthode "GetCarte(unsigned int position)" de la classe ENsembleDeCartes ! 
+}
 
 void MainJoueur::AfficherMainJoueur() const
 {

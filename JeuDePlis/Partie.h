@@ -36,12 +36,19 @@ public:
 	virtual void DistribuerCartes() = 0;
 
 	/*
+	* permet de donner des cartes à un joueur
+	* @param interface : Interface, référence const
+	*/
+	virtual void DonnerCarte(const Interface& interface) = 0;
+
+	/*
 	* Lance la partie
 	*/
 	virtual void LancerPartie() = 0;
 
 	/*
 	* Jouer la partie
+	* @param interface : Interface, référence const
 	*/
 	virtual void JouerPartie(const Interface& interface) = 0;
 
