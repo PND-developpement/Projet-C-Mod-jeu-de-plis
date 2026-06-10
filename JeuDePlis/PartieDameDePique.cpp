@@ -101,17 +101,19 @@ void PartieDameDePique::DistribuerCartes()
     cout << "Melange des cartes en cours" << std::endl;
     pLeJeu->MelangeCarte();
     cout << "Distribution de 13 cartes a chaque joueur..." << std::endl;
+    unsigned int ajoutCarte = 0;
     for (const auto& joueur : listeJoueur) {
         unique_ptr<MainJoueur> nmainjoueur = make_unique<MainJoueur>();
         nmainjoueur->DefinirTaille(13);
         size_t boucleAjouterCarte;
-        unsigned int ajoutCarte=0;
+        
         for (boucleAjouterCarte = 0; boucleAjouterCarte < 13; boucleAjouterCarte++) {
-            ajoutCarte++;
+            
             
             if (ajoutCarte<52){
                 nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->ObtenirEnsembleDeCarte()[ajoutCarte]);
             }
+            ajoutCarte++;
         }
         
         joueur->ModifierCartes(move(nmainjoueur));
@@ -142,7 +144,11 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             if (listeJoueur[selectionJoueur]->LireCartes()->TrouverCarte("2", "Trefle")) {
                 trouverJoueur = true;
             }
-            selectionJoueur++;
+            else
+            {
+                selectionJoueur++;
+            }
+            
         }
 
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
@@ -151,6 +157,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
             unsigned int positionPremierJoueur = selectionJoueur;
+            vector <shared_ptr<CarteInterface>> carteTable;
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;
@@ -163,14 +170,18 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 carteDuPlis[selectionJoueur] = cartejouer;
                 selectionJoueur++;
                 nombreJoueurJouer++;
-                
+                carteTable.push_back(cartejouer);
             }
             // Plis verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
+            cout << "verif plis" << endl;
+            interface.AfficherTable(carteTable);
             vector<int> resultatPlis = plis.verifPlis(carteDuPlis, positionPremierJoueur);
             selectionJoueur = resultatPlis[0];
             listeJoueur[selectionJoueur]->ModifierScore(resultatPlis[1]);
+            cout << "fin verif plis" << endl;
+            nombreDeTour++;
         }
-        AfficherScore();
+        
     }
     cout << "Fin Partie Classement finale :" << endl;
     AfficherScore();
