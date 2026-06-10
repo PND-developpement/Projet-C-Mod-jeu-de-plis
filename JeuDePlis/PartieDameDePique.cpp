@@ -15,6 +15,7 @@
 #include "CarteInterface.h"
 #include <algorithm>
 #include "Joueur.h"
+#include "PlisDameDePique.h"
 
 using namespace std;
 PartieDameDePique::PartieDameDePique()
@@ -145,6 +146,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
         }
 
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
+        PlisDameDePique plis;
         while (nombreDeTour < 13) {
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
@@ -156,7 +158,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 cout << "Autour du joueur " << listeJoueur[selectionJoueur]->LirePseudo() << " de jouer" << endl;
                 cin.get(); // attendre la validation du joueur
                 // interface afficher le bloque noire
-                listeJoueur[selectionJoueur]->AfficherMainDuJoueur();
+               
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
                 carteDuPlis[selectionJoueur] = cartejouer;
                 selectionJoueur++;
@@ -164,6 +166,9 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 
             }
             // Plis verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
+            vector<int> resultatPlis = plis.verifPlis(carteDuPlis, positionPremierJoueur);
+            selectionJoueur = resultatPlis[0];
+            listeJoueur[selectionJoueur]->ModifierScore(resultatPlis[1]);
         }
         AfficherScore();
     }
