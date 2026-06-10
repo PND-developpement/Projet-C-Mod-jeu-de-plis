@@ -65,7 +65,7 @@ int JeuDeCartesDameDePique::ScoreCarte(const std::shared_ptr<CarteInterface>& ca
     //On créeait notre table de correspondance pour chaque carte. 
     //Variable statique pour éviter de la reconstruire à chaque appelle étant donné que le score des cartes seront toujours les mêmes
     static const std::unordered_map<string, int> valeurCarte = {
-        {"as", 1}, {"deux", 2}, {"trois", 3}, {"quatre", 4}, {"cinq", 5}, {"six", 6}, {"sept", 7}, {"huit", 8}, {"neuf", 9}, {"dix", 10}, {"vallet", 11}, {"dame", 12}, {"roi", 13}
+        {"As", 14}, {"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}, {"10", 10}, {"Valet", 11}, {"Dame", 12}, {"Roi", 13}
     };
 
     //On cherche la valeur de la carte dans notre map

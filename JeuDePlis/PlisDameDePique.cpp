@@ -4,6 +4,7 @@
 #include <memory>
 #include <unordered_map>
 #include <vector>
+#include <optional>
 
 using namespace std;
 
@@ -20,10 +21,16 @@ vector<int> PlisDameDePique::verifPlis(unordered_map<unsigned int, shared_ptr<Ca
         if (deplacementCartesJ->second->ObtenirFigure() != carteJoueur1->ObtenirFigure()) {
             memeCartes = true;
         }
-        scoretotal = (*deplacementCartesJ->second->ObtenirPenalite()) + scoretotal; // remplacer GETSCoreCarte par Getpenalite;
+         // remplacer GETSCoreCarte par Getpenalite;
+        if (deplacementCartesJ->second->ObtenirPenalite() != nullopt) {
+            scoretotal = (*deplacementCartesJ->second->ObtenirPenalite()) + scoretotal;
+        }
+        
         if (!memeCartes) {
-            if (jeuxDameScore.ScoreCarte(deplacementCartesJ->second) > scoreBase) {
+            int scoreCarte = jeuxDameScore.ScoreCarte(deplacementCartesJ->second);
+            if (scoreCarte > scoreBase) {
                 joueurGagnant = deplacementCartesJ->first;
+                scoreBase = jeuxDameScore.ScoreCarte(deplacementCartesJ->second);
             }
         }
     }

@@ -171,13 +171,17 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 selectionJoueur++;
                 nombreJoueurJouer++;
                 carteTable.push_back(cartejouer);
+                interface.AfficherTable(carteTable);
             }
             // Plis verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
             cout << "verif plis" << endl;
-            interface.AfficherTable(carteTable);
+            
             vector<int> resultatPlis = plis.verifPlis(carteDuPlis, positionPremierJoueur);
             selectionJoueur = resultatPlis[0];
             listeJoueur[selectionJoueur]->ModifierScore(resultatPlis[1]);
+            cout << "joueur gagnant" << selectionJoueur << listeJoueur[selectionJoueur]->LirePseudo() << endl;
+            cout << "score finale" << resultatPlis[1] << endl;
+
             cout << "fin verif plis" << endl;
             nombreDeTour++;
         }
