@@ -18,6 +18,7 @@
 #include "PlisDameDePique.h"
 
 using namespace std;
+
 PartieDameDePique::PartieDameDePique()
 {
     pLeJeu = make_unique<JeuDeCartesDameDePique>();
@@ -106,10 +107,8 @@ void PartieDameDePique::DistribuerCartes()
         unique_ptr<MainJoueur> nmainjoueur = make_unique<MainJoueur>();
         nmainjoueur->DefinirTaille(13);
         size_t boucleAjouterCarte;
-        
-        for (boucleAjouterCarte = 0; boucleAjouterCarte < 13; boucleAjouterCarte++) {
-            
-            
+        for (boucleAjouterCarte = 0; boucleAjouterCarte < 13; boucleAjouterCarte++) 
+        {
             if (ajoutCarte<52){
                 nmainjoueur->AjouterCarteMain(pLeJeu->ObtenirEnsemble()->ObtenirEnsembleDeCarte()[ajoutCarte]);
             }
@@ -148,16 +147,16 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             {
                 selectionJoueur++;
             }
-            
         }
-
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
         PlisDameDePique plis;
         while (nombreDeTour < 13) {
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
             unsigned int positionPremierJoueur = selectionJoueur;
+
             vector <shared_ptr<CarteInterface>> carteTable;
+
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;
@@ -168,8 +167,10 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
                 carteDuPlis[selectionJoueur] = cartejouer;
+
                 selectionJoueur++;
                 nombreJoueurJouer++;
+
                 carteTable.push_back(cartejouer);
                 interface.AfficherTable(carteTable);
             }
@@ -183,7 +184,6 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             cout << "score finale" << resultatPlis[1] << endl;
 
             cout << "fin verif plis" << endl;
-            nombreDeTour++;
         }
         
     }
@@ -213,7 +213,3 @@ void PartieDameDePique::AfficherScore(){
     cout << "3eme : " << listeJoueur[2] << " score : " << listeJoueur[2]->LireScore() << endl;
     cout << "4eme : " << listeJoueur[3] << " score : " << listeJoueur[3]->LireScore() << endl;
 }
-
-
-
-

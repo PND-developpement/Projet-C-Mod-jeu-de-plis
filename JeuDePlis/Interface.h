@@ -12,6 +12,7 @@ private:
     //Codes pour les couleurs dansla console
     const std::string COULEUR_ROUGE = "\033[31m";
     const std::string COULEUR_BLANCHE = "\033[97m";
+    const std::string COULEUR_VIOLET = "\033[35m";
     const std::string RESET_COULEUR = "\033[0m";
 public:
     Interface() = default;
@@ -27,7 +28,7 @@ public:
     * Demande à l'humain de jouer et renvoie l'index
     * @param mainJoeur : MainJoueur&
     */
-    int DemanderCarte(const MainJoueur& mainDuJoueur) const;
+    int DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo) const;
 
     /*
     * Affiche les cartes actuellement posées au centre de la table
@@ -40,6 +41,12 @@ public:
     * @param message : const std::string&
     */
     void AfficherMessage(const std::string& message) const;
+
+    /*
+    * Affiche le pseudo du joueur
+    * @param pseudoJoueur : std::message
+    */
+    void AfficherPseudoJoueur(const std::string& pseudoJoueur) const;
 
     /*
     * Annonce qui a remporté le pli

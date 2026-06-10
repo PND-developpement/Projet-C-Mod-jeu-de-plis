@@ -7,6 +7,7 @@
 #include "CarteInterface.h"
 #include "interface.h"
 
+
 class Joueur
 {
 protected :

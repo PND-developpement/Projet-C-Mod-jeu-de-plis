@@ -22,11 +22,12 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
     std::cout << std::endl;
 }
 
-int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
+int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo) const {
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
-    std::cout << "\n- - - A VOTRE TOUR DE JOUER - - -" << std::endl;
+    AfficherPseudoJoueur(pseudo);
+
     AfficherMainDuJoueur(mainDuJoueur);
 
     while (true)
@@ -50,6 +51,15 @@ int Interface::DemanderCarte(const MainJoueur& mainDuJoueur) const {
 
     //renvoie l'index memoire
     return positionCarte - 1;
+}
+
+void Interface::AfficherPseudoJoueur(const std::string& pseudoJoueur) const
+{
+    std::cout << "\n- - - AU TOUR DE : "
+        << COULEUR_VIOLET
+        << pseudoJoueur
+        << RESET_COULEUR
+        << " - - -" << std::endl;
 }
 
 void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>& cartes) const {

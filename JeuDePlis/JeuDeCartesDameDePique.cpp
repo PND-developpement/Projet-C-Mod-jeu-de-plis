@@ -18,7 +18,8 @@ JeuDeCartesDameDePique::JeuDeCartesDameDePique()
 
 }
 
-void JeuDeCartesDameDePique::CreerJeux(const std::vector<std::string>& vFigures, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers) {
+void JeuDeCartesDameDePique::CreerJeux(const std::vector<std::string>& vFigures, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers) 
+{
     for (const auto& figure : vFigures)
     {
         //on déduit la couleur (rouge ou noir) grâce à la figure

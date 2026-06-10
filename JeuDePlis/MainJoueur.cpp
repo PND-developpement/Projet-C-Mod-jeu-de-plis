@@ -40,7 +40,7 @@ void MainJoueur::AjouterCarteMain(shared_ptr<CarteInterface> nouvelleCarte)
 		throw std::invalid_argument("Erreur : pointeur est nul");
 
 	//On vérifie qu'elle ne soit pas déjà présente dans la main du joueur
-	if (TrouverCarte(nouvelleCarte))
+	if (TrouverCarte(nouvelleCarte->ObtenirValeur(), nouvelleCarte->ObtenirFigure()))
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
 	CartesMain->AjouterCarte(nouvelleCarte); //On l'ajoute à la main
 }
@@ -52,24 +52,10 @@ void MainJoueur::SupprimerCarteMain(shared_ptr<CarteInterface> carte)
 		throw std::invalid_argument("Erreur : pointeur est nul");
 
 	//On vérifie qu'elle soit présente dans la main du joueur
-	if (!TrouverCarte(carte))
+	if (!TrouverCarte(carte->ObtenirValeur(), carte->ObtenirFigure()))
 		throw std::logic_error("Carte déjà présente dans la main du joueur");
 
 	CartesMain->SupprimerCarte(carte); //On la supprime de la main
-}
-
-bool MainJoueur::TrouverCarte(std::shared_ptr<CarteInterface> carte)
-{
-    const auto& ensemble = CartesMain->ObtenirEnsembleDeCarte();
-
-	//Boucle permettant de rechercher la carte dans la main du joueur avec un itérateur
-    for (auto itCarte = ensemble.begin(); itCarte != ensemble.end(); itCarte++)
-    {
-		if (carte == *itCarte)
-			return true;
-    }
-
-	return false; //On renvoie "false" si la carte n'est as présente dans la main.
 }
 
 bool MainJoueur::TrouverCarte(string valeur, string figure)
@@ -83,7 +69,6 @@ bool MainJoueur::TrouverCarte(string valeur, string figure)
 		if (valeur == itCarte->get()->ObtenirValeur() && figure == itCarte->get()->ObtenirFigure()) {
 			trouver = true;
 		}
-			
 	}
 	return trouver;
 }
