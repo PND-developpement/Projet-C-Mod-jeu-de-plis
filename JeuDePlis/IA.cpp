@@ -26,7 +26,8 @@ std::shared_ptr<CarteInterface> IA::JouerUneCarte(const Interface& interface)
 
 	size_t nbCarteMainJoueur = cartes->LireCartesMain()->ObtenirTaille(); //On récupère la taille de l'ensemble de carte
 
-	int positionCarte = rand() % nbCarteMainJoueur + 1; //On choisit une position de carte aléatoirement
+	//int positionCarte = rand() % cartes->LireCartesMain()->ObtenirEnsembleDeCarte().size(); //On choisit une position de carte aléatoirement
+	int positionCarte = rand() % nbCarteMainJoueur;
 
 	std::shared_ptr<CarteInterface> carteJouee = cartes->ObtenirCarte(positionCarte); //on obtient la carte en fonction de la position choisie
 
