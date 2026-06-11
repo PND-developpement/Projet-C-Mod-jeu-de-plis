@@ -11,6 +11,7 @@ protected:
 	unsigned int nombreJoueur; 
 	std::vector <std::unique_ptr <Joueur>> listeJoueur;
 	std::unique_ptr<JeuDeCartes> pLeJeu;
+	unsigned int scoreTotal;
 public:
 	// Constructeur et Destructeur
 	/*
@@ -61,5 +62,18 @@ public:
 	* Affiche le vainceur de la partie
 	*/
 	virtual void AfficherScore() = 0;
+
+	/*
+	* Ajoute le score par celle mis en parametre
+	* @param scoreTotal unsigned int
+	*/
+	void DefinirScoreTotal(unsigned int scoreTotal) { this->scoreTotal = scoreTotal; }
+
+	/*
+	* Ajoute le score par celle mis en parametre
+	* @return scoreTotal
+	*/
+	unsigned int ObtenirScoreTotal() const { return scoreTotal; }
+
 };
 #endif

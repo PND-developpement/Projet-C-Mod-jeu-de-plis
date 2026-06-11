@@ -61,8 +61,22 @@ public:
     */
     void AfficherScores(const std::vector<std::string>& nomsJoueurs, const std::vector<int>& scores) const;
 
-    // - - - - - - -  - -
-    // Faire méthode écran noir
+    /*
+    * Affiche l'écran noire entre chaque joueur
+    */
+    void AfficherEcranNoir() const;
+
+    /*
+    * Demande à l’utilisateur le score total pour finir une partie
+    * @return scoreTotal unsigned int
+    */
+    unsigned int DemanderScoreTotal() const;
+
+    /*
+    * Demande à l’utilisateur à quel jeu il veut jouer
+    * @return choix unsigned int
+    */
+    unsigned int DemanderJeux() const;
 };
 
 #endif

@@ -28,12 +28,14 @@ int main()
 {
     try {
         //exemple initalisation d'un jeux
+        Interface interface;
         PartieFactory jeux;
-        auto partie = jeux.create(1);
+        auto partie = jeux.create(interface.DemanderJeux());
+        
 
         if (partie) {
-            cout << "partie ok";
-            Interface interface;
+            
+            
             partie->JouerPartie(interface);
         }
         else {
@@ -43,6 +45,6 @@ int main()
     catch(exception erreur){
         cout << "Erreur : " << erreur.what() << endl;
     }
-    //Erreur : invalid vector subscript
+    
     
 }

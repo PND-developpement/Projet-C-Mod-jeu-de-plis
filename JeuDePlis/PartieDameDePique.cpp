@@ -23,6 +23,7 @@ PartieDameDePique::PartieDameDePique()
 {
     pLeJeu = make_unique<JeuDeCartesDameDePique>();
     nombreJoueur = 4;
+    scoreTotal = 0;
 }
 
 
@@ -184,6 +185,7 @@ void PartieDameDePique::LancerPartie()
 void PartieDameDePique::JouerPartie(const Interface& interface)
 {
     LancerPartie();
+    scoreTotal=interface.DemanderScoreTotal();
     unsigned int manche = 0;
     while (!VerifScore()) {
         DistribuerCartes();
@@ -218,10 +220,10 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                     selectionJoueur = 0;
                 }
 
-                cout << "Autour du joueur " << listeJoueur[selectionJoueur]->LirePseudo() << " de jouer" << endl;
+                interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
                 cin.get(); // attendre la validation du joueur
                 // interface afficher le bloque noire
-
+                interface.AfficherEcranNoir();
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
 
                 carteDuPlis[selectionJoueur] = cartejouer;
@@ -232,16 +234,25 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 carteTable.push_back(cartejouer);
                 interface.AfficherTable(carteTable);
             }
-            // Plis verifier qui gagne en passer le la unordered_map carteduplie et renvoie la postion du joueur
-            cout << "verif plis" << endl;
+            
             
             vector<int> resultatPlis = plis.verifPlis(carteDuPlis, positionPremierJoueur);
+
             selectionJoueur = resultatPlis[0];
             listeJoueur[selectionJoueur]->ModifierScore(resultatPlis[1]);
+
             cout << "joueur gagnant" << selectionJoueur << listeJoueur[selectionJoueur]->LirePseudo() << endl;
             cout << "score finale" << resultatPlis[1] << endl;
 
-            cout << "fin verif plis" << endl;
+            interface.AfficherGagnantPli(listeJoueur[selectionJoueur]->LirePseudo());
+            vector<string> nomjoueur;
+            vector<int> scorejoueur;
+            for (auto parcourJ = listeJoueur.begin(); parcourJ != listeJoueur.end(); parcourJ++) {
+                nomjoueur.push_back(parcourJ->get()->LirePseudo());
+                scorejoueur.push_back(parcourJ->get()->LireScore());
+            }
+            interface.AfficherScores(nomjoueur,scorejoueur);
+            nombreDeTour++;
         }
         
     }
@@ -254,7 +265,7 @@ bool PartieDameDePique::VerifScore()
     bool scoreFinale = false;
     auto parcourirJoueur = listeJoueur.begin();
     while (parcourirJoueur != listeJoueur.end() && !scoreFinale) {
-        if (parcourirJoueur->get()->LireScore() == 100) {
+        if (parcourirJoueur->get()->LireScore() == scoreTotal) {
             scoreFinale = true;
         }
         parcourirJoueur++;

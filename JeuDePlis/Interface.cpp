@@ -105,3 +105,50 @@ void Interface::AfficherScores(const std::vector<std::string>& nomsJoueurs, cons
     }
     std::cout << "==========================================\n" << std::endl;
 }
+
+void Interface::AfficherEcranNoir() const{
+    size_t ecranNoir;
+    for (ecranNoir = 0; ecranNoir < 30; ecranNoir++)
+    {
+        std::cout << std::endl;
+    }
+    
+}
+
+unsigned int Interface::DemanderScoreTotal() const
+{
+    unsigned int scoreTotal=0;
+    std::cout << "Combien de points a marquer ? " << std::endl;
+    std::cin >> scoreTotal;
+    while (scoreTotal < 20 && scoreTotal>200) {
+        if (scoreTotal < 20) {
+            std::cout << "Score trop bas !" << std::endl;
+            std::cout << "Entrer une nouvelle valeur :" << std::endl;
+            std::cin >> scoreTotal;
+
+        }
+        if (scoreTotal > 200) {
+            std::cout << "Score trop haut !" << std::endl;
+            std::cout << "Entrer une nouvelle valeur :" << std::endl;
+            std::cin >> scoreTotal;
+        }
+    }
+    
+    return scoreTotal;
+}
+
+unsigned int Interface::DemanderJeux() const
+{
+    unsigned int choix=1;
+    std::cout << "\n==========================================" << std::endl;
+    std::cout << "             JEUX DISPONIBLES               " << std::endl;
+    std::cout << "==========================================\n" << std::endl;
+    std::cout << "1: " << "Dame de Pique" << std::endl;
+    std::cin >> choix;
+    while (choix < 1 && choix>1) {
+        std::cout << "Rentrer un numero de jeu valide : " << std::endl;
+        std::cin >> choix;
+
+    }
+    return choix;
+}
