@@ -239,7 +239,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             vector<int> resultatPlis = plis.verifPlis(carteDuPlis, positionPremierJoueur);
 
             selectionJoueur = resultatPlis[0];
-            listeJoueur[selectionJoueur]->ModifierScore(resultatPlis[1]);
+            listeJoueur[selectionJoueur]->ModifierScore(listeJoueur[selectionJoueur]->LireScore() + resultatPlis[1]);
 
             cout << "joueur gagnant" << selectionJoueur << listeJoueur[selectionJoueur]->LirePseudo() << endl;
             cout << "score finale" << resultatPlis[1] << endl;
