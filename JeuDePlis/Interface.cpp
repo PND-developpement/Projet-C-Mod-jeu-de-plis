@@ -26,8 +26,6 @@ int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo)
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
-    AfficherPseudoJoueur(pseudo);
-
     AfficherMainDuJoueur(mainDuJoueur);
 
     while (true)
@@ -55,15 +53,12 @@ int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo)
 
 void Interface::AfficherPseudoJoueur(const std::string& pseudoJoueur) const
 {
-    std::cout << "\n- - - AU TOUR DE : "
-        << COULEUR_VIOLET
-        << pseudoJoueur
-        << RESET_COULEUR
-        << " - - -" << std::endl;
+    std::cout << "\n- - -   AU   TOUR   DE   :   " << COULEUR_VIOLET << pseudoJoueur << RESET_COULEUR << "   - - - \n" << std::endl;
 }
 
 void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>& cartes) const {
-    std::cout << "\n- - - CARTES SUR LA TABLE - - -" << std::endl;
+   
+    std::cout << "\n- - - CARTES SUR LA TABLE - - - \n" << std::endl;
 
     if (cartes.empty()) {
         std::cout << "La table est vide." << std::endl;
@@ -143,8 +138,15 @@ unsigned int Interface::DemanderJeux() const
     std::cout << "\n==========================================" << std::endl;
     std::cout << "             JEUX DISPONIBLES               " << std::endl;
     std::cout << "==========================================\n" << std::endl;
-    std::cout << "1: " << "Dame de Pique" << std::endl;
+
+    std::cout << "1: " << "Dame de Pique \n" << std::endl;
+
+    std::cout << "Entrer le numero du jeu auquel vous souhaitez jouer : ";
+    
     std::cin >> choix;
+
+    std::cout << std::endl;
+
     while (choix < 1 && choix>1) {
         std::cout << "Rentrer un numero de jeu valide : " << std::endl;
         std::cin >> choix;

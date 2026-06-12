@@ -141,6 +141,8 @@ void PartieDameDePique::DonnerCarte(const Interface& interface)
 
             carteTable.push_back(carteADonnee);
 
+            interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
+
             interface.AfficherTable(carteTable);
 
             nbCartesDonnees++;
@@ -187,6 +189,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
     LancerPartie();
     scoreTotal=interface.DemanderScoreTotal();
     unsigned int manche = 0;
+
     while (!VerifScore()) {
         DistribuerCartes();
         cout << "\nLa partie commence " << endl;
@@ -220,10 +223,14 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                     selectionJoueur = 0;
                 }
 
-                interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
                 cin.get(); // attendre la validation du joueur
-                // interface afficher le bloque noire
+
                 interface.AfficherEcranNoir();
+
+                interface.AfficherTable(carteTable);
+
+                interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
+
                 auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
 
                 carteDuPlis[selectionJoueur] = cartejouer;
@@ -232,7 +239,6 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 nombreJoueurJouer++;
 
                 carteTable.push_back(cartejouer);
-                interface.AfficherTable(carteTable);
             }
             
             
@@ -241,8 +247,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             selectionJoueur = resultatPlis[0];
             listeJoueur[selectionJoueur]->ModifierScore(listeJoueur[selectionJoueur]->LireScore() + resultatPlis[1]);
 
-            cout << "joueur gagnant" << selectionJoueur << listeJoueur[selectionJoueur]->LirePseudo() << endl;
-            cout << "score finale" << resultatPlis[1] << endl;
+            interface.AfficherTable(carteTable);
 
             interface.AfficherGagnantPli(listeJoueur[selectionJoueur]->LirePseudo());
             vector<string> nomjoueur;
@@ -252,6 +257,10 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
                 scorejoueur.push_back(parcourJ->get()->LireScore());
             }
             interface.AfficherScores(nomjoueur,scorejoueur);
+
+            cout << "Appuyez sur Entree pour continuer..." << endl;
+            cin.get();
+
             nombreDeTour++;
         }
         
