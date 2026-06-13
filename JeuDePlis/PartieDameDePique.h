@@ -51,8 +51,25 @@ public:
 
 	/*
 	* Jouer la partie
+	* @param interface : Interface, référence constante
 	*/
 	void JouerPartie(const Interface& interface) override;
+
+
+	/*
+	* Permet de définir les cartes jouable dans la main du joueur en fonction des cartes en cours de jeu.
+	* @param carteTable : vector <shared_ptr<CarteInterface>>
+	*/
+	std::shared_ptr<CarteInterface> JouerCarte(std::vector<std::shared_ptr<CarteInterface>>& carteTable, unsigned int JoueurEnCours, const Interface& interface) override;
+
+	/*
+	* vérifie que les deux cartes ont la même figure ou non
+	* @param carte1 : std::shared_ptr<CarteInterface>, référence const
+	* @param carte2 : std::shared_ptr<CarteInterface>, référence const
+	* @return bool : true or false
+	*/
+	bool FigureCarteEgal(const std::shared_ptr<CarteInterface>& carte1, const std::shared_ptr<CarteInterface>& carte2) { return carte1->ObtenirFigure() == carte2->ObtenirFigure(); }
+
 
 	/*
 	* Verifier score des joueurs

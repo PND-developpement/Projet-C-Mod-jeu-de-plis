@@ -134,16 +134,18 @@ void PartieDameDePique::DonnerCarte(const Interface& interface)
         while (nbCartesDonnees < 3)
         {
             cin.get(); // attendre la validation du joueur
+            
+            interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
+
+            interface.AfficherTable(carteTable);
+
+            interface.AfficherMainDuJoueur((*listeJoueur[selectionJoueur]->LireCartes()));
 
             auto carteADonnee = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
 
             carteAdonneeAuJoueur.push_back(carteADonnee);
 
             carteTable.push_back(carteADonnee);
-
-            interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
-
-            interface.AfficherTable(carteTable);
 
             nbCartesDonnees++;
         }
@@ -231,7 +233,9 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
 
                 interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
 
-                auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
+                //auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
+
+                auto cartejouer = JouerCarte(carteTable, selectionJoueur, interface);
 
                 carteDuPlis[selectionJoueur] = cartejouer;
 
@@ -290,4 +294,67 @@ void PartieDameDePique::AfficherScore(){
     cout << "2eme : " << listeJoueur[1] << " score : " << listeJoueur[1]->LireScore() << endl;
     cout << "3eme : " << listeJoueur[2] << " score : " << listeJoueur[2]->LireScore() << endl;
     cout << "4eme : " << listeJoueur[3] << " score : " << listeJoueur[3]->LireScore() << endl;
+}
+
+std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<CarteInterface>>& carteTable, unsigned int JoueurEnCours, const Interface& interface)
+{
+    vector<bool> carteJouable; //vecteur de booleen pour savoir quelles cartes sont jouables 
+    bool aucuneCarteJouable; //booleeen indiquanr si aucune carte n'est de la même figure que la première carte du plis
+    std::shared_ptr<CarteInterface> cartejouee; //comporte la carte jouée par le joueur.
+    int positionCarte; //ici on récupère la position de la carte jouer par joueur
+
+    //Si aucune carte n'est sur la table, alors le joueur joue la carte qu'il souhaite
+    if (carteTable.empty())
+    {
+        carteJouable.assign(listeJoueur[JoueurEnCours]->LireCartes()->ObtenirTaille(), true);
+        interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
+        cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface);
+    }
+
+    //sinon, on distingue deux cas
+    else
+    {
+        //on regarde si chaque carte a la même figure ou non que la première carte posée dans le plis.
+        auto ensembleCarte = listeJoueur[JoueurEnCours]->LireCartes()->LireCartesMain()->ObtenirEnsembleDeCarte();
+        for (auto carteJoueur = ensembleCarte.begin(); carteJoueur != ensembleCarte.end(); carteJoueur++)
+        {
+            if (FigureCarteEgal(carteTable[0], *carteJoueur)) //si même figure => alors on ajoute true dans les cartes jouables pour gérer l'affichage
+                carteJouable.push_back(true);
+            else
+                carteJouable.push_back(false); //false sinon
+        }
+
+        //On regarde si le joueur n'a aucune carte de la même figure que la première carte dans le plis
+        aucuneCarteJouable = std::none_of(carteJouable.begin(), carteJouable.end(),[](bool b) { return b; });
+
+        //premier cas : le joueur a des cartes de la même figure
+        if (!aucuneCarteJouable)
+        {
+            interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
+
+            positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo());
+            cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
+
+            //tant que la carte n'est pas de la même figure que la figure du plis en cours, le joueur rechoisit une carte
+            while (!FigureCarteEgal(carteTable[0], cartejouee)) {
+                std::cout << "Rentrer un numero de carte valide : " << std::endl;
+                positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo());
+                cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
+            }
+
+            if (cartejouee != nullptr)
+            {
+                listeJoueur[JoueurEnCours]->LireCartes()->SupprimerCarteMain(cartejouee);
+            }
+
+        }
+        else //deuxième cas : il n'a aucune carte du même figure, il peut donc jouer la carte qu'il souhaite.
+        {
+            std::fill(carteJouable.begin(), carteJouable.end(), true);
+            interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
+            cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface);
+        }
+    }
+
+    return cartejouee;
 }

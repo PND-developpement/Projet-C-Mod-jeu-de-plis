@@ -4,29 +4,57 @@
 void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur) const {
     std::cout << "Votre main : \n";
 
-    //on recupere la taille de la main
+    //on recupere la taille de la main du joueur
     size_t taille = mainJoueur.LireCartesMain()->ObtenirTaille();
 
-    // boucle pour afficher chaque carte avec la bonne couleur
-    for (size_t i = 0; i < taille; ++i) {
-        auto c = mainJoueur.LireCartesMain()->ObtenirCarte(i);
+    //boucle pour afficher chaque carte avec la bonne couleur
+    for (size_t positionCarte = 0; positionCarte < taille; ++positionCarte) {
+        auto carte = mainJoueur.LireCartesMain()->ObtenirCarte(positionCarte);
 
-        // On determine la couleur active
-        std::string couleurActive = (c->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+        //On determine la couleur de la carte
+        std::string couleurCarte = (carte->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
 
-        // Affichage colore
-        std::cout << i + 1 << ") ["
-            << couleurActive << c->ObtenirValeur() << " de " << c->ObtenirFigure() << RESET_COULEUR
+        //Affichage de la carte à la position en cours
+        std::cout << positionCarte + 1 << ") ["
+            << couleurCarte << carte->ObtenirValeur() << " de " << carte->ObtenirFigure() << RESET_COULEUR
             << "]\n";
     }
     std::cout << std::endl;
+}
+
+void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur, std::vector<bool> carteJouable) const
+{
+    std::cout << "Votre main : \n";
+
+    //on recupere la taille de la main du joueur
+    size_t taille = mainJoueur.LireCartesMain()->ObtenirTaille();
+
+    //boucle pour afficher chaque carte avec la bonne couleur
+    for (size_t positionCarte = 0; positionCarte < taille; ++positionCarte) {
+        auto carte = mainJoueur.LireCartesMain()->ObtenirCarte(positionCarte);
+
+        //On determine la couleur de la position de la carte
+        //vert = jouable / rouge = pas jouable
+        std::string couleurPositionCarte = carteJouable[positionCarte] ? COULEUR_VERTE : COULEUR_ROUGE;
+
+        //On determine la couleur de la carte
+        std::string couleurCarte = (carte->ObtenirCouleur() == "Rouge") ? COULEUR_ROUGE : COULEUR_BLANCHE;
+
+        //Affichage de la carte à la position en cours
+        std::cout << couleurPositionCarte << positionCarte + 1 << ")" << RESET_COULEUR << " ["
+            << couleurCarte << carte->ObtenirValeur() << " de " << carte->ObtenirFigure() << RESET_COULEUR
+            << "]" << std::endl;
+    }
+    std::cout << std::endl;
+
+    return;
 }
 
 int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo) const {
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
-    AfficherMainDuJoueur(mainDuJoueur);
+    //AfficherMainDuJoueur(mainDuJoueur);
 
     while (true)
     {

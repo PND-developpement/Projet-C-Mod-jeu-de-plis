@@ -11,6 +11,7 @@ class Interface {
 private:
     //Codes pour les couleurs dansla console
     const std::string COULEUR_ROUGE = "\033[31m";
+    const std::string COULEUR_VERTE = "\033[32m";
     const std::string COULEUR_BLANCHE = "\033[97m";
     const std::string COULEUR_VIOLET = "\033[35m";
     const std::string RESET_COULEUR = "\033[0m";
@@ -23,6 +24,13 @@ public:
     * @param mainJoeur : MainJoueur&
     */
     void AfficherMainDuJoueur(const MainJoueur& mainJoueur) const;
+
+    /*
+    * Affiche les cartes que le joueur a en main avec les cartes jouables ou non
+    * @param mainJoeur : MainJoueur&
+    * @param carteJouable : std::vector<bool>
+    */
+    void AfficherMainDuJoueur(const MainJoueur& mainJoueur, std::vector<bool> carteJouable) const;
 
     /*
     * Demande à l'humain de jouer et renvoie l'index
