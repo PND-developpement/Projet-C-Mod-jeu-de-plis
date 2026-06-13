@@ -211,6 +211,7 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
 
         unsigned int selectionJoueur = 0; // Choisit le joueur qui doit jouer
         bool trouverJoueur = false; // Recherche le joueur avec la carte 2 de Trefle
+
         while (selectionJoueur < 4 && !trouverJoueur) {
             if (listeJoueur[selectionJoueur]->LireCartes()->TrouverCarte("2", "Trefle")) {
                 trouverJoueur = true;
@@ -340,16 +341,18 @@ std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<
     //Si aucune carte n'est sur la table, alors le joueur joue la carte qu'il souhaite
     if (carteTable.empty())
     {
-        carteJouable.assign(listeJoueur[JoueurEnCours]->LireCartes()->ObtenirTaille(), true);
-        interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
-        cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface,"jouer");
+        //il n'y a aucune carte sur la table, donc le joueur peut jouer toutes les cartes qui se trouvent dans sa main. Ainsi, nous remplissons le vecteur de booleen de carte jouable
+        //avec des 'true', poue que toutes les cartes est leur position en vert pour indiquer qu'elles sont jouables.
+        carteJouable.assign(listeJoueur[JoueurEnCours]->LireCartes()->ObtenirTaille(), true); //remplie le vecteur de 'true' de la longueur de la main du joueur
+        interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable); //affiche la main du joueur
+        cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface,"jouer"); //permet au joueur de jouer une carte
     }
 
     //sinon, on distingue deux cas
     else
     {
         //on regarde si chaque carte a la même figure ou non que la première carte posée dans le plis.
-        auto ensembleCarte = listeJoueur[JoueurEnCours]->LireCartes()->LireCartesMain()->ObtenirEnsembleDeCarte();
+        auto ensembleCarte = listeJoueur[JoueurEnCours]->LireCartes()->LireCartesMain()->ObtenirEnsembleDeCarte(); //vecteur de la main du joueur
         for (auto carteJoueur = ensembleCarte.begin(); carteJoueur != ensembleCarte.end(); carteJoueur++)
         {
             if (FigureCarteEgal(carteTable[0], *carteJoueur)) //si même figure => alors on ajoute true dans les cartes jouables pour gérer l'affichage
@@ -359,36 +362,64 @@ std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<
         }
 
         //On regarde si le joueur n'a aucune carte de la même figure que la première carte dans le plis
+        //c'est a dire que si le vecteur est remplie de 'false', le joueur n'a aucune carte de la figure demandé, donc il peut jouer la carte qu'il désire
         aucuneCarteJouable = std::none_of(carteJouable.begin(), carteJouable.end(),[](bool b) { return b; });
 
         //premier cas : le joueur a des cartes de la même figure
         if (!aucuneCarteJouable)
         {
-            interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
+            //Ici on redistingue deux cas : le cas où le joueur est une IA et le cas où le joueur est un humain
 
-            positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo(),"jouer");
-            cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
-
-            //tant que la carte n'est pas de la même figure que la figure du plis en cours, le joueur rechoisit une carte
-            while (!FigureCarteEgal(carteTable[0], cartejouee)) {
-                std::cout << "Rentrer un numero de carte valide : " << std::endl;
-                positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo(),"jouer");
-                cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
-            }
-
-            if (cartejouee != nullptr)
+            //1er cas : le joueur est une IA : on va se baser sur un code similaire à la fonction 'jouerCarte' dans la classe IA, sauf qu'on intègre le fait que l'ia doit choisir 
+            //une position aléatoire avec la bonne figure
+            if (typeid(*listeJoueur[JoueurEnCours]) == typeid(IA))
             {
-                listeJoueur[JoueurEnCours]->LireCartes()->SupprimerCarteMain(cartejouee);
-            }
+                //interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable); 
 
+                positionCarte = rand() % listeJoueur[JoueurEnCours]->LireCartes()->ObtenirTaille(); //on récupère
+
+                cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte); //on récupère la carte à la position choisie
+
+                //tant que la carte n'est pas de la même figure que la figure du plis en cours, on retire une position aléatoire
+                while (!FigureCarteEgal(carteTable[0], cartejouee)) {
+                    //std::cout << "Rentrer un numero de carte valide : " << std::endl;
+                    positionCarte = rand() % listeJoueur[JoueurEnCours]->LireCartes()->ObtenirTaille();
+                    cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
+                }
+
+                //on retire la carte de la main du joueur
+                if (cartejouee != nullptr)
+                    listeJoueur[JoueurEnCours]->LireCartes()->SupprimerCarteMain(cartejouee);
+            }
+            else {
+                interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable); //on affiche la main du joueur 
+
+                positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo(), "jouer"); //le joueur choisit une carte
+                cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte); //on récupère la carte
+
+                //tant que la carte n'est pas de la même figure que la figure du plis en cours, le joueur rechoisit une carte
+                while (!FigureCarteEgal(carteTable[0], cartejouee)) {
+                    std::cout << "Rentrer un numero de carte valide : " << std::endl;
+                    positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo(), "jouer");
+                    cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
+                }
+
+                //on retire la carte de la main du joueur
+                if (cartejouee != nullptr)
+                    listeJoueur[JoueurEnCours]->LireCartes()->SupprimerCarteMain(cartejouee);
+            }
         }
         else //deuxième cas : il n'a aucune carte du même figure, il peut donc jouer la carte qu'il souhaite.
         {
+            //ici on ne distingue pas IA et humain car les deux peuvent jouer la carte qu'il désire
+
+            //on passe tous les false a true car vu que le joueur n'a aucune carte de la même figure, avec la boucle for au dessus, nous avons passer que des false dans le vecteur des cartes jouables
+            //ainsi on repasse tout a true car le joueur peut jouer la carte qu'il souhaite
             std::fill(carteJouable.begin(), carteJouable.end(), true);
             interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
             cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface,"jouer");
         }
     }
 
-    return cartejouee;
+    return cartejouee; //on renvoie la carte jouée pour qu'ensuite la fonction du déroulement de la partie puisse s'en servir
 }

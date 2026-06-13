@@ -19,13 +19,9 @@
 * override
 */
 
-
-
-
-
 using namespace std;
 int main()
-{
+{   
     try {
         //exemple initalisation d'un jeux
         Interface interface;
