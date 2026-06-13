@@ -13,6 +13,7 @@ class Joueur
 protected :
 	std::string pseudo; //pseudo du joueur
 	int score; //score du joueur 
+	int scoreManche; //score du joueur par manche
 	std::unique_ptr<MainJoueur> cartes; //la main du joueur
 
 public :
@@ -74,6 +75,18 @@ public :
 	*/
 	void ModifierScore(int NouveauScore);
 
+	/*
+	* permet de modifier le score de la manche du joueur
+	* @param NouveauScore : int
+	*/
+	void ModifierScoreManche(int score) { scoreManche = score; }
+
+	/*
+	* permet de lire le score de la manche du joueur
+	* @return int
+	*/
+	int LireScoreManche() const { return scoreManche; }
+
 	// - accesseurs cartes - 
 	/*
 	* permet de modifier le score du joueur
@@ -91,15 +104,19 @@ public :
 	/*
 	* permet de jouer une carte qui est dans la main du joueur.
 	* virtual pure car une IA ne jouera pas de la même façon qu'un humain
+	* le variable parametre permet d'afficher une interface diffrerente si le joueur joue une carte ou la donne
 	* @param interface : Interface, référence const
-	* @param std::shared_ptr<CarteInterface>
+	* @param parametre : std::string
+	* @return std::shared_ptr<CarteInterface>
 	*/
-	virtual std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface) = 0;
+	virtual std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface,std::string parametre) = 0;
 
 	/*
 	* permet d'afficher la main du joueur en faisant appelle à la méthode de la classe MainJoueur
 	*/
 	void AfficherMainDuJoueur() const;
+
+	
 };
 
 #endif

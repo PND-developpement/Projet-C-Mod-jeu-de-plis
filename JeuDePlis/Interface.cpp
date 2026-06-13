@@ -50,7 +50,7 @@ void Interface::AfficherMainDuJoueur(const MainJoueur& mainJoueur, std::vector<b
     return;
 }
 
-int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo) const {
+int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo, std::string parametre) const {
     int positionCarte = 0;
     size_t nbCartes = mainDuJoueur.LireCartesMain()->ObtenirTaille();
 
@@ -58,7 +58,7 @@ int Interface::DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo)
 
     while (true)
     {
-        std::cout << "Quelle carte voulez-vous jouer ? (1 a " << nbCartes << ") : ";
+        std::cout << "Quelle carte voulez-vous "<< parametre << " ? (1 a " << nbCartes << ") : ";
         std::cin >> positionCarte;
 
         //on a mis une vérification pour vider le buffer en cas de faute de frappe
@@ -106,6 +106,7 @@ void Interface::AfficherTable(const std::vector<std::shared_ptr<CarteInterface>>
         }
         std::cout << std::endl;
     }
+    std::cout << "\n- - - - - - - - - - - - - - - - \n" << std::endl;
 }
 
 void Interface::AfficherMessage(const std::string& message) const {
@@ -181,4 +182,18 @@ unsigned int Interface::DemanderJeux() const
 
     }
     return choix;
+}
+
+void Interface::AfficherDebutPartie() const
+{
+    std::cout << "\n==========================================" << std::endl;
+    std::cout << "             DEBUT DE LA PARTIE             " << std::endl;
+    std::cout << "==========================================\n" << std::endl;
+    std::cout << std::endl;
+
+}
+
+void Interface::AfficherMessageAvecScore(std::string message, int score) const
+{
+    std::cout << message << ": " << score << std::endl;
 }

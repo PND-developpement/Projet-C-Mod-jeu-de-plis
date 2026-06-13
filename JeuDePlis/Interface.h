@@ -34,9 +34,12 @@ public:
 
     /*
     * Demande à l'humain de jouer et renvoie l'index
+    * L'option parametre permet de savoir si le joueur joue une carte ou la donne
     * @param mainJoeur : MainJoueur&
+    * @param pseudo : std::string
+    * @param parametre : std::string
     */
-    int DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo) const;
+    int DemanderCarte(const MainJoueur& mainDuJoueur, std::string pseudo, std::string parametre) const;
 
     /*
     * Affiche les cartes actuellement posées au centre de la table
@@ -85,6 +88,19 @@ public:
     * @return choix unsigned int
     */
     unsigned int DemanderJeux() const;
+
+    /*
+    * Affiche le debut de la partie
+    */
+    void AfficherDebutPartie() const;
+
+    /*
+    * Affiche une message avec un score a coter
+    * MESSAGE : score
+    * @param message : std::string
+    * @param score : int
+    */
+    void AfficherMessageAvecScore(std::string message, int score) const;
 };
 
 #endif

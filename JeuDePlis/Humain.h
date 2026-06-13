@@ -20,7 +20,7 @@ public:
 	* @param interface : référence Interface, const
 	* @return std::shared_ptr<CarteInterface>
 	*/
-	std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface) override;
+	std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface, std::string parametre) override;
 };
 
 #endif

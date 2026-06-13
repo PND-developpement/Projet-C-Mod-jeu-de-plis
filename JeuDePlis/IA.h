@@ -15,7 +15,7 @@ public :
 	~IA() = default;
 
 	//Méthodes
-	std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface) override;
+	std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface, std::string parametre) override;
 };
 
 #endif

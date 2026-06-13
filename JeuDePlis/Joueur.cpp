@@ -10,12 +10,14 @@ Joueur::Joueur()
 {
 	pseudo = "inconnu";
 	score = 0;
+	scoreManche = 0;
 }
 
 Joueur::Joueur(const Joueur& rJoueur) noexcept
 {
 	pseudo = rJoueur.pseudo;
 	score = rJoueur.score;
+	scoreManche = rJoueur.scoreManche;
 	cartes = make_unique<MainJoueur>(*rJoueur.cartes);
 }
 
@@ -23,13 +25,15 @@ Joueur::Joueur(Joueur&& rJoueur) noexcept
 {
 	pseudo = move(rJoueur.pseudo);
 	score = rJoueur.score;
+	scoreManche = rJoueur.scoreManche;
 	cartes = move(rJoueur.cartes);
 }
 
-Joueur::Joueur(string pseudo, int score, unique_ptr<MainJoueur> cartes)
+Joueur::Joueur(string pseudo, int score,unique_ptr<MainJoueur> cartes)
 {
 	pseudo = move(pseudo);
 	this->score = score;
+	scoreManche = score;
 	cartes = move(cartes);
 }
 

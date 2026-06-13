@@ -20,7 +20,7 @@ IA::IA(IA& parametre) : Joueur(parametre) {}
 IA::IA(IA&& parametre) : Joueur(move(parametre)) {}
 
 //Méthodes
-std::shared_ptr<CarteInterface> IA::JouerUneCarte(const Interface& interface)
+std::shared_ptr<CarteInterface> IA::JouerUneCarte(const Interface& interface, std::string parametre)
 {
 	interface.AfficherMainDuJoueur(*cartes);
 

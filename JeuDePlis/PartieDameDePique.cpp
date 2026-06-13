@@ -16,6 +16,8 @@
 #include <algorithm>
 #include "Joueur.h"
 #include "PlisDameDePique.h"
+#include <limits>
+#include <ios>
 
 using namespace std;
 
@@ -127,21 +129,24 @@ void PartieDameDePique::DonnerCarte(const Interface& interface)
     unsigned int selectionJoueur; // Choisit le joueur qui doit donner ses cartes
     for (selectionJoueur = 0; selectionJoueur < 4; selectionJoueur++)
     {
-        std::cout << "Autour du joueur " << listeJoueur[selectionJoueur]->LirePseudo() << " de donner 3 cartes" << endl;
+        interface.AfficherEcranNoir();
+        interface.AfficherMessage("Donnez 3 cartes a votre adversaire");
+        interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
+        interface.AfficherMessage("Appuyez sur Entree pour commencer :");
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //permet de vider le buffer pour attendre la validation du joueur
+        cin.get();
+
 
         unsigned int nbCartesDonnees = 0;
         vector <shared_ptr<CarteInterface>> carteTable;
         while (nbCartesDonnees < 3)
         {
-            cin.get(); // attendre la validation du joueur
-            
-            interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
 
             interface.AfficherTable(carteTable);
 
             interface.AfficherMainDuJoueur((*listeJoueur[selectionJoueur]->LireCartes()));
 
-            auto carteADonnee = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
+            auto carteADonnee = listeJoueur[selectionJoueur]->JouerUneCarte(interface,"donner");
 
             carteAdonneeAuJoueur.push_back(carteADonnee);
 
@@ -194,11 +199,15 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
 
     while (!VerifScore()) {
         DistribuerCartes();
-        cout << "\nLa partie commence " << endl;
-        cout << "Manche : " << manche << endl;
-        manche++;
 
         DonnerCarte(interface);
+        interface.AfficherEcranNoir();
+        //faire meuilleur affichage
+        interface.AfficherDebutPartie();
+        interface.AfficherMessageAvecScore("MANCHE", manche+1);
+        manche++;
+
+        
 
         unsigned int selectionJoueur = 0; // Choisit le joueur qui doit jouer
         bool trouverJoueur = false; // Recherche le joueur avec la carte 2 de Trefle
@@ -213,30 +222,32 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
         }
         unsigned int nombreDeTour=0; // Compte le nombre de tour du manche
         PlisDameDePique plis;
-        while (nombreDeTour < 13) {
+        while (nombreDeTour < 13 && !VerifScore()) {
+            interface.AfficherMessageAvecScore("TOUR", nombreDeTour+1);
+
             unsigned int nombreJoueurJouer = 0; // Compte si bien tout les joueurs on jouer
             unordered_map<unsigned int, shared_ptr<CarteInterface>> carteDuPlis; 
             unsigned int positionPremierJoueur = selectionJoueur;
-
+            listeJoueur[selectionJoueur]->ModifierScoreManche(0);
             vector <shared_ptr<CarteInterface>> carteTable;
 
             while (nombreJoueurJouer < 4) {
                 if (selectionJoueur == 4) {
                     selectionJoueur = 0;
                 }
+                
 
+                interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
+                interface.AfficherMessage("Appuyez sur Entree pour commencer :");
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //permet de vider le buffer pour attendre la validation du joueur
                 cin.get(); // attendre la validation du joueur
 
-                interface.AfficherEcranNoir();
 
                 interface.AfficherTable(carteTable);
 
-                interface.AfficherPseudoJoueur(listeJoueur[selectionJoueur]->LirePseudo());
-
-                //auto cartejouer = listeJoueur[selectionJoueur]->JouerUneCarte(interface);
 
                 auto cartejouer = JouerCarte(carteTable, selectionJoueur, interface);
-
+                interface.AfficherEcranNoir();
                 carteDuPlis[selectionJoueur] = cartejouer;
 
                 selectionJoueur++;
@@ -250,6 +261,8 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
 
             selectionJoueur = resultatPlis[0];
             listeJoueur[selectionJoueur]->ModifierScore(listeJoueur[selectionJoueur]->LireScore() + resultatPlis[1]);
+            listeJoueur[selectionJoueur]->ModifierScoreManche(resultatPlis[1]);
+
 
             interface.AfficherTable(carteTable);
 
@@ -262,12 +275,32 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
             }
             interface.AfficherScores(nomjoueur,scorejoueur);
 
-            cout << "Appuyez sur Entree pour continuer..." << endl;
-            cin.get();
+            
 
             nombreDeTour++;
         }
-        
+        // VERIFIER SCORE J > 26 donner 26 adversaire
+        if (!VerifScore()) {
+            auto scoreJoueur = listeJoueur.begin();
+            bool scoreSuperieur = false;
+            while (scoreJoueur != listeJoueur.end() && !scoreSuperieur) {
+                if (scoreJoueur->get()->LireScoreManche() == 26) {
+                    scoreSuperieur = true;
+                }
+                scoreJoueur++;
+            }
+            if (scoreSuperieur) {
+                for (auto scoreJoueur = listeJoueur.begin(); scoreJoueur != listeJoueur.end(); scoreJoueur++) {
+                    if (scoreJoueur->get()->LireScoreManche() == 26) {
+                        scoreJoueur->get()->ModifierScore(scoreJoueur->get()->LireScore() - 26);
+                    }
+                    else {
+                        scoreJoueur->get()->ModifierScore(scoreJoueur->get()->LireScore() + 26);
+                    }
+                }
+
+            }
+        }
     }
     cout << "Fin Partie Classement finale :" << endl;
     AfficherScore();
@@ -278,10 +311,11 @@ bool PartieDameDePique::VerifScore()
     bool scoreFinale = false;
     auto parcourirJoueur = listeJoueur.begin();
     while (parcourirJoueur != listeJoueur.end() && !scoreFinale) {
-        if (parcourirJoueur->get()->LireScore() == scoreTotal) {
+        if (parcourirJoueur->get()->LireScore() >= scoreTotal) {
             scoreFinale = true;
         }
         parcourirJoueur++;
+        
     }
     return scoreFinale;
 }
@@ -290,10 +324,10 @@ void PartieDameDePique::AfficherScore(){
     sort(listeJoueur.begin(), listeJoueur.end(), [](const unique_ptr<Joueur>& j1, const unique_ptr<Joueur>& j2) {
         return j1->LireScore() < j2->LireScore();
     });
-    cout << "1er : " << listeJoueur[0] << " score : " << listeJoueur[0]->LireScore() << endl;
-    cout << "2eme : " << listeJoueur[1] << " score : " << listeJoueur[1]->LireScore() << endl;
-    cout << "3eme : " << listeJoueur[2] << " score : " << listeJoueur[2]->LireScore() << endl;
-    cout << "4eme : " << listeJoueur[3] << " score : " << listeJoueur[3]->LireScore() << endl;
+    cout << "1er : " << listeJoueur[0]->LirePseudo() << " score : " << listeJoueur[0]->LireScore() << endl;
+    cout << "2eme : " << listeJoueur[1]->LirePseudo() << " score : " << listeJoueur[1]->LireScore() << endl;
+    cout << "3eme : " << listeJoueur[2]->LirePseudo() << " score : " << listeJoueur[2]->LireScore() << endl;
+    cout << "4eme : " << listeJoueur[3]->LirePseudo() << " score : " << listeJoueur[3]->LireScore() << endl;
 }
 
 std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<CarteInterface>>& carteTable, unsigned int JoueurEnCours, const Interface& interface)
@@ -308,7 +342,7 @@ std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<
     {
         carteJouable.assign(listeJoueur[JoueurEnCours]->LireCartes()->ObtenirTaille(), true);
         interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
-        cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface);
+        cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface,"jouer");
     }
 
     //sinon, on distingue deux cas
@@ -332,13 +366,13 @@ std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<
         {
             interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
 
-            positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo());
+            positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo(),"jouer");
             cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
 
             //tant que la carte n'est pas de la même figure que la figure du plis en cours, le joueur rechoisit une carte
             while (!FigureCarteEgal(carteTable[0], cartejouee)) {
                 std::cout << "Rentrer un numero de carte valide : " << std::endl;
-                positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo());
+                positionCarte = interface.DemanderCarte((*listeJoueur[JoueurEnCours]->LireCartes()), listeJoueur[JoueurEnCours]->LirePseudo(),"jouer");
                 cartejouee = listeJoueur[JoueurEnCours]->LireCartes()->ObtenirCarte(positionCarte);
             }
 
@@ -352,7 +386,7 @@ std::shared_ptr<CarteInterface> PartieDameDePique::JouerCarte(vector<shared_ptr<
         {
             std::fill(carteJouable.begin(), carteJouable.end(), true);
             interface.AfficherMainDuJoueur((*listeJoueur[JoueurEnCours]->LireCartes()), carteJouable);
-            cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface);
+            cartejouee = listeJoueur[JoueurEnCours]->JouerUneCarte(interface,"jouer");
         }
     }
 
