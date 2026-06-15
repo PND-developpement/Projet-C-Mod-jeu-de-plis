@@ -12,6 +12,10 @@ public :
 	CarteAtout(std::shared_ptr<CarteInterface> carteInter, int valeurAtout) : CarteDecorator(std::move(carteInter)), valeurAtout(valeurAtout) {}
 	
 	//- - - Accesseur - - -
+	/*
+	* Renvoie la valeur de l'atout
+	* @return valeurPenalite int
+	*/
 	std::optional<int> ObtenirAtout() const override { return valeurAtout; }
 };
 

@@ -18,6 +18,7 @@ public:
 	* Cette méthode permet de jouer une carte en utilisant l'interface pour demander à l'utilisateur la carte qu'il souhaite jouer
 	* Nous suprimons cette carte de la main du joueur une fois qu'elle est jouée
 	* @param interface : référence Interface, const
+	* @param parametre : std::string
 	* @return std::shared_ptr<CarteInterface>
 	*/
 	std::shared_ptr<CarteInterface> JouerUneCarte(const Interface& interface, std::string parametre) override;

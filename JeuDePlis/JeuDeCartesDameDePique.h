@@ -16,28 +16,28 @@ public:
     * place la nouvelle valeur de taille et change la taille de l'ensemble de carte
     * @param taille : size_t
     */
-    void DefinirTaille(size_t taille) { this->taille = taille; pEnsembleCartes->DefinirTaille(taille); }
+    void DefinirTaille(size_t taille) override { this->taille = taille; pEnsembleCartes->DefinirTaille(taille); }
 
     /*
     * renvoie l'attribut taille
     * @return size_t
     */
-    size_t ObtenirTaille() const { return taille; }
+    size_t ObtenirTaille() const override { return taille; }
 
     // On utilise vFigures (Pique, Coeur, Carreau et Trefle) et vValeurs (As, 10, etc)
-    void CreerJeux(const std::vector<std::string>& vFigures, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers = 0);
+    void CreerJeux(const std::vector<std::string>& vFigures, const std::vector<std::string>& vValeurs, unsigned int uiNbJokers = 0) override;
 
     /*
     * permet de récupérer l'ensemble de carte avec son getter
     * @return EnsembleDeCarte
     */
-    EnsembleDeCartes* ObtenirEnsemble() const;
+    EnsembleDeCartes* ObtenirEnsemble() const override;
 
     // - - - Methodes - - - 
     /*
     * permet de mélanger les carte de notre ensemble de carte
     */
-    void MelangeCarte() const;
+    void MelangeCarte() const override;
 
     /*
     * Renvoie le score de la carte associé à sa valeur
