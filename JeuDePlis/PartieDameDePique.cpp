@@ -202,7 +202,6 @@ void PartieDameDePique::JouerPartie(const Interface& interface)
 
         DonnerCarte(interface);
         interface.AfficherEcranNoir();
-        //faire meuilleur affichage
         interface.AfficherDebutPartie();
         interface.AfficherMessageAvecScore("MANCHE", manche+1);
         manche++;

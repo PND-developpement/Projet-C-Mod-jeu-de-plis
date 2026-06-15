@@ -16,7 +16,7 @@ public :
 
 	//Méthodes
 	/*
-	* Cette méthode permet de jouer une carte aléatoirement pour un IA
+	* Cette méthode permet de jouer une carte aléatoirement pour un IA 
 	* Nous suprimons cette carte de la main du joueur une fois qu'elle est jouée
 	* @param interface : référence Interface, const
 	* @param parametre : std::string

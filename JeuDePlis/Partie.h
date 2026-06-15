@@ -38,6 +38,7 @@ public:
 
 	/*
 	* permet de donner des cartes à un joueur
+	* virtuelle pure car plusieurs jeux de plis sont amenés à donner des cartes (ex : papayoo, certaines versions de la belote)
 	* @param interface : Interface, référence const
 	*/
 	virtual void DonnerCarte(const Interface& interface) = 0;
