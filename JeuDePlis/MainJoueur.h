@@ -89,7 +89,7 @@ public:
 	std::shared_ptr<CarteInterface> ObtenirCarte(int positionCarte);
 
 	/*
-	* Afficher la main
+	* Afficher la main  
 	*/
 	void AfficherMainJoueur() const;
 	

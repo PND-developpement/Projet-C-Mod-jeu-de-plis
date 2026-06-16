@@ -58,7 +58,10 @@ public:
 
 	/*
 	* Permet de définir les cartes jouable dans la main du joueur en fonction des cartes en cours de jeu.
+	* Ensuite le joueur ou l'IA joue une carte valide
 	* @param carteTable : vector <shared_ptr<CarteInterface>>
+	* @param JoueurEnCours : unsigned int
+	* @param interface : Interface, référence const
 	*/
 	std::shared_ptr<CarteInterface> JouerCarte(std::vector<std::shared_ptr<CarteInterface>>& carteTable, unsigned int JoueurEnCours, const Interface& interface) override;
 
