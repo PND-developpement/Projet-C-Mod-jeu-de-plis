@@ -45,10 +45,6 @@ void EnsembleDeCartes::SupprimerCarte(std::shared_ptr<CarteInterface> carteASupp
 	taille--;
 }
 
-void EnsembleDeCartes::TrieCarte(std::string typedetrie){
-	
-}
-
 void EnsembleDeCartes::MelangeAleatoireCarte() {
 	auto seed = chrono::system_clock::now().time_since_epoch().count();
 	mt19937 rng(seed); // Permet le melange des cartes aleatoirement

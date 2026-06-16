@@ -63,12 +63,6 @@ public:
 	void SupprimerCarte(std::shared_ptr<CarteInterface> carteASupprimer);
 
 	/*
-	* Trie les cartes selon un ordre donner en parametre
-	* @param valeur std::string
-	*/
-	void TrieCarte(std::string typedetrie);
-
-	/*
 	* Melange les cartes aleatoirement
 	*/
 	void MelangeAleatoireCarte();
