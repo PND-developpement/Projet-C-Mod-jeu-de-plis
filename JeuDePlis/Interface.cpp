@@ -132,7 +132,7 @@ void Interface::AfficherScores(const std::vector<std::string>& nomsJoueurs, cons
 
 void Interface::AfficherEcranNoir() const{
     size_t ecranNoir;
-    for (ecranNoir = 0; ecranNoir < 30; ecranNoir++)
+    for (ecranNoir = 0; ecranNoir < 50; ecranNoir++)
     {
         std::cout << std::endl;
     }
